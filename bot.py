@@ -165,7 +165,7 @@ async def on_ready():
     print("[START UP] Loaded warnings.")
     started.append("+1")
     print("[START UP] Finished.")
-    await client.change_presence(game=discord.Game(name="}help | }invite"))
+    await client.change_presence(game=discord.Game(name="on Pixels"))
     m = splitter
     m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
     t1 = time.perf_counter()
