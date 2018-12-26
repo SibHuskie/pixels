@@ -42,9 +42,9 @@ loading_e = '<a:loading:484705261609811979>'
 error_e = "<:error:517356130968666132>"
 log_e = "<:log:517356131115597824>"
 auto_e = "<:auto:517356130557755396>"
-pinggood_e = "<:pinggood:517356130855550977>"
-pingok_e = "<:pingok:517356130918203394>"
-pingbad_e = "<:pingbad:517356131086106624>"
+pinggood_e = ":bulb: "
+pingok_e = ":bulb: "
+pingbad_e = ":bulb: "
 clearbots_e = "<:clearbots:517356130855419934>"
 muted_e = "<:muted:517356135972470794>"
 unmuted_e = "<:unmuted:517356137964765193>"
@@ -193,7 +193,7 @@ client.remove_command('help')
 # }ping <option>
 @client.command(pass_context=True)
 async def ping(ctx, option = None):
-    embed = discord.Embed(colour=0x7F1100)
+    embed = discord.Embed(colour=0x000000)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -230,7 +230,7 @@ async def ping(ctx, option = None):
 # }help
 @client.command(pass_context=True)
 async def help(ctx):
-    embed = discord.Embed(colour=0x7F1100)
+    embed = discord.Embed(colour=0x000000)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
