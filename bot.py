@@ -48,6 +48,86 @@ logs_chnl = '516614512657563658'
 log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
 
+# START UP SYSTEM
+started = []
+@client.event
+async def on_ready():
+    async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        owner_roles.append(role)
+    print("[START UP] Loaded owner roles.")
+    async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        manager_roles.append(role)
+    print("[START UP] Loaded manager roles.")
+    async for i in client.logs_from(client.get_channel(admin_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        admin_roles.append(role)
+    print("[START UP] Loaded administrator roles.")
+    async for i in client.logs_from(client.get_channel(mod_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        mod_roles.append(role)
+    print("[START UP] Loaded moderator roles.")
+    async for i in client.logs_from(client.get_channel(helper_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        helper_roles.append(role)
+    print("[START UP] Loaded helper roles.")
+    async for i in client.logs_from(client.get_channel(partner_manager_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        partner_manager_roles.append(role)
+    print("[START UP] Loaded partner manager roles.")
+    async for i in client.logs_from(client.get_channel(partner_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        partner_roles.append(role)
+    print("[START UP] Loaded partner roles.")
+    async for i in client.logs_from(client.get_channel(member_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        member_roles.append(role)
+    print("[START UP] Loaded member roles.")
+    async for i in client.logs_from(client.get_channel(self_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        self_roles.append(role)
+    print("[START UP] Loaded self roles.")
+    async for i in client.logs_from(client.get_channel(muted_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        muted_roles.append(role)
+    print("[START UP] Loaded muted roles.")
+    async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
+        logs.append(i.content)
+    print("[START UP] Loaded logs channels.")
+    async for i in client.logs_from(client.get_channel(joins_leaves_chnl), limit=limit):
+        joins_leaves.append(i.content)
+    print("[START UP] Loaded join-leave channels.")
+    started.append("+1")
+    print("[START UP] Finished.")
+    await client.change_presence(game=discord.Game(name="px!help | px!invite"))
+    m = splitter
+    m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
+    t1 = time.perf_counter()
+    await client.send_typing(client.get_channel(log_chnl))
+    t2 = time.perf_counter()
+    m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
+    await client.send_message(client.get_channel(log_chnl), m)
 
 # staff
 @client.command(pass_context=True)
