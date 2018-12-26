@@ -18,6 +18,19 @@ version = "1.0"
 splitter = "**~~`====================`~~**"
 started = "2"
 
+owner_roles = []
+manager_roles = []
+admin_roles = []
+mod_roles = []
+helper_roles = []
+partner_manager_roles = []
+partner_roles = []
+muted_roles = []
+member_roles = []
+self_roles = []
+logs = []
+joins_leaves = []
+
 owner_roles_chnl = '527410451655426058'
 manager_roles_chnl = '527410482844532736'
 admin_roles_chnl = '527410517388820480'
