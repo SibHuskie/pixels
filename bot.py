@@ -34,10 +34,10 @@ self_roles = []
 logs = []
 joins_leaves = []
 
-owner_roles_chnl = '527373834618273803'
-manager_roles_chnl = '527373849495339008'
-admin_roles_chnl = '527373859335176202'
-mod_roles_chnl = '527373873394483200'
+owner_roles_chnl = '516605295816867871'
+manager_roles_chnl = '516606147558506507'
+admin_roles_chnl = '516605310203592704'
+mod_roles_chnl = '516605319665680405'
 helper_roles_chnl = '516605337248464906'
 partner_manager_roles_chnl = '516606847323734064'
 partner_roles_chnl = '516606872896405520'
@@ -47,6 +47,27 @@ self_roles_chnl = '516611549427793930'
 logs_chnl = '516614512657563658'
 log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
+
+loading_e = "<a:loading:484705261609811979>"
+error_e = "<:error:516609910356574212>"
+joined_e = "<:joined:516609910318956552>"
+left_e = "<:left:516609910318956553>"
+serverinfo_e = "<:serverinfo:516609910088400922>"
+userinfo_e = "<:userinfo:516609910465757184>"
+avatar_e = "<:avatar:516609910008578049>"
+suggestion_e = "<:suggestion:516609910088138772>"
+upvote_e = "<:upvote:516609910235201536>"
+downvote_e = "<:downvote:516609910214230016>"
+lookup_e = "<:lookup:516609910553837578>"
+partner_e = "<:partner:516609910390390815>"
+log_e = "<:log:516609910415425536>"
+roleme_e = "<:roleme:516609911006691338>"
+pinggood_e = "<:pinggood:516609909819965441>"
+pingok_e = "<:pingok:516609909832417296>"
+pingbad_e = "<:pingbad:516609910168092682>"
+reload_e = "<:reload:516609910235070472>"
+worked_e = "<:worked:516609910310699042>"
+roles_e = "<:roles:516614182045614080>"
 
 # START UP SYSTEM
 started = []
