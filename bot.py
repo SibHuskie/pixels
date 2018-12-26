@@ -16,6 +16,7 @@ footer_text = "Pixels"
 limit = 1000000000000
 version = "1.0"
 splitter = "**~~`====================`~~**"
+started = "2"
 
 
 
