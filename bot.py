@@ -54,8 +54,8 @@ loading_e = "<a:loading:484705261609811979>"
 error_e = "<:error:516609910356574212>"
 joined_e = "<:joined:516609910318956552>"
 left_e = "<:left:516609910318956553>"
-serverinfo_e = "<:serverinfo:516609910088400922>"
-userinfo_e = "<:userinfo:516609910465757184>"
+serverinfo_e = ":crown: "
+userinfo_e = ":bust_in_silhouette: "
 avatar_e = "<:avatar:516609910008578049>"
 suggestion_e = "<:suggestion:516609910088138772>"
 upvote_e = "<:upvote:516609910235201536>"
@@ -110,5 +110,27 @@ async def userinfo(ctx, user: discord.User = None):
         embed.description = m
         await client.say(embed=embed)
         
+# }serverinfo
+@client.command(pass_context=True)
+async def serverinfo(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        embed.set_thumbnail(url=ctx.message.server.icon_url)
+        m = "{} **__SERVER INFORMATION:__**".format(serverinfo_e)
+        m += "\n"
+        m += "\n**MEMBERS:** `{}`".format(len(ctx.message.server.members))
+        m += "\n**CHANNELS:** `{}`".format(len(ctx.message.server.channels))
+        m += "\n**EMOJIS:** `{}`".format(len(ctx.message.server.emojis))
+        m += "\n**ID:** `{}`".format(ctx.message.server.id)
+        m += "\n**REGION:** `{}`".format(ctx.message.server.region)
+        m += "\n**ROLES:** `{}`".format(len(ctx.message.server.roles))
+        m += "\n**CREATED BY:** `{}`".format(ctx.message.server.owner)
+        m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
+        embed.description = m
+        await client.say(embed=embed)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
