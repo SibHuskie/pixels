@@ -46,9 +46,8 @@ async def on_member_join(userName: discord.User):
     m2 += "\nAll information is in the <#426683264682557440> channel, but feel free to ask the staff about anything you want to know."
     m2 += "\https://giphy.com/gifs/1fmwoUOwMh5koSdpVD"
     m = "\n**Welcome to P i x e l s™, <@{}>! :sparkles:".format(userName.id)
-    m += "\nRemember to read all the <#527430670255915008>."
-    m += "\nAlso don't forget to get roles and colors in the <#527430670255915008> and the <#527430670255915008> channels :wink: \nEnjoy your stay :sparkling_heart:**"
-    m += "\http://imgur.com/a/r6RyJm8"
+    m += "\nRemember to read all the <#447618217805086720>."
+    m += "\nAlso don't forget to get roles and colors in the <#471257818482343957> and the <#471257883712028683> channels :wink: \nEnjoy your stay :sparkling_heart:**\nhttp://imgur.com/a/r6RyJm8"
     await client.send_message(client.get_channel("447634076866969610"), "{}".format(m))
     server = client.get_server('447634076866969610')
     try:
