@@ -23,7 +23,7 @@ error_e = "<:error:516609910356574212>"
 joined_e = "<:joined:516609910318956552>"
 left_e = "<:left:516609910318956553>"
 serverinfo_e = ":mag:"
-userinfo_e = "<:userinfo:516609910465757184>"
+userinfo_e = ":bust_in_silhouette: "
 avatar_e = "<:avatar:516609910008578049>"
 suggestion_e = "<:suggestion:516609910088138772>"
 upvote_e = "<:upvote:516609910235201536>"
@@ -82,6 +82,45 @@ async def serverinfo(ctx):
         m += "\n**ROLES:** `{}`".format(len(ctx.message.server.roles))
         m += "\n**CREATED BY:** `{}`".format(ctx.message.server.owner)
         m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
+        embed.description = m
+        await client.say(embed=embed)
+        
+# }userinfo [user]
+@client.command(pass_context=True)
+async def userinfo(ctx, user: discord.User = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        a = []
+        for i in muted_roles:
+            if i in ctx.message.server.roles:
+                a.append(i)
+                break
+        if user == None:
+            author = ctx.message.author
+        else:
+            author = user
+        embed.set_thumbnail(url=author.avatar_url)
+        m = "{} **__USER INFORMATION:__**".format(userinfo_e)
+        m += "\n"
+        m += "\n**NAME:** `{}`".format(author)
+        m += "\n**ID:** `{}`".format(author.id)
+        m += "\n**CREATED AT:** `{}`".format(author.created_at)
+        m += "\n**JOINED AT:** `{}`".format(author.joined_at)
+        m += "\n**STATUS:** `{}`".format(author.status)
+        m += "\n**IS BOT:** `{}`".format(author.bot)
+        m += "\n**GAME:** `{}`".format(author.game)
+        m += "\n**NICKNAME:** `{}`".format(author.nick)
+        m += "\n**TOP ROLE:** `{}`".format(author.top_role)
+        m += "\n**VOICE CHANNEL:** `{}`".format(author.voice_channel)
+        if len(a) != 0:
+            if a[0] in author.roles:
+                m += "\n**MUTED:** `True`"
+            else:
+                m += "\n**MUTED:** `False`"
         embed.description = m
         await client.say(embed=embed)
 #######################
