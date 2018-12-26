@@ -66,1232 +66,1574 @@ reload_e = "<:reload:517356130939306020>"
 worked_e = "<:worked:517356137817964545>"
 roles_e = "<:roles:517356131379707905>"
 
-help1 = "```diff"
-help1 += "\n--- COMMANDS FOR EVERYONE ---"
-help1 += "\nxm!ping"
-help1 += "\n-    Pings the bot. Used to check if the bot is lagging."
-help1 += "\n"
-help1 += "\n--- COMMANDS FOR HELPERS ---"
-help1 += "\nxm!cb"
-help1 += "\n-    Removes the latest messages sent by bots."
-help1 += "\nxm!mute <user> <minutes> [reason]"
-help1 += "\n-    Mutes the mentioned user for the specified amount of minutes."
-help1 += "\nxm!unmute <user>"
-help1 += "\n-    Unmutes the mentioned user."
-help1 += "\nxm!warn <user> <reason>"
-help1 += "\n-    Warns the mentioned user."
-help1 += "\nxm!check <user>"
-help1 += "\n-    Gives you a list of warnings for the mentioned user."
-help1 += "\nxm!clear <user> <warn number/all>"
-help1 += "\n-    Clears all or a specified warning for the mentioned user."
-help1 += "\nxm!purge <number>"
-help1 += "\n-    Deletes the given amount of messages."
-help1 += "\nxm!nick <user> [nickname]"
-help1 += "\n-    Changes the nickname of the mentioned user or removes it if no nickname is given."
-help1 += "\n"
-help1 += "\n--- COMMANDS FOR MODERATORS ---"
-help1 += "\nxm!ban <user> <reason>"
-help1 += "\n-    Bans the mentioned user."
-help1 += "\nxm!unban <user ID>"
-help1 += "\n-    Unbans the user with the matching ID as the one given."
-help1 += "\nxm!kick <user> <reason>"
-help1 += "\n-    Kicks the mentioned user."
-help1 += "\n"
-help1 += "\n--- COMMANDS FOR ADMINISTRATORS ---"
-help1 += "\nxm!takerole <user> <role name>"
-help1 += "\n-    Removes a role from the mentioned user."
-help1 += "\nxm!giverole <user> <role name>"
-help1 += "\n-    Adds a role to the mentioned user."
-help1 += "\n"
-help1 += "\n--- COMMANDS FOR MANAGERS ---"
-help1 += "\nxm!idban <user ID> <reason>"
-help1 += "\n-    Bans the user with the matching ID as the one given, their IP and all their alts that aren't already in the server. Works even if the user isn't in the server."
-help1 += "\n"
-help1 += "\n--- COMMANDS FOR OWNERS ---"
-help1 += "\nxm!setrole <option> <role name>"
-help1 += "\n-    Used to manage roles in the bot's database."
-help1 += "\nxg!log <channel name>"
-help1 += "\n-    Sets the logs channel."
-help1 += "\n```"
-
-''''''
-
-# START UP SYSTEM
-started = []
-@client.event
-async def on_ready():
-    async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        owner_roles.append(role)
-    print("[START UP] Loaded owner roles.")
-    async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        manager_roles.append(role)
-    print("[START UP] Loaded manager roles.")
-    async for i in client.logs_from(client.get_channel(admin_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        admin_roles.append(role)
-    print("[START UP] Loaded administrator roles.")
-    async for i in client.logs_from(client.get_channel(mod_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        mod_roles.append(role)
-    print("[START UP] Loaded moderator roles.")
-    async for i in client.logs_from(client.get_channel(helper_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        helper_roles.append(role)
-    print("[START UP] Loaded helper roles.")
-    async for i in client.logs_from(client.get_channel(partner_manager_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        partner_manager_roles.append(role)
-    print("[START UP] Loaded partner manager roles.")
-    async for i in client.logs_from(client.get_channel(partner_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        partner_roles.append(role)
-    print("[START UP] Loaded partner roles.")
-    async for i in client.logs_from(client.get_channel(member_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        member_roles.append(role)
-    print("[START UP] Loaded member roles.")
-    async for i in client.logs_from(client.get_channel(self_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        self_roles.append(role)
-    print("[START UP] Loaded self roles.")
-    async for i in client.logs_from(client.get_channel(muted_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        muted_roles.append(role)
-    print("[START UP] Loaded muted roles.")
-    async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
-        logs.append(i.content)
-    print("[START UP] Loaded logs channels.")
-    async for i in client.logs_from(client.get_channel(joins_leaves_chnl), limit=limit):
-        joins_leaves.append(i.content)
-    print("[START UP] Loaded join-leave channels.")
-    started.append("+1")
-    print("[START UP] Finished.")
-    await client.change_presence(game=discord.Game(name="}help | }invite"))
-    m = splitter
-    m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
-    t1 = time.perf_counter()
-    await client.send_typing(client.get_channel(log_chnl))
-    t2 = time.perf_counter()
-    m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
-    await client.send_message(client.get_channel(log_chnl), m)
-
-# ANTI MUTE BYPASS
 @client.async_event
-async def on_member_join(user: discord.User):
-    for i in muted_list:
-        a = i.split(' | ')
-        if a[1] == user.id:
-            for u in user.server.roles:
-                if u in muted_roles:
-                    try:
-                        await client.add_roles(user.server.get_member(user.id), u)
-                    except:
-                        print("[ANTI MUTE BYPASS] Error.")
+async def on_member_join(userName: discord.User):
+    m2 = "Welcome to **Violets**, <@{}>! We hope you enjoy your stay and have fun.".format(userName.id)
+    m2 += "\nAll information is in the <#426683264682557440> channel, but feel free to ask the staff about anything you want to know."
+    m2 += "\https://giphy.com/gifs/1fmwoUOwMh5koSdpVD"
+    m = "\n**Welcome to Violets™ <@{}>! :sparkles:".format(userName.id)
+    m += "\nPlease make sure to read the rules and if you want to partner, contact any of the staff with the role Partnership Manager :smiley:"
+    m += "\nAlso don't forget to get roles and colors in the <#523865910163800099> and the <#427124007377305611> channels :wink: \nEnjoy your stay :sparkling_heart:**"
+    m += "\nhttps://giphy.com/gifs/1fmwoUOwMh5koSdpVD"
+    await client.send_message(client.get_channel("426680388585521163"), "{}".format(m))
+    server = client.get_server('426680388002250753')
+    await client.send_message(client.get_channel("429874952934785025"), ":large_blue_circle: `{}` joined the server! Now we have {} members.".format(userName, len(server.members)))
+    try:
+        await client.send_message(userName, "{}".format(m2))
+    except:
+        print("")
 
+@client.async_event
+async def on_member_remove(userName: discord.User):
+    leaves = ["Cya `{}` :wave:".format(userName)]
+    await client.send_message(client.get_channel("426680388585521163"), "{}".format(random.choice(leaves)))
+    print("Leave")
+    
 ''' COMMANDS FOR EVERYONE '''
-client.remove_command('help')
+    
+#EMOTE
 
-# }ping <option>
-@client.command(pass_context=True)
-async def ping(ctx, option = None):
-    embed = discord.Embed(colour=0x000000)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+mocklinks = ["https://media1.tenor.com/images/e92185e00b00c8b2ef4199164e130d27/tenor.gif?itemid=8665747"]
+
+huglinks = ["https://i.imgur.com/yE2RnXK.gif",
+            "https://i.imgur.com/R9sYxk8.gif",
+            "https://i.imgur.com/iLBEoKv.gif",
+            "https://i.imgur.com/cc554e8.gif",
+            "https://i.imgur.com/1dqkjHe.gif",
+            "https://i.imgur.com/Ph8GTqg.gif",
+            "https://i.imgur.com/G6EnOxd.gif",
+            "https://i.imgur.com/ZxwHn5Y.gif",
+            "https://i.imgur.com/movPIsP.gif",
+            "https://i.imgur.com/tKlfSgo.gif",
+            "https://i.imgur.com/ICg9nCr.gif",
+            "https://i.imgur.com/yC95DC2.gif",
+            "https://i.imgur.com/hRYXNKX.gif",
+            "https://i.imgur.com/br3bGQc.gif",
+            "https://i.imgur.com/IcNGAQD.gif"]
+
+patlinks = ["https://i.imgur.com/8eApUKG.gif",
+            "https://i.imgur.com/qVcP9Pt.gif",
+            "https://i.imgur.com/X9hKO2p.gif",
+            "https://i.imgur.com/v8cRPH9.gif",
+            "https://i.imgur.com/N6C7C30.gif",
+            "https://i.imgur.com/M9QPcY6.gif",
+            "https://i.imgur.com/oUSdjX6.gif",
+            "https://i.imgur.com/mFFr4e0.gif",
+            "https://i.imgur.com/3F7kmCd.gif",
+            "https://i.imgur.com/7yFvJ6m.gif",
+            "https://i.imgur.com/y3La9yP.gif"]
+
+kisslinks = ["https://i.imgur.com/0Ri9sfq.gif",
+             "https://i.imgur.com/EMdpmXW.gif",
+             "https://i.imgur.com/Y9iLoiv.gif",
+             "https://i.imgur.com/ZlqZy8S.gif",
+             "https://i.imgur.com/ySav1IQ.gif",
+             "https://i.imgur.com/ZGfrn2d.gif",
+             "https://i.imgur.com/glwWeUl.gif",
+             "https://i.imgur.com/j5hDl7V.gif",
+             "https://i.imgur.com/w7mVYty.gif",
+             "https://i.imgur.com/FJ5bckO.gif",
+             "https://i.imgur.com/KqVmVU7.gif",
+             "https://i.imgur.com/EM1C9a6.gif",
+             "https://i.imgur.com/TACVpH9.gif",
+             "https://i.imgur.com/opiHLtc.gif",
+             "https://i.imgur.com/LylJAea.gif"]
+
+nomlinks = ["https://i.imgur.com/E1eQPfu.gif",
+            "https://i.imgur.com/UUZY3Rb.gif",
+            "https://i.imgur.com/Zd6fIpA.gif",
+            "https://i.imgur.com/i2NaBS7.gif",
+            "https://i.imgur.com/Up5J6Nn.gif",
+            "https://i.imgur.com/J5MLku7.gif",
+            "https://i.imgur.com/7yYgZXE.gif"]
+
+throwlinks = ["https://i.imgur.com/o9j2oNi.gif",
+              "https://i.imgur.com/wSb8aux.gif",
+              "https://i.imgur.com/QO8TrkK.gif",
+              "https://i.imgur.com/Ts3Cc52.gif",
+              "https://i.imgur.com/D3ggzfW.gif",
+              "https://i.imgur.com/eD5mE7R.gif",
+              "https://i.imgur.com/JCUipZJ.gif",
+              "https://i.imgur.com/VSg0YLw.gif",
+              "https://i.imgur.com/8mUufrm.gif"]
+
+bitelinks = ["https://i.imgur.com/E0jIIa9.gif",
+             "https://i.imgur.com/Nvkw6hN.gif",
+             "https://i.imgur.com/wr7l06j.gif",
+             "https://i.imgur.com/uce91VI.gif"]
+
+bloodsucklinks = ["https://i.imgur.com/UbaeYIq.gif",
+                  "https://i.imgur.com/qi83Eft.gif",
+                  "https://i.imgur.com/CtwmzpG.gif",
+                  "https://i.imgur.com/DAuEJ2F.gif",
+                  "https://i.imgur.com/By6IGzq.gif"]
+
+cuddlelinks = ["https://i.imgur.com/GWNWcLH.gif",
+               "https://i.imgur.com/i3Eqqgz.gif",
+               "https://i.imgur.com/GpFk6fE.gif",
+               "https://i.imgur.com/mc3Z7wf.gif",
+               "https://i.imgur.com/N5JYB5r.gif",
+               "https://i.imgur.com/PGp8JYq.gif"]
+
+highfivelinks = ["https://i.imgur.com/hjoQeOt.gif",
+                 "https://i.imgur.com/9nhheqT.gif",
+                 "https://i.imgur.com/yw3xMOu.gif",
+                 "https://i.imgur.com/Y4g5fsT.gif",
+                 "https://i.imgur.com/p6Hvx5r.gif",
+                 "https://i.imgur.com/33nuO9D.gif",
+                 "https://i.imgur.com/uFQnmYa.gif",
+                 "https://i.imgur.com/9KG3k2n.gif",
+                 "https://i.imgur.com/nHCC1ps.gif",
+                 "https://i.imgur.com/aKvaNba.gif",
+                 "http://i.imgur.com/hnHR29x.gif"]
+
+pokelinks = ["https://i.imgur.com/HAAktbl.gif",
+             "https://i.imgur.com/Fmd0Rsu.gif",
+             "https://i.imgur.com/1rObSM3.gif",
+             "https://i.imgur.com/Wo2fc94.gif",
+             "https://i.imgur.com/rtTucBW.gif",
+             "https://i.imgur.com/4c2mC5d.gif",
+             "https://i.imgur.com/1DVD84G.gif"]
+
+slaplinks = ["https://i.imgur.com/EAF42MG.gif",
+             "https://i.imgur.com/tLTT9Q4.gif",
+             "https://i.imgur.com/tEWjg7v.gif",
+             "https://i.imgur.com/MlkLTjv.gif",
+             "https://i.imgur.com/hoTYJZP.gif",
+             "https://i.imgur.com/Pthhs3Y.gif"]
+
+
+punchlinks = ["https://i.imgur.com/T2HdIv8.gif",
+              "https://i.imgur.com/LZz65rg.gif",
+              "https://i.imgur.com/FqPBIf3.gif",
+              "https://i.imgur.com/KmqPDQG.gif",
+              "https://i.imgur.com/yEx4aKu.gif"]
+
+starelinks = ["https://i.imgur.com/f8rFNH0.gif",
+              "https://i.imgur.com/ACCQDj4.gif",
+              "https://i.imgur.com/1Co1i9t.gif",
+              "https://i.imgur.com/uPZHQxV.gif",
+              "https://i.imgur.com/wXQLAb3.gif",
+              "https://i.imgur.com/hY7ZngK.gif"]
+
+facepalmlinks = ["http://media.giphy.com/media/8BYLSNmnJYQxy/giphy.gif",
+                 "https://uploads.disquscdn.com/images/84e9a7cef36a59ae605fad98c7ac567841be388820bf3fb936fd21b646a1d605.gif",
+                 "https://media1.tenor.com/images/74199573d51d1bd9b61029b611ee7617/tenor.gif?itemid=5695432",
+                 "http://i0.kym-cdn.com/photos/images/original/000/173/877/Facepalm.gif",
+                 "http://i.imgur.com/gXOcRsW.gif",
+                 "https://media.giphy.com/media/8cPpgUhTMjhF6/giphy.gif",
+                 "https://media1.tenor.com/images/a0282083ab6b592ab419659e4fb08624/tenor.gif?itemid=4745847"]
+
+crylinks = ["https://media1.giphy.com/media/ROF8OQvDmxytW/giphy-downsized.gif",
+            "https://media1.tenor.com/images/06ae6bbe852471939cf61a81e5a9eb23/tenor.gif?itemid=5370823",
+            "https://78.media.tumblr.com/e9fb46144efc579746e57bcaebd3350a/tumblr_olrmy4djBG1tydz8to1_500.gif",
+            "http://i.imgur.com/k5B1CBd.jpg",
+            "https://media.giphy.com/media/hyU0RHvlS3iQU/giphy.gif",
+            "https://media1.tenor.com/images/5912cbe4bc0dec511b5e0996a2ad9b6f/tenor.gif?itemid=8620704",
+            "https://s9.favim.com/orig/131225/an-anime-anime-gif-anime-guy-Favim.com-1182388.gif"]
+
+licklinks = ["https://i.imgur.com/QkRz1GJ.gif",
+             "https://i.imgur.com/ObCPKYV.gif",
+             "https://i.imgur.com/7fWrYqd.gif",
+             "https://i.imgur.com/O8CNVUL.gif",
+             "https://i.imgur.com/4QIlJtC.gif",
+             "https://i.imgur.com/LptJIi1.gif",
+             "https://i.imgur.com/THGgRJz.gif"]
+
+spanklinks = ["https://i.imgur.com/dt1TTQu.gif",
+              "https://i.imgur.com/ZsTbDvh.gif",
+              "https://i.imgur.com/4LHwG60.gif",
+              "https://i.imgur.com/xLOoHKP.gif",
+              "https://i.imgur.com/UShywVv.gif",
+              "https://i.imgur.com/RE3mnrA.gif"]
+
+# FUN MESSAGES
+@client.event
+async def on_message(message):
+    if message.content.lower().startswith('v!test'):
+        await client.send_message(message.channel, "Testing 1 2 3...")
+
+    if message.content.lower().startswith('v!coin'): #Coinflip 50/50% chance kopf oder zahl
+        choice = random.randint(1,2)
+        if choice == 1:
+            await client.add_reaction(message, '🌑')
+        if choice == 2:
+            await client.add_reaction(message, '🌕')
+                    
+    if message.content.lower().startswith('who is huskie'):
+        await client.send_message(message.channel, "Dog")
+                                                         
+    if message.content.lower().startswith('who is vanessa'):
+        await client.send_message(message.channel, "Vanessa is a dog lover, she enjoys long walks on the beach as well as spending her days on Discord. SHE IS ALSO TAKEN SO STAY AWAY")
+        
+    if message.content.lower().startswith('who is panda'):
+        await client.send_message(message.channel, "The best fucking animal. Your and everyone's fav animal. panda (bear)s are pure. **NOT RED PANDA**. Oh and <@481268235585716235> BOW TO HER OR DIE.")
+                               
+    if message.content.lower().startswith('who is feez'):
+        await client.send_message(message.channel, "A ghost that lives in shadows... *that's a bit dark*...")
+                                       
+    if message.content.lower().startswith('who is yami'):
+        await client.send_message(message.channel, "The best owner, the kind and thoughtful guy that cares about everybody.")
+        
+    if message.content.lower().startswith('who is kasper'):
+        await client.send_message(message.channel, "Useless admin, can't do anything right. Most retarded thing I've seen, and I've seen a kid in a wheelchair fall down a deck of stairs.")
+      
+    if message.content.lower().startswith('who is rai'):
+        await client.send_message(message.channel, "A kind wonderful person. She awesome.")
+                                      
+    if message.content.lower().startswith('whalecum'):
+        b = ["Stop saying that shit.", "just why", "(╯°□°）╯︵ ┻━┻", "boi", "fucking pervert"]
+        await client.send_message(message.channel, "{}".format(random.choice(b)))       
     else:
-        if '}' in str(ctx.message.content):
-            if option == "all" or option == "m":
-                t1 = time.perf_counter()
-                await client.send_typing(ctx.message.channel)
-                t2 = time.perf_counter()
-                ping = round((t2-t1)*1000)
-                if ping > 300:
-                    m = "{} The bot is lagging.\nAttempting to fix the bot's ping. This should take about a minute to finish.".format(pingbad_e)
-                elif ping > 200:
-                    m = "{} The bot might be lagging.".format(pingok_e)
+        await client.process_commands(message)
+            
+            
+# v!hug <user>
+@client.command(pass_context=True)
+async def hug(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to hug.")
+    else:
+        msg.set_image(url="{}".format(random.choice(huglinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got a hug from <@{}>! Nawww.".format(user.id, author.id))
+    await client.say(embed=msg)
+    
+# v!mock <user>
+@client.command(pass_context=True)
+async def mock(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to mock.")
+    else:
+        msg.set_image(url="{}".format(random.choice(mocklinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> iS mOcKiNg <@{}>!".format(author.id, user.id))
+    await client.say(embed=msg)
+    
+# v!cry
+@client.command(pass_context=True)
+async def cry(ctx):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    msg.set_image(url="{}".format(random.choice(crylinks)))
+    msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> is crying. ;-;".format(author.id))
+    await client.say(embed=msg)
+
+# v!kiss <user>
+@client.command(pass_context=True)
+async def kiss(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to kiss.")
+    else:
+        msg.set_image(url="{}".format(random.choice(kisslinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got a kiss from <@{}>! owo what's this?".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!cuddle <user>
+@client.command(pass_context=True)
+async def cuddle(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to cuddle.")
+    else:
+        msg.set_image(url="{}".format(random.choice(cuddlelinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> cuddled <@{}>! Aww.".format(author.id, user.id))
+    await client.say(embed=msg)
+
+# v!bite <user>
+@client.command(pass_context=True)
+async def bite(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to bite.")
+    else:
+        msg.set_image(url="{}".format(random.choice(bitelinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got biten by <@{}>! Ouch.".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!bloodsuck <user>
+@client.command(pass_context=True)
+async def bloodsuck(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to suck blood from.")
+    else:
+        msg.set_image(url="{}".format(random.choice(bloodsucklinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> sucked some of <@{}>'s blood! Yummy.".format(author.id, user.id))
+    await client.say(embed=msg)
+
+# v!throw <user>
+@client.command(pass_context=True)
+async def throw(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to throw.")
+    else:
+        msg.set_image(url="{}".format(random.choice(throwlinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got throw by <@{}>! Weee.".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!pat <user>
+@client.command(pass_context=True)
+async def pat(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to pat.")
+    else:
+        msg.set_image(url="{}".format(random.choice(patlinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got a pat from <@{}>! uwu".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!punch <user>
+@client.command(pass_context=True)
+async def punch(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to punch.")
+    else:
+        msg.set_image(url="{}".format(random.choice(punchlinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got punched by <@{}>! Wow, calm down.".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!nom <user>
+@client.command(pass_context=True)
+async def nom(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to nom.")
+    else:
+        msg.set_image(url="{}".format(random.choice(nomlinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> nommed <@{}>! ( ͡° ͜ʖ ͡°)".format(author.id, user.id))
+    await client.say(embed=msg)
+
+# v!highfive <user>
+@client.command(pass_context=True)
+async def highfive(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to highfive.")
+    else:
+        msg.set_image(url="{}".format(random.choice(highfivelinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> highfived <@{}>! Woo.".format(author.id, user.id))
+    await client.say(embed=msg)
+
+# v!poke <user>
+@client.command(pass_context=True)
+async def poke(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to poke.")
+    else:
+        msg.set_image(url="{}".format(random.choice(pokelinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got poked by <@{}>! Hmm?".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!slap <user>
+@client.command(pass_context=True)
+async def slap(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to slap.")
+    else:
+        msg.set_image(url="{}".format(random.choice(slaplinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got slapped by <@{}>! They probably deserved it.".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!stare <user>
+@client.command(pass_context=True)
+async def stare(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to stare at.")
+    else:
+        msg.set_image(url="{}".format(random.choice(starelinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> is staring at <@{}>! Creep.".format(author.id, user.id))
+    await client.say(embed=msg)
+
+# v!facepalm
+@client.command(pass_context=True)
+async def facepalm(ctx):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    msg.set_image(url="{}".format(random.choice(facepalmlinks)))
+    msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> facepalmed. <_<".format(author.id))
+    await client.say(embed=msg)
+    
+# v!fart
+@client.command(pass_context=True)
+async def fart(ctx):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> farted... can you smell the love? <_<".format(author.id))
+    await client.say(embed=msg)
+
+# v!spank <user>
+@client.command(pass_context=True)
+async def spank(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to spank.")
+    else:
+        msg.set_image(url="{}".format(random.choice(spanklinks)))
+        msg.add_field(name=":small_blue_diamond: EMOTE :small_blue_diamond:", value="<@{}> got spanked by <@{}>! =3".format(user.id, author.id))
+    await client.say(embed=msg)
+
+# v!lick <user>
+@client.command(pass_context=True)
+async def lick(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to lick.")
+    else:
+        msg.set_image(url="{}".format(random.choice(licklinks)))
+        msg.add_field(name="**:small_blue_diamond: EMOTE :small_blue_diamond: **", value="<@{}> licked <@{}>! Uhm...".format(author.id, user.id))
+    await client.say(embed=msg)
+    
+#FUN
+# }kill <user>
+@client.command(pass_context=True)
+async def kill(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if user == None:
+        msg.add_field(name=error_img, value="Please mention the user you want to kill.")
+    else:
+        msgs = ["On a beautiful, sunny day, <@{}> went to the store. As they walked in to the store, they slipped and the doors cut off their head.".format(user.id),
+                "<@{}> was sitting on a tree, but because of their weight, the branch broke and they fell right on their head.".format(user.id),
+                "On a beautiful morning <@{}> suddenly jumped out of bed and started running towards the bathroom. However, they slipped on a banana and fell out of the window.".format(user.id),
+                "<@{}> watched the Emoji movie. The next day they died from too much cringe.".format(user.id),
+                "<@{}> was browsing the web one day. They accidentaly clicked on a pop-up saying 'DIE FOR FREE!'.".format(user.id),
+                "<@{}> got caught watching hentai. They had no choice but to kill themselves in order to wash away their sins.".format(user.id),
+                "All of <@{}>'s memes got stolen! They couldn't live for more than 0.420 seconds without memes.".format(user.id),
+                "<@{}> was walking down the village when all of a sudden a piano fell on top of them, crashing all their bones.".format(user.id),
+                "Long time ago <@{}> lived in peace and harmony, until the fire nation attacked. Now <@{}> is pretty much dead.".format(user.id, user.id),
+                "<@{}> died a virgin. LMAO what a loser.".format(user.id),
+                "<@{}> was playing hopscotch on a landmine field. You can tell how that went.".format(user.id),
+                "<@{}> was playing the Sims. Their computer crashed and they got a heart attack.".format(user.id),
+                "Wait, <@{}> died? Oh well.".format(user.id),
+                "<@{}> commited suicide. I guess it's a way of saying 'You can't fire me! I quit!' to God.".format(user.id),
+                "<@{}> gave their heart to <@{}>... Literally.".format(user.id, author.id),
+                "There hasn't been rain around the whole world, plants are dying and the temperatures are very high. <@{}> was a vegan.".format(user.id),
+                "<@{}> decided to go on the moon. However they forgot their space suit. All the kids wanted to hear about the corpse on the moon...".format(user.id),
+                "One day <@{}> was chilling with their friends. All of them were bored, they didn't have anything to do. One of them said 'So gentlemen, what do we do now?', <@{}> replied: 'We die.'. Yeah, they were really bored.".format(user.id, user.id),
+                "<@{}> tried to lay an egg. Humans can't do that, nor can bots!".format(user.id),
+                "All of <@{}>'s diamonds were stolen on their Christian minecraft server. Out of anger they said 'heck' and got killed instantly.".format(user.id),
+                "<@{}> forgot how to breathe.".format(user.id),
+                "<@{}> saw <@{}>'s face and instantly died.".format(user.id, author.id),
+                "...and then <@{}> said: I don't feel so good...".format(user.id),
+                "<@{}> livedn't.".format(user.id),
+                "<@{}> had a lot of mental disorders and couldn't live with them anymore. They commited suicide by cutting a deep wound on their chest with a kitchen knife.".format(user.id),
+                "<@{}> drowned <@{}> in a glass of water.".format(author.id, user.id),
+                "<@{}> threw <@{}> in a pool with sharks.".format(author.id, user.id),
+                "<@{}> spammed <@{}>'s DMs and they died from all the notifications they got.".format(author.id, user.id),
+                "<@{}> stole all of <@{}>'s chocolate. <@{}> simply couldn't live without their chocolate and decided that their life is not worth living anymore.".format(author.id, user.id, user.id),
+                "<@{}>'s toaster was hacked by <@{}>. They couldn't live with no toast.".format(user.id, author.id),
+                "<@{}> watched furry porn and died from what they saw.".format(user.id),
+                "<@{}> 'accidentally' fell off a building.".format(user.id),
+                "<@{}> may have ate food with cyanide.".format(user.id),
+                "<@{}> starved in a fast food restaurant. What a fucking idiot.".format(user.id),
+                "...And <@{}> died happily ever after... Wait no, I messed it up!".format(user.id),
+                "<@{}> joined this server and died. Oh well, that's not a first.".format(user.id),
+                "<@{}> was gay in Iran.".format(user.id),
+                "<@{}> choked on a banana ( ͡° ͜ʖ ͡°) and died.".format(user.id),
+                "<@{}> drove off a cliff and survived, but died from shock when they saw the high price of the hospital bill.".format(user.id),
+                "<@{}> listened to Justin Beiber for more than 0.69 seconds.".format(user.id),
+                "<@{}> drank too much anti-freeze.".format(user.id),
+                "<@{}> got stabbed with a cucumber by <@{}>.".format(user.id, author.id),
+                "<@{}> died from a heatstroke in the artic.".format(user.id),
+                "<@{}> tried to fly. It worked till they hit the ground.".format(user.id),
+                "<@{}> wanted to get a haircut in a faster way. They thought setting their hair on fire would do the trick.".format(user.id),
+                "On a peaceful night. The moon was shining and everyone was sleeping and enjoying their dreams while <@{}> suffocated in their pillow.".format(user.id),
+                "<@{}> got run over by a boat. A fricking boat!".format(user.id),
+                "What's that smell? It smells like toast... Hey, <@{}>! Don't take out the toast with a fork- too late...".format(user.id),
+                "<@{}> got a paper cut on both of their eyes, walked off a cliff and died. I guess books are evil.".format(user.id),
+                "<@{}> tried putting out fire with gasoline.".format(user.id),
+                "<@{}>'s head exploded while they were sitting on the toilet and pressing.".format(user.id),
+                "<@{}> died of laughter. No I mean they actually died.".format(user.id),
+                "<@{}> got locked in a refrigerator and died of hunger.".format(user.id),
+                "<@{}> drowned in their own tears after losing a game of Fortnite.".format(user.id),
+                "<@{}> got beat up by their imaginary friends.".format(user.id),
+                "<@{}> played My Little Ponny for too long.".format(user.id),
+                "<@{}> choked on air.".format(user.id),
+                "<@{}> got poked by Chuck Norris.".format(user.id),
+                "<@{}> took a selfie with a gun.".format(user.id),
+                "<@{}>'s brain exploded after <@{}> saying 'What if dolphins had legs?'.".format(user.id, author.id),
+                "<@{}> died after eating their favourite snack, tide pods.".format(user.id),
+                "<@{}> survived the biggest waves then tripped on a rock and died.".format(user.id),
+                "<@{}> ate white chocolate. Who the fuck eats white chocolate?".format(user.id),
+                "<@{}> demonstrated how to die and then had a heart attack. How ironic.".format(user.id),
+                "<@{}> fell in a toilet and then got flushed.".format(user.id),
+                "<@{}> got stuck in a vending machine.".format(user.id),
+                "<@{}> choked on their toothbrush and died.".format(user.id),
+                "<@{}> found their butthole and died from excitement.".format(user.id),
+                "<@{}> died. That's it. They just died.".format(user.id)]
+        msg.add_field(name=":newspaper2: ", value="{}".format(random.choice(msgs)))
+    await client.say(embed=msg)
+    
+# v!battle <user>
+@client.command(pass_context=True)
+async def battle(ctx, userName: discord.Member = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if userName == None:
+        msg.add_field(name=error_img, value="Please mention someone you want to battle.\nExample: `v!battle @Huskie`.")
+    else:
+        a_attacks = ["<@{}> punches <@{}> :punch: ".format(author.id, userName.id),
+                     "<@{}> kicks <@{}> :boot: ".format(author.id, userName.id),
+                     "<@{}> grabs and throws <@{}> :raised_hands: ".format(author.id, userName.id),
+                     "<@{}> stabs <@{}> :dagger: ".format(author.id, userName.id),
+                     "<@{}> shoots <@{}> :gun: ".format(author.id, userName.id),
+                     "<@{}> cuts <@{}> :knife: ".format(author.id, userName.id),
+                     "<@{}> hits <@{}> with a hammer :hammer: ".format(author.id, userName.id),
+                     "<@{}> uses dark magic on <@{}> :skull_crossbones: ".format(author.id, userName.id),
+                     "<@{}> uses chains to choke <@{}> :chains: ".format(author.id, userName.id),
+                     "<@{}> casts a spell on <@{}> :sparkles: ".format(author.id, userName.id),
+                     "<@{}> pukes on <@{}> :nauseated_face: ".format(author.id, userName.id),
+                     "<@{}> scares <@{}> :ghost: ".format(author.id, userName.id),
+                     "<@{}> summons a demon to attack <@{}> :smiling_imp: ".format(author.id, userName.id),
+                     "<@{}> calls a robot army to attack <@{}> :robot: ".format(author.id, userName.id),
+                     "<@{}> farts at <@{}> :dash: ".format(author.id, userName.id),
+                     "<@{}> creates a tornado behind <@{}> :cloud_tornado: ".format(author.id, userName.id),
+                     "<@{}> summons a meteor and the meteor falls on <@{}> :comet: ".format(author.id, userName.id),
+                     "<@{}> strikes <@{}> with lightning :zap: ".format(author.id, userName.id),
+                     "<@{}> freezes <@{}> :snowflake: ".format(author.id, userName.id),
+                     "<@{}> cripples <@{}> :boom: ".format(author.id, userName.id),
+                     "<@{}> shoots <@{}> with a bow and arrow :gun: ".format(author.id, userName.id),
+                     "<@{}> drives over <@{}> :red_car: ".format(author.id, userName.id),
+                     "<@{}> chops off <@{}>'s leg :crossed_swords: ".format(author.id, userName.id),
+                     "<@{}> drains some of <@{}>'s life :broken_heart: ".format(author.id, userName.id),
+                     "<@{}> steals <@{}>'s soul :black_heart: ".format(author.id, userName.id),
+                     "<@{}> stuns <@{}> :octagonal_sign: ".format(author.id, userName.id),
+                     "<@{}> uses nuclear energy to attack <@{}> :radioactive: ".format(author.id, userName.id),
+                     "<@{}> stabs <@{}> in the eyes and blinds them :eye: ".format(author.id, userName.id),
+                     "<@{}> uses ear-rape to deafen <@{}> :ear: ".format(author.id, userName.id),
+                     "<@{}> uses mind control on <@{}> :alien: ".format(author.id, userName.id),
+                     "<@{}> summons minions to attack <@{}> :busts_in_silhouette: ".format(author.id, userName.id),
+                     "<@{}> traps <@{}> :spider_web: ".format(author.id, userName.id)]
+        
+        u_attacks = ["<@{}> punches <@{}> :punch: ".format(userName.id, author.id),
+                     "<@{}> kicks <@{}> :boot: ".format(userName.id, author.id),
+                     "<@{}> grabs and throws <@{}> :raised_hands: ".format(userName.id, author.id),
+                     "<@{}> stabs <@{}> :dagger: ".format(userName.id, author.id),
+                     "<@{}> shoots <@{}> :gun: ".format(userName.id, author.id),
+                     "<@{}> cuts <@{}> :knife: ".format(userName.id, author.id),
+                     "<@{}> hits <@{}> with a hammer :hammer: ".format(userName.id, author.id),
+                     "<@{}> uses dark magic on <@{}> :skull_crossbones: ".format(userName.id, author.id),
+                     "<@{}> uses chains to choke <@{}> :chains: ".format(userName.id, author.id),
+                     "<@{}> casts a spell on <@{}> :sparkles: ".format(userName.id, author.id),
+                     "<@{}> pukes on <@{}> :nauseated_face: ".format(userName.id, author.id),
+                     "<@{}> scares <@{}> :ghost: ".format(userName.id, author.id),
+                     "<@{}> summons a demon to attack <@{}> :smiling_imp: ".format(userName.id, author.id),
+                     "<@{}> calls a robot army to attack <@{}> :robot: ".format(userName.id, author.id),
+                     "<@{}> farts at <@{}> :dash: ".format(userName.id, author.id),
+                     "<@{}> creates a tornado behind <@{}> :cloud_tornado: ".format(userName.id, author.id),
+                     "<@{}> summons a meteor and the meteor falls on <@{}> :comet: ".format(userName.id, author.id),
+                     "<@{}> strikes <@{}> with lightning :zap: ".format(userName.id, author.id),
+                     "<@{}> freezes <@{}> :snowflake: ".format(userName.id, author.id),
+                     "<@{}> cripples <@{}> :boom: ".format(userName.id, author.id),
+                     "<@{}> shoots <@{}> with a bow and arrow :gun: ".format(userName.id, author.id),
+                     "<@{}> drives over <@{}> :red_car: ".format(userName.id, author.id),
+                     "<@{}> chops off <@{}>'s leg :crossed_swords: ".format(userName.id, author.id),
+                     "<@{}> drains some of <@{}>'s life :broken_heart: ".format(userName.id, author.id),
+                     "<@{}> steals <@{}>'s soul :black_heart: ".format(userName.id, author.id),
+                     "<@{}> stuns <@{}> :octagonal_sign: ".format(userName.id, author.id),
+                     "<@{}> uses nuclear energy to attack <@{}> :radioactive: ".format(userName.id, author.id),
+                     "<@{}> stabs <@{}> in the eyes and blinds them :eye: ".format(userName.id, author.id),
+                     "<@{}> uses ear-rape to deafen <@{}> :ear: ".format(userName.id, author.id),
+                     "<@{}> uses mind control on <@{}> :alien: ".format(userName.id, author.id),
+                     "<@{}> summons minions to attack <@{}> :busts_in_silhouette: ".format(userName.id, author.id),
+                     "<@{}> traps <@{}> :spider_web: ".format(userName.id, author.id)]
+        a_health = []
+        u_health = []
+        r = []
+        for i in range(1000):
+            a_health.append(".")
+            u_health.append(".")
+        msg.add_field(name=":crossed_swords: **__D E A T H   B A T T L E__** :crossed_swords: ", value="***`>>>`*** <@{}> :vs: <@{}> ***`<<<`***\n**~~__==============================__~~**".format(author.id, userName.id))
+        for i in range(1000):
+            if len(a_health) == 0 or len(u_health) == 0:
+                if len(a_health) > len(u_health):
+                    m = ":crown: WINNER: <@{}>\n:heart: `{}` Health".format(author.id, len(a_health))
+                    m += "\n "
+                    m += "\n:thumbsdown: LOSER: <@{}>\n:heart: `{}` Health".format(userName.id, len(u_health))
+                elif len(a_health) < len(u_health):
+                    m = ":crown: WINNER: <@{}>\n:heart: `{}` Health".format(userName.id, len(u_health))
+                    m += "\n "
+                    m += "\n:thumbsdown: LOSER: <@{}>\n:heart: `{}` Health".format(author.id, len(a_health))
                 else:
-                    m = "{} The bot isn't lagging.".format(pinggood_e)
-                embed.description = "My ping is `{}`ms.\n{}".format(ping, m)
-                await client.say(embed=embed)
-        else:
-            t1 = time.perf_counter()
-            await client.send_typing(ctx.message.channel)
-            t2 = time.perf_counter()
-            ping = round((t2-t1)*1000)
-            if ping > 300:
-                m = "{} The bot is lagging.\nAttempting to fix the bot's ping. This should take about a minute to finish.".format(pingbad_e)
-            elif ping > 200:
-                m = "{} The bot might be lagging.".format(pingok_e)
+                    k = random.randint(0, 100)
+                    if k >= 50:
+                        m = ":crown: RANDOM WINNER: <@{}>\n:heart: `{}` Health".format(author.id, len(a_health))
+                        m += "\n "
+                        m += "\n:thumbsdown: LOSER: <@{}>\n:heart: `{}` Health".format(userName.id, len(u_health))
+                    else:
+                        m = ":crown: RANDOM WINNER: <@{}>\n:heart: `{}` Health".format(userName.id, len(u_health))
+                        m += "\n "
+                        m += "\n:thumbsdown: LOSER: <@{}>\n:heart: `{}` Health".format(author.id, len(a_health))
+                msg.add_field(name="**~~__==============================__~~**", value=m)
+                break
             else:
-                m = "{} The bot isn't lagging.".format(pinggood_e)
-            embed.description = "My ping is `{}`ms.\n{}".format(ping, m)
-            await client.say(embed=embed)
-
-# }help
+                r.append(".")
+                a_d = random.randint(100, 250)
+                u_d = random.randint(100, 250)
+                m = ":small_red_triangle_down: {}!\n`{}` DMG!".format(random.choice(a_attacks), a_d)
+                m += "\n:small_red_triangle_down: {}!\n`{}` DMG!".format(random.choice(u_attacks), u_d)
+                msg.add_field(name=":arrow_right: ROUND `{}`:".format(len(r)), value=m)
+                for i in range(a_d):
+                    if len(u_health) == 0:
+                        break
+                    else:
+                        u_health.remove(".")
+                for i in range(u_d):
+                    if len(a_health) == 0:
+                        break
+                    else:
+                        a_health.remove(".")
+    await client.say(embed=msg)
+    
+# v!ship <something> and <something else>
 @client.command(pass_context=True)
-async def help(ctx):
-    embed = discord.Embed(colour=0x000000)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+async def ship(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please give 2 things you want to ship.\nExample: `v!ship Hikari and Yami`.")
     else:
-        if 'xm!' in str(ctx.message.content):
+        if len(str(args)) > 400:
+            msg.add_field(name=error_img, value="The ship cannot be longer than 400 characters.")
+        else:
+            if " and " in str(args):
+                a = args.split(' and ')
+                if len(a) > 2:
+                    msg.add_field(name=error_img, value="The command was used incorrectly.\nExample: `v!ship Hikari and Yami`.")
+                else:
+                    p = random.randint(0, 101)
+                    if p >= 0 and p <= 10:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Shit\n```\n:sob: ".format(a[0], a[1], p)
+                    elif p >= 11 and p <= 20:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Awful\n```\n:cry: ".format(a[0], a[1], p)
+                    elif p >= 21 and p <= 30:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Really Bad\n```\n:frowning2: ".format(a[0], a[1], p)
+                    elif p >= 31 and p <= 40:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Bad\n```\n:slight_frown: ".format(a[0], a[1], p)
+                    elif p >= 41 and p <= 50:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Okay\n```\n:neutral_face: ".format(a[0], a[1], p)
+                    elif p >= 51 and p <= 60:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Good\n```\n:slight_smile: ".format(a[0], a[1], p)
+                    elif p >= 61 and p <= 70:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Very Good\n```\n:smiley: ".format(a[0], a[1], p)
+                    elif p >= 71 and p <= 80:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Fantastic\n```\n:blush: ".format(a[0], a[1], p)
+                    elif p >= 81 and p <= 90:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Amazing\n```\n:heart_eyes: ".format(a[0], a[1], p)
+                    else:
+                        m = ":small_red_triangle_down: **{}**\n:small_red_triangle: **{}**\n```fix\n{}% - Perfect\n```\n:revolving_hearts: ".format(a[0], a[1], p)
+                    msg.add_field(name=":heartpulse: **__S H I P   M A C H I N E__** :heartpulse: ", value=m)
+            else:
+                msg.add_field(name=error_img, value="The command was used incorrectly.\nExample: `v!ship Hikari and Yami`")
+    await client.say(embed=msg)
+    
+# v!rps <rock/paper/scissors>
+@client.command(pass_context=True)
+async def rps(ctx, o = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if o == None:
+        msg.add_field(name=error_img, value="Please choose what you want to use.\nExample: `v!rps rock`.")
+    else:
+        if o == "rock" or o == "paper" or o == "scissors":
+            a = ["rock", "paper", "scissors"]
+            c = random.choice(a)
+            msg.add_field(name=":fist: **__ROCK, PAPER, SCISSORS__** :fist: ", value="**~~__==============================__~~**\n:arrow_forward: <@{}>\n------- `{}`\n:arrow_forward: <@{}>\n------- `{}`".format(author.id, o, client.user.id, c))
+            if o == "rock" and c == "scissors":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "paper" and c == "rock":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "scissors" and c == "paper":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(author.id, client.user.id))
+            elif o == "rock" and c == "paper":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            elif o == "paper" and c == "scissors":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            elif o == "scissors" and c == "rock":
+                msg.add_field(name="**~~__==============================__~~**", value=":crown: WINNER: <@{}>\n \n:thumbsdown: LOSER: <@{}>".format(client.user.id, author.id))
+            else:
+                msg.add_field(name="**~~__==============================__~~**", value=":no_entry: It's a tie!")
+        else:
+            msg.add_field(name=error_img, value="Invalid choice.\nChoices: `rock`, `paper`, `scissors`.")
+    await client.say(embed=msg)
+    
+# v!eightball <yes or no question>
+@client.command(pass_context=True)
+async def eightball(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please ask a yes/no question.")
+    else:
+        if len(str(args)) > 1900:
+            msg.add_field(name=error_img, value="The question cannot be longer than 1900 characters.")
+        else:
+            a = ["Hell no!",
+                 "No!",
+                 "Hell yes!",
+                 "Yes!",
+                 "Definitely!",
+                 "Definitely not!",
+                 "Probably!",
+                 "Probably not!",
+                 "Most likely!",
+                 "Yes! I'm sure of it!",
+                 "No! I'm sure of it!"]
+            msg.add_field(name=":8ball: ", value=":grey_question: `Question:`\n<@{}>: {}\n \n:grey_exclamation: `Answer:`\n**Magic Eight Ball**: {}".format(author.id, args, random.choice(a)))
+    await client.say(embed=msg)
+    
+# v!rate <text>
+@client.command(pass_context=True)
+async def rate(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Nothing to rate given.")
+    else:
+        if len(str(args)) > 1900:
+            msg.add_field(name=error_img, value="The text cannot be longer than 1900 characters.")
+        else:
+            msg.add_field(name=":scales:", value=":arrow_forward: <@{}>\nI'd rate {} a {}/10!".format(author.id, args, random.randint(0, 11)))
+    await client.say(embed=msg)
+    
+# v!urban <text>
+@client.command(pass_context=True)
+async def urban(ctx, *, args = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please give something you want to define.")
+    else:
+        if len(str(args)) > 150:
+            msg.add_field(name=error_img, value="The text cannot be longer than 150 characters.")
+        else:
             try:
-                await client.send_message(ctx.message.author, help1)
-                embed.description = "{} A list of commands has been sent to your DMs.".format(worked_e)
-                await client.say(embed=embed)
+                defs = ud.define('{}'.format(args))
+                msg.add_field(name=":bookmark_tabs: Urban Dictionary", value="<@{}>: What is {}?\n \n{}".format(author.id, args, random.choice(defs)))
             except:
-                embed.description = "{} I was unable to DM you my list of commands.".format(error_e)
-                await client.say(embed=embed)
+                msg.add_field(name=":bookmark_tabs: Urban Dictionary", value="<@{}>: What is {}?\n \nNo definition found.".format(author.id))
+    await client.say(embed=msg)
+    
+#GENERAL
 
-''' COMMANDS FOR HELPERS '''
-# }cb
+# }apply <helper/mod/admin/manager/adbot>
 @client.command(pass_context=True)
-async def cb(ctx):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+async def apply(ctx, option = None):
+    author = ctx.message.author
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if option == None:
+        msg.add_field(name=error_img, value="No option given.\nOptions: `mod`, `pm`.\n \nExample: `v!apply pm`.")
     else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    embed.description = "{} Deleting latest messages sent by bots... {}".format(clearbots_e, loading_e)
-                    h = await client.say(embed=embed)
-                    msgs = []
-                    async for o in client.logs_from(ctx.message.channel, limit=100, before=ctx.message):
-                        if o.author.bot and o.id != h.id:
-                            msgs.append(o)
-                try:
-                    await client.delete_messages(msgs)
-                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
-                    await client.edit_message(h, embed=embed)
-                except:
-                    for o in msgs:
-                        await client.delete_message(o)
-                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
-                    await client.edit_message(h, embed=embed)
-                a.append("+1")
-                break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
-
-# }mute <user> <minutes> [reason]
+        if option == "pm":
+            try:
+                mg = "***__PARTNERSHIP MANAGER APPLICATION TEMPLATE__***"
+                mg += "\n:exclamation: Before applying make sure you met all the requirements."
+                mg += "\n`-` You must be 15+"
+                mg += "\n`-` You must be level 5+"
+                mg += "\n```fix"
+                mg += "\n===================================="
+                mg += "\n```"
+                mg += "\n:grey_question: How to apply:"
+                mg += "\n`-` Once you meet the requirements, copy the template below and answer all the questions."
+                mg += "\n`-` When you finish answering the questions, DM the finished version to Huskie."
+                mg += "\n```fix"
+                mg += "\n===================================="
+                mg += "\n```"
+                mg += "\n`-` What is your discord username? Example: Huskie#9999"
+                mg += "\n`-` How old are you?"
+                mg += "\n`-` For how long have you been in this server?"
+                mg += "\n`-` Why do you want to become a partnership manager?"
+                mg += "\n`-` How many partnerships can you do a day?."
+                mg += "\n`-` How active can you be (example: 1 hour a day, 3 times a week per 2 hours, etc.)?"
+                mg += "\n`-` What would you do if the server is being raided?"
+                mg += "\n`-` What would you do if a staff member is abusing their powers?"
+                mg += "\n`-` What would you do if someone is being rude towards you?"
+                mg += "\n`-` Do you know any of the staff members? If yes, please tag them."
+                mg += "\n`-` Have you been or are you a partnership manager on another server?"
+                await client.send_message(author, mg)
+                msg.add_field(name=":pencil: ", value="The `pm` template has been sent to your DMs!")
+            except:
+                msg.add_field(name=error_img, value="I was unable to DM you, please try again once you allowed DMs from me.")
+        elif option == "mod":
+            try:
+                mg = "***__MODERATOR APPLICATION TEMPLATE__***"
+                mg += "\n:exclamation: Before applying make sure you met all the requirements."
+                mg += "\n`-` You must be 15+"
+                mg += "\n`-` You must be level 15+"
+                mg += "\n```fix"
+                mg += "\n===================================="
+                mg += "\n```"
+                mg += "\n:grey_question: How to apply:"
+                mg += "\n`-` Once you meet the requirements, copy the template below and answer all the questions."
+                mg += "\n`-` When you finish answering the questions, DM the finished version to Huskie."
+                mg += "\n```fix"
+                mg += "\n===================================="
+                mg += "\n```"
+                mg += "\n`-` How old are you?"
+                mg += "\n`-` For how long have you been in this server?"
+                mg += "\n`-` Why do you want to become a moderator?"
+                mg += "\n`-` Rate your knowledge of discord and the Viola Bot (from 1-10 for both)."
+                mg += "\n`-` How active can you be (example: 1 hour a day, 3 times a week per 2 hours, etc)?"
+                mg += "\n`-` What would you do if the server is being raided?"
+                mg += "\n`-` What would you do if a staff member is abusing their powers?"
+                mg += "\n`-` What would you do if someone is being rude towards you?"
+                mg += "\n`-` Do you know any of the staff members? If yes, please tag them."
+                mg += "\n`-` Have you been or are you a staff member on another server? If yes, what role do you have?"
+                mg += "\n`-` Do you know how partnerships work on this server?"
+                await client.send_message(author, mg)
+                msg.add_field(name=":pencil: ", value="The `mod` template has been sent to your DMs!")
+            except:
+                msg.add_field(name=error_img, value="I was unable to DM you, please try again once you allowed DMs from me.")
+        else:
+            msg.add_field(name=error_img, value="Invalid option given.\nOptions: `mod`, `pm`.\n \nExample: `v!apply mod`.")
+    await client.say(embed=msg)
+    
+# }invite
 @client.command(pass_context=True)
-async def mute(ctx, user: discord.Member = None, time = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+async def invite(ctx):
+    msg = discord.Embed(colour=0x000000, url=default_invite, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    msg.add_field(name=":link: ", value="Here is the default server invite:\n{}".format(default_invite))
+    await client.say(embed=msg)
+    
+# }suggest <suggestion>
+@client.command(pass_context=True)
+async def suggest(ctx, *, args = None):
+    author = ctx.message.author
+    channel = client.get_channel('457604410344865814')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if args == None:
+        msg.add_field(name=error_img, value="Please give a suggestion.\nExample: `v!suggest Create a new role called Huskie's Servant.`.")
     else:
-        author = ctx.message.author
-        muted = []
-        for i in muted_roles:
-            if i in ctx.message.server.roles:
-                muted.append(i)
-                break
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if len(muted) != 0:
-                        if user == None or time == None:
-                            embed.description = "{} The command was used incorrectly.\nProper usage: `<user> <minutes> [reason]`.".format(error_e)
-                            await client.say(embed=embed)
-                        elif muted[0] in user.roles:
-                            embed.description = "{} That user is already muted.".format(error_e)
-                            await client.say(embed=embed)
-                        else:
-                            b = []
-                            for o in roles:
-                                for r in o:
-                                    if r in ctx.message.server.roles and r in user.roles:
-                                        embed.description = "{} Other server staff cannot be muted.".format(error_e)
-                                        await client.say(embed=embed)
-                                        b.append("+1")
-                                        break
-                                if len(b) != 0:
-                                    break
-                            if len(b) == 0:
-                                if len(str(args)) > 250 and args != None:
-                                    embed.description = "{} The reason cannot be longer than 250 characters.".format(error_e)
-                                    await client.say(embed=embed)
-                                else:
-                                    try:
-                                        time2 = int(time)
-                                        if time2 > 600 or time2 < 1:
-                                            embed.description = "{} You cannot mute someone for longer than 600 minutes and shorter than 1 minute.".format(error_e)
-                                            await client.say(embed=embed)
-                                        else:
-                                            await client.add_roles(user, muted[0])
-                                            muted_list.append(user.id)
-                                            minutes = time2 * 60
-                                            if args == None:
-                                                reason = "?"
-                                            else:
-                                                reason = args
-                                            embed.description = "{} **{}** muted **{}** for `{}` minute(s).\nReason: {}".format(muted_e, author.name, user.name, time, reason)
-                                            await client.say(embed=embed)
-                                            m = splitter
-                                            m += "\n{} **__Mute__** {}".format(log_e, muted_e)
-                                            m += "\n`Author:` {} ### {}".format(author, author.id)
-                                            m += "\n`Target:` {} ### {}".format(user, user.id)
-                                            m += "\n`Time:` {} minute(s)".format(time)
-                                            m += "\n`Reason:` {}".format(reason)
-                                            for o in logs:
-                                                b = o.split(' | ')
-                                                if b[0] == ctx.message.server.id:
-                                                    c = client.get_channel(b[1])
-                                                    await client.send_message(c, m)
-                                                    break
-                                            await asyncio.sleep(float(minutes))
-                                            try:
-                                                try:
-                                                    muted_list.remove(user.id)
-                                                except:
-                                                    print("[AUTO UNMUTE] Unable to remove user from muted list.")
-                                                if muted[0] in user.roles:
-                                                    await client.remove_roles(user, muted[0])
-                                                    embed.description = "{} **{}** was automatically unmuted.".format(unmuted_e, user.name)
-                                                    await client.say(embed=embed)
-                                            except:
-                                                print("[AUTO UNMUTE] Unable to remove role from user.")
-                                    except:
-                                        embed.description = "{} The minutes have to be a number.".format(error_e)
-                                        await client.say(embed=embed)
-                    else:
-                        embed.description = "{} No muted role found.".format(error_e)
-                        await client.say(embed=embed)
-                    a.append("+1")
+        if len(str(args)) > 500:
+            msg.add_field(name=error_img, value="The suggestion cannot be longer than 500 characters.")
+        else:
+            m = discord.Embed(colour=0x000000, description= "")
+            m.title = ""
+            m.set_footer(text=footer_text)
+            m.add_field(name=":speech_balloon: ", value="{}".format(args))
+            m.add_field(name="===============", value="Suggested by: `{}` ### `{}`\nIf you like this suggestion, react with :white_check_mark: and if you don't like it, react with :x:.".format(author, author.id))
+            await client.send_message(channel, embed=m)
+            async for message in client.logs_from(channel):
+                if len(message.reactions) == 0:
+                    await client.add_reaction(message, '\u2611')
+                    await client.add_reaction(message, '\u2716')
                     break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
+                else:
+                    print("")
+            msg.add_field(name=":speech_balloon: ", value="Suggestion sent!\nYou can see it in <#457604410344865814>.")
+    await client.say(embed=msg)
 
-# }unmute <user>
+# }userinfo <user>
 @client.command(pass_context=True)
-async def unmute(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+async def userinfo(ctx, userName: discord.Member = None):
+    punish = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x870099, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if userName == None:
+        msg.add_field(name=error_img, value="Please tag the user you want to get information on.")
     else:
-        author = ctx.message.author
-        muted = []
-        for i in muted_roles:
-            if i in ctx.message.server.roles:
-                muted.append(i)
-                break
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if len(muted) != 0:
-                        if user == None:
-                            embed.description = "{} Please mention the user you want to unmute.".format(error_e)
-                            await client.say(embed=embed)
-                        elif muted[0] in user.roles:
-                            try:
-                                muted_list.remove(user.id)
-                            except:
-                                print("[UNMUTE] Unable to remove user from muted list.")
-                            await client.remove_roles(user, muted[0])
-                            embed.description = "{} **{}** unmuted **{}**.".format(unmuted_e, author.name, user.name)
-                            await client.say(embed=embed)
-                            m = splitter
-                            m += "\n{} **__Unmute__** {}".format(log_e, unmuted_e)
-                            m += "\n`Author:` {} ### {}".format(author, author.id)
-                            m += "\n`Target:` {} ### {}".format(user, user.id)
-                            for o in logs:
-                                b = o.split(' | ')
-                                if b[0] == ctx.message.server.id:
-                                    c = client.get_channel(b[1])
-                                    await client.send_message(c, m)
-                                    break
-                        else:
-                            embed.description = "{} That user is not muted.".format(error_e)
-                            await client.say(embed=embed)
-                    else:
-                        embed.description = "{} No muted role found.".format(error_e)
-                        await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
-
-# }warn <user> <reason>
+        imageurl = userName.avatar_url
+        msg.title = "USER INFO"
+        msg.set_thumbnail(url=imageurl)
+        msg.add_field(name="NAME:", value="`{}`".format(userName), inline=True)
+        msg.add_field(name="ID:", value="`{}`".format(userName.id), inline=True)
+        msg.add_field(name="CREATED AT:", value="`{}`".format(userName.created_at), inline=True)
+        msg.add_field(name="JOINED AT:", value="`{}`".format(userName.joined_at), inline=True)
+        msg.add_field(name="STATUS:", value="`{}`".format(userName.status), inline=True)
+        msg.add_field(name="IS BOT:", value="`{}`".format(userName.bot), inline=True)
+        msg.add_field(name="GAME:", value="{}".format(userName.game), inline=True)
+        msg.add_field(name="NICKNAME:", value="`{}`".format(userName.nick), inline=True)
+        msg.add_field(name="TOP ROLE:", value="`{}`".format(userName.top_role), inline=True)
+        msg.add_field(name="VOICE CHANNEL:", value="`{}`".format(userName.voice_channel), inline=True)
+        if punish in userName.roles:
+            msg.add_field(name="MUTED:", value="True", inline=True)
+        else:
+            msg.add_field(name="MUTED:", value="False", inline=True)
+    await client.say(embed=msg)
+    
+# }serverinfo
 @client.command(pass_context=True)
-async def warn(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> <reason>`.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        b = []
-                        for o in roles:
-                            for r in o:
-                                if r in ctx.message.server.roles and r in user.roles:
-                                    embed.description = "{} Other server staff and bots cannot be warned.".format(error_e)
-                                    await client.say(embed=embed)
-                                    b.append("+1")
-                                    break
-                            if len(b) != 0:
-                                break
-                        if len(b) == 0:
-                            if len(str(args)) > 250:
-                                embed.description = "{} The reason cannot be longer than 250 characters.".format(error_e)
-                                await client.say(embed=embed)
-                            elif warns.count(user.id) >= 5:
-                                await client.ban(user)
-                                embed.description = "{} **{}** has been automatically banned.\nReason: Reached max warnings.".format(auto_e, user)
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Auto Ban__** {}".format(log_e, auto_e)
-                                m += "\n`Target:` {} ### {}".format(user, user.id)
-                                m += "\n`Reason:` Reached max warnings."
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                            else:
-                                try:
-                                    embed.description = "{} You have been warned in **Realm ✘**.\nReason: {}".format(warn_e, args)
-                                    await client.send_message(user, embed=embed)
-                                    embed.description = "{} **{}** warned **{}**.\nReason: {}".format(warn_e, author.name, user.name, args)
-                                    await client.say(embed=embed)
-                                except:
-                                    embed.description = "{} **{}** warned **{}**.\nReason: {}".format(warn_e, author.name, user.name, args)
-                                    await client.say("<@{}>".format(user.id), embed=embed)
-                                warns.append(user.id)
-                                await client.send_message(client.get_channel(warns_chnl), "{} | {} | {} | {}".format(ctx.message.server.name, user.id, author.id, args))
-                                m = splitter
-                                m += "\n{} **__Warning__** {}".format(log_e, warn_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Target:` {} ### {}".format(user, user.id)
-                                m += "\n`Reason:` {}".format(args)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
-
-# }check <user>
+async def serverinfo(ctx):
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = "SERVER INFORMATION"
+    msg.set_footer(text=footer_text)
+    imageurl = ctx.message.server.icon_url
+    msg.set_thumbnail(url=imageurl)
+    msg.add_field(name="MEMBERS", value="`{}`".format(len(ctx.message.server.members)), inline=True)
+    msg.add_field(name="CHANNELS", value="`{}`".format(len(ctx.message.server.channels)), inline=True)
+    msg.add_field(name="EMOJIS", value="`{}`".format(len(ctx.message.server.emojis)), inline=True)
+    msg.add_field(name="ID", value="`{}`".format(ctx.message.server.id), inline=True)
+    msg.add_field(name="REGION", value="`{}`".format(ctx.message.server.region), inline=True)
+    msg.add_field(name="ROLES", value="`{}`".format(len(ctx.message.server.roles)), inline=True)
+    msg.add_field(name="OWNER", value="`{}`".format(ctx.message.server.owner), inline=True)
+    msg.add_field(name="CREATED AT", value="`{}`".format(ctx.message.server.created_at), inline=True)
+    msg.set_image(url="{}".format(banner))
+    await client.say(embed=msg)
+    
+# v!mc
 @client.command(pass_context=True)
-async def check(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None:
-                        embed.description = "{} Please mention the user you want to check.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        if warns.count(user.id) == 0:
-                            embed.description = "{} No warnings found for **{}**.".format(checking_e, user.name)
-                            await client.say(embed=embed)
-                        else:
-                            embed.description = "{} Checking warnings... {}".format(checking_e, loading_e)
-                            h = await client.say(embed=embed)
-                            embed.description = "{} Warning data for **{}** ( `{}` ):".format(checking_e, user, user.id)
-                            async for o in client.logs_from(client.get_channel(warns_chnl), limit=limit):
-                                b = o.content.split(' | ')
-                                if b[1] == user.id:
-                                    r = await client.get_user_info(b[2])
-                                    embed.add_field(name="{} **__Warning Number:__** `{}`".format(warn_e, o.id), value="`Warned by:` {} ### {}\n`Reason:` {}\n`Warned in:` {}".format(r, r.id, b[3], b[0]))
-                            await client.edit_message(h, embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
+async def mc(ctx):
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = "MEMBER COUNT"
+    msg.set_footer(text=footer_text)
+    msg.add_field(name="Members", value="`{}`".format(len(ctx.message.server.members)), inline=True)
+    await client.say(embed=msg)
 
-# }clear <user> <warn number/all>
+#MODERATOR COMMANDS
+
+# }p <user>
 @client.command(pass_context=True)
-async def clear(ctx, user: discord.Member = None, target = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+async def partner(ctx, userName: discord.Member = None):
+    author = ctx.message.author
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    partner = discord.utils.get(ctx.message.server.roles, name='Partners')
+    pmanager = discord.utils.get(ctx.message.server.roles, name='Partnership Manager')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    chnl = client.get_channel('470464384725024768')
+    l = client.get_channel(logs)
+    if helper in author.roles or mod in author.roles or admin in author.roles or manager in author.roles or owner in author.roles or pmanager in author.roles:
+        if userName == None:
+            msg.add_field(name=error_img, value="Please mention the person you want to give/remove the partner role to/from.")
+        else:
+            try:
+                if partner in userName.roles:
+                    await client.remove_roles(userName, partner)
+                    msg.add_field(name=":handshake: ", value="<@{}> removed the partner role from <@{}>.".format(author.id, userName.id))
+                else:
+                    await client.add_roles(userName, partner)
+                    msg.add_field(name=":handshake: ", value="<@{}> gave the partner role to <@{}>.".format(author.id, userName.id))
+            except:
+                msg.add_field(name=error_img, value="There was an error while trying to give/take the partner role to/from that user.")
     else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or target == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> <warn number/all>`.".format(error_e)
-                        await client.say(embed=embed)
-                    elif warns.count(user.id) == 0:
-                        embed.description = "{} No warnings found for **{}**.".format(clear_e, user.name)
-                        await client.say(embed=embed)
-                    elif target == "all":
-                        embed.description = "{} Clearing warnings... {}".format(clear_e, loading_e)
-                        h = await client.say(embed=embed)
-                        p = []
-                        async for o in client.logs_from(client.get_channel(warns_chnl), limit=limit):
-                            b = o.content.split(' | ')
-                            if b[1] == user.id:
-                                await client.delete_message(o)
-                                p.append("+1")
-                        embed.description = "{} **{}** cleared `{}` warning(s) for **{}**.".format(clear_e, author.name, len(p), user.name)
-                        await client.edit_message(h, embed=embed)
-                        m = splitter
-                        m += "\n{} **__Clear Warnings__** {}".format(log_e, clear_e)
-                        m += "\n`Author:` {} ### {}".format(author, author.id)
-                        m += "\n`Target:` {} ### {}".format(user, user.id)
-                        m += "\n`Number:` {} (all)".format(len(p))
-                        for o in logs:
-                            b = o.split(' | ')
-                            if b[0] == ctx.message.server.id:
-                                c = client.get_channel(b[1])
-                                await client.send_message(c, m)
-                                break
-                    else:
-                        embed.description = "{} Clearing warning... {}".format(clear_e, loading_e)
-                        h = await client.say(embed=embed)
-                        p = []
-                        async for o in client.logs_from(client.get_channel(warns_chnl), limit=limit):
-                            b = o.content.split(' | ')
-                            if b[1] == user.id and o.id == target:
-                                await client.delete_message(o)
-                                warns.remove(user.id)
-                                p.append("+1")
-                                break
-                        if len(p) == 0:
-                            embed.description = "{} A warning with that number was not found.".format(error_e)
-                            await client.edit_message(h, embed=embed)
-                        else:
-                            embed.description = "{} **{}** cleared `1` warning for **{}**.".format(clear_e, author.name, user.name)
-                            await client.edit_message(h, embed=embed)
-                            m = splitter
-                            m += "\n{} **__Clear Warnings__** {}".format(log_e, clear_e)
-                            m += "\n`Author:` {} ### {}".format(author, author.id)
-                            m += "\n`Target:` {} ### {}".format(user, user.id)
-                            m += "\n`Number:` {}".format(len(p))
-                            for o in logs:
-                                b = o.split(' | ')
-                                if b[0] == ctx.message.server.id:
-                                    c = client.get_channel(b[1])
-                                    await client.send_message(c, m)
-                                    break
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
+        msg.add_field(name=error_img, value="This command can only be used by the staff!")
+    await client.say(embed=msg)
 
-# }purge <number>
+# v!bc
 @client.command(pass_context=True)
-async def purge(ctx, number = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if number == None:
-                        embed.description = "{} Please give the number of messages you want to delete.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        try:
-                            amount = int(number)
-                            try:
-                                await client.delete_message(ctx.message)
-                                deleted = await client.purge_from(ctx.message.channel, limit=amount)
-                                embed.description = "{} **{}** deleted `{}` messages.".format(purge_e, author.name, len(deleted))
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Purge__** {}".format(log_e, purge_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Channel:` {} ### {}".format(ctx.message.channel.name, ctx.message.channel.id)
-                                m += "\n`Number:` {}/{}".format(len(deleted), number)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                            except:
-                                deleted = []
-                                await client.delete_message(ctx.message)
-                                async for i in client.logs_from(ctx.message.channel, limit=amount):
-                                    await client.delete_message(i)
-                                    deleted.append("+1")
-                                    await asyncio.sleep(float(1.25))
-                                embed.description = "{} **{}** deleted `{}` messages.".format(purge_e, author.name, len(deleted))
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Purge__** {}".format(log_e, purge_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Channel:` {} ### {}".format(ctx.message.channel.name, ctx.message.channel.id)
-                                m += "\n`Number:` {}/{}".format(len(deleted), number)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                        except:
-                            embed.description = "{} Invalid number given.".format(error_e)
-                            await client.say(embed=embed)
+async def bc(ctx):
+    author = ctx.message.author
+    chnl = ctx.message.channel
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    a = []
+    if helper in author.roles or mod in author.roles or admin in author.roles or manager in author.roles or owner in author.roles:
+        async for i in client.logs_from(chnl):
+            if len(a) < 50:
+                if i.author.bot:
+                    await client.delete_message(i)
                     a.append("+1")
-                    break
-            if len(a) != 0:
+                else:
+                    print("")
+            else:
                 break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
-
-# }nick <user> [nickname]
-@client.command(pass_context=True)
-async def nick(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
+        msg.add_field(name="**Bot Clear**", value="<@{}> removed the latest messages sent by bots.".format(author.id))
     else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> [nickname]`.".format(error_e)
-                        await client.say(embed=embed)
-                    elif len(str(args)) > 32 and args != None:
-                        embed.description = "{} The nickname cannot be longer than 32 characters.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        try:
-                            await client.change_nickname(user, args)
-                            if args == None:
-                                embed.description = "{} **{}** removed **{}**'s nickname.".format(nick_e, author.name, user.name)
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Nickname__** {}".format(log_e, nick_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Target:` {} ### {}".format(user, user.id)
-                                m += "\n`Nickname:` 'cleared'"
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                            else:
-                                embed.description = "{} **{}** changed **{}**'s nickname to `{}`.".format(nick_e, author.name, user.name, args)
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Nickname__** {}".format(log_e, nick_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Target:` {} ### {}".format(user, user.id)
-                                m += "\n`Nickname:` {}".format(args)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                        except:
-                            embed.description = "{} Unable to edit **{}**'s nickname.".format(error_e, user.name)
-                            await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
+        msg.add_field(name=error_img, value="This command can only be used by the staff!")
+    await client.say(embed=msg)
 
-''' COMMANDS FOR MODERATORS '''
-# }ban <user> <reason>
-@client.command(pass_context=True)
-async def ban(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> <reason>`.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        b = []
-                        for o in roles:
-                            for r in o:
-                                if r in ctx.message.server.roles and r in user.roles:
-                                    embed.description = "{} Other staff can only be banned manually.".format(error_e)
-                                    await client.say(embed=embed)
-                                    b.append("+1")
-                                    break
-                            if len(b) != 0:
-                                break
-                        if len(b) == 0:
-                            if len(str(args)) > 250:
-                                embed.description = "{} The reason cannot be longer than 250 characters.".format(error_e)
-                                await client.say(embed=embed)
-                            else:
-                                try:
-                                    await client.ban(user)
-                                    embed.description = "{} **{}** banned **{}**.\nReason: {}".format(ban_e, author.name, user, args)
-                                    await client.say(embed=embed)
-                                    m = splitter
-                                    m += "\n{} **__Ban__** {}".format(log_e, ban_e)
-                                    m += "\n`Author:` {} ### {}".format(author, author.id)
-                                    m += "\n`Target:` {} ### {}".format(user, user.id)
-                                    m += "\n`Reason:` {}".format(args)
-                                    for o in logs:
-                                        b = o.split(' | ')
-                                        if b[0] == ctx.message.server.id:
-                                            c = client.get_channel(b[1])
-                                            await client.send_message(c, m)
-                                            break
-                                except:
-                                    embed.description = "{} I am unable to ban that user.".format(error_e)
-                                    await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by moderators, administrators, managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-# }unban <user id>
-@client.command(pass_context=True)
-async def unban(ctx, ID = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if ID == None:
-                        embed.description = "{} Please give the user ID you want to unban.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        try:
-                            user = await client.get_user_info(ID)
-                            try:
-                                await client.unban(ctx.message.server, user)
-                                embed.description = "{} **{}** unbanned **{}**.".format(unban_e, author.name, user)
-                                await client.say(embed=embed)
-                                m = splitter
-                                m += "\n{} **__Unban__** {}".format(log_e, unban_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Target:` {} ### {}".format(user, user.id)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                            except:
-                                embed.description = "{} The user with that ID is not banned.".format(error_e)
-                                await client.say(embed=embed)
-                        except:
-                            embed.description = "{} A user with that ID was not found.".format(error_e)
-                            await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by moderators, administrators, managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-# }kick <user> <reason>
+# v!kick <user> [reason]
 @client.command(pass_context=True)
 async def kick(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> [reason]`.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        b = []
-                        for o in roles:
-                            for r in o:
-                                if r in ctx.message.server.roles and r in user.roles:
-                                    embed.description = "{} Other staff can only be banned manually.".format(error_e)
-                                    await client.say(embed=embed)
-                                    b.append("+1")
-                                    break
-                            if len(b) != 0:
-                                break
-                        if len(b) == 0:
-                            if len(str(args)) > 250:
-                                embed.description = "{} The reason cannot be longer than 250 characters.".format(error_e)
-                                await client.say(embed=embed)
-                            else:
-                                try:
-                                    await client.kick(user)
-                                    embed.description = "{} **{}** kicked **{}**.\nReason: {}".format(kick_e, author.name, user, args)
-                                    await client.say(embed=embed)
-                                    m = splitter
-                                    m += "\n{} **__Kick__** {}".format(log_e, kick_e)
-                                    m += "\n`Author:` {} ### {}".format(author, author.id)
-                                    m += "\n`Target:` {} ### {}".format(user, user.id)
-                                    m += "\n`Reason:` {}".format(args)
-                                    for o in logs:
-                                        b = o.split(' | ')
-                                        if b[0] == ctx.message.server.id:
-                                            c = client.get_channel(b[1])
-                                            await client.send_message(c, m)
-                                            break
-                                except:
-                                    embed.description = "{} I am unable to kick that user.".format(error_e)
-                                    await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by moderators, administrators, managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-''' COMMANDS FOR ADMINISTRATORS '''
-# }takerole <user> <role name>
-@client.command(pass_context=True)
-async def takerole(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> [role name]`.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        b = []
-                        for o in ctx.message.server.roles:
-                            if args.lower() in str(o.name.lower()):
-                                b.append("+1")
-                                if author.top_role <= o:
-                                    embed.description = "{} You cannot remove a role that is the same or higher than your top role.".format(error_e)
-                                    await client.say(embed=embed)
-                                    break
-                                else:
-                                    try:
-                                        await client.remove_roles(user, o)
-                                        embed.description = "{} **{}** removed `{}` from **{}**'s roles.".format(takerole_e, author.name, o.name, user.name)
-                                        await client.say(embed=embed)
-                                        m = splitter
-                                        m += "\n{} **__Take Role__** {}".format(log_e, takerole_e)
-                                        m += "\n`Author:` {} ### {}".format(author, author.id)
-                                        m += "\n`Target:` {} ### {}".format(user, user.id)
-                                        m += "\n`Role:` {}".format(o.name)
-                                        for o in logs:
-                                            b = o.split(' | ')
-                                            if b[0] == ctx.message.server.id:
-                                                c = client.get_channel(b[1])
-                                                await client.send_message(c, m)
-                                                break
-                                    except:
-                                        embed.description = "{} There was an error while trying to edit that user's roles.".format(error_e)
-                                        await client.say(embed=embed)
-                                    break
-                        if len(b) == 0:
-                            embed.description = "{} A role with that name was not found.".format(error_e)
-                            await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by administrators, managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-# }giverole <user> <role name>
-@client.command(pass_context=True)
-async def giverole(ctx, user: discord.Member = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if user == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user> [role name]`.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        b = []
-                        for o in ctx.message.server.roles:
-                            if args.lower() in str(o.name.lower()):
-                                b.append("+1")
-                                if author.top_role <= o:
-                                    embed.description = "{} You cannot give a role that is the same or higher than your top role.".format(error_e)
-                                    await client.say(embed=embed)
-                                    break
-                                else:
-                                    try:
-                                        await client.add_roles(user, o)
-                                        embed.description = "{} **{}** added `{}` to **{}**'s roles.".format(giverole_e, author.name, o.name, user.name)
-                                        await client.say(embed=embed)
-                                        m = splitter
-                                        m += "\n{} **__Give Role__** {}".format(log_e, giverole_e)
-                                        m += "\n`Author:` {} ### {}".format(author, author.id)
-                                        m += "\n`Target:` {} ### {}".format(user, user.id)
-                                        m += "\n`Role:` {}".format(o.name)
-                                        for o in logs:
-                                            b = o.split(' | ')
-                                            if b[0] == ctx.message.server.id:
-                                                c = client.get_channel(b[1])
-                                                await client.send_message(c, m)
-                                                break
-                                    except:
-                                        embed.description = "{} There was an error while trying to edit that user's roles.".format(error_e)
-                                        await client.say(embed=embed)
-                                    break
-                        if len(b) == 0:
-                            embed.description = "{} A role with that name was not found.".format(error_e)
-                            await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by administrators, managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-''' COMMANDS FOR MANAGERS '''
-# }idban <user id> <reason>
-@client.command(pass_context=True)
-async def idban(ctx, target = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    if target == None or args == None:
-                        embed.description = "{} The command was used incorrectly.\nProper usage: `<user ID> <reason>`.".format(error_e)
-                        await client.say(embed=embed)
-                    elif len(str(args)) > 250:
-                        embed.description = "{} The reason cannot be longer than 250 characters.".format(error_e)
-                        await client.say(embed=embed)
-                    else:
-                        try:
-                            user = await client.get_user_info(target)
-                            await client.http.ban(target, ctx.message.server.id, 0)
-                            embed.description = "{} **{}** ID banned **{}**.\nReason: {}".format(idban_e, author.name, user, args)
-                            await client.say(embed=embed)
-                            m = splitter
-                            m += "\n{} **__ID Ban__** {}".format(log_e, idban_e)
-                            m += "\n`Author:` {} ### {}".format(author, author.id)
-                            m += "\n`Target:` {} ### {}".format(user, user.id)
-                            m += "\n`Reason:`".format(args)
-                            for o in logs:
-                                b = o.split(' | ')
-                                if b[0] == ctx.message.server.id:
-                                    c = client.get_channel(b[1])
-                                    await client.send_message(c, m)
-                                    break
-                        except:
-                            embed.description = "{} Either I cannot ban the user with that ID or that user ID does not exist.".format(error_e)
-                            await client.say(embed=embed)
-                    a.append("+1")
-                    break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by managers and owners.".format(error_e)
-            await client.say(embed=embed)
-
-''' COMMANDS FOR OWNERS '''
-# }setrole <option> <role name>
-@client.command(pass_context=True)
-async def setrole(ctx, option = None, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        a = []
-        for i in owner_roles:
-            if i in ctx.message.server.roles and i in ctx.message.author.roles:
-                options = ["owner", "manager", "admin", "mod", "helper", "muted"]
-                if option == None or args == None:
-                    embed.description = "{} Not all arguments were given.\nOptions: `owner`, `manager`, `admin`, `mod`, `helper`, `muted`.\nTo remove a role from the database write the role's name like this: `<role name> | none`.".format(error_e)
-                    await client.say(embed=embed)
-                elif option.lower() not in options:
-                    embed.description = "{} Invalid option.\nOptions: `owner`, `manager`, `admin`, `mod`, `helper`, `muted`.\nTo remove a role from the database write the role's name like this: `<role name> | none`.".format(error_e)
-                    await client.say(embed=embed)
-                else:
-                    t = {"owner" : owner_roles_chnl,
-                         "manger" : manager_roles_chnl,
-                         "admin" : admin_roles_chnl,
-                         "mod" : mod_roles_chnl,
-                         "helper" : helper_roles_chnl,
-                         "muted" : muted_roles_chnl}
-                    k = {"owner" : owner_roles,
-                         "manger" : manager_roles,
-                         "admin" : admin_roles,
-                         "mod" : mod_roles,
-                         "helper" : helper_roles,
-                         "muted" : muted_roles}
-                    embed.description = "{} Editing roles database... {}".format(roles_e, loading_e)
-                    h = await client.say(embed=embed)
-                    p = []
-                    r = []
-                    for u in ctx.message.server.roles:
-                        if ' | ' in args:
-                            y = args.split(' | ')
-                            args = y[0]
-                            r.append(y[1])
-                        if args.lower() in str(u.name.lower()):
-                            p.append("+1")
-                            if " | none" in r:
-                                async for o in client.logs_from(client.get_channel(t[option]), limit=limit):
-                                    b = o.content.split(' | ')
-                                    if b[0] == ctx.message.server.id and b[1] == u.id:
-                                        await client.delete_message(o)
-                                        k[option].remove(u)
-                                        break
-                                embed.description = "{} **{}** removed `{}` from the `{}` roles database.".format(roles_e, author.name, u.name, option)
-                                await client.edit_message(h, embed=embed)
-                                m = splitter
-                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Removed role:` {} ### {}".format(u.name, u.id)
-                                m += "\n`Role type:` {}".format(option)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                                break
-                            elif option.lower() != "member":
-                                async for o in client.logs_from(client.get_channel(t[option]), limit=limit):
-                                    b = o.content.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        k[option].remove(discord.utils.get(ctx.message.server.roles, id=b[1]))
-                                        await client.delete_message(o)
-                                        break
-                                await client.send_message(client.get_channel(t[option]), "{} | {}".format(ctx.message.server.id, u.id))
-                                k[option].append(u)
-                                embed.description = "{} **{}** set the `{}` role as `{}`.".format(roles_e, author.name, u.name, option)
-                                await client.edit_message(h, embed=embed)
-                                m = splitter
-                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Set role:` {} ### {}".format(u.name, u.id)
-                                m += "\n`Set as:` {}".format(option)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                                break
-                            else:
-                                await client.send_message(client.get_channel(t[option]), "{} | {}".format(ctx.message.server.id, u.id))
-                                k[option].append(u)
-                                embed.description = "{} **{}** set the `{}` role as `{}`/`auto role`.".format(roles_e, author.name, u.name, option)
-                                await client.edit_message(h, embed=embed)
-                                m = splitter
-                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`Set role:` {} ### {}".format(u.name, u.id)
-                                m += "\n`Set as:` {}/auto role".format(option)
-                                for o in logs:
-                                    b = o.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        c = client.get_channel(b[1])
-                                        await client.send_message(c, m)
-                                        break
-                                break
-                    if len(p) == 0:
-                        embed.description = "{} Role not found.".format(error_e)
-                        await client.edit_message(h, embed=embed)
-                a.append("+1")
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by owners.".format(error_e)
-            await client.say(embed=embed)
-            
-# }log <channel name>
-@client.command(pass_context=True)
-async def log(ctx, *, args = None):
-    embed = discord.Embed(colour=0x7F1100)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        a = []
-        for i in owner_roles:
-            if i in ctx.message.server.roles and i in ctx.message.author.roles:
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles:
+        if user == None:
+            msg.add_field(name=error_img, value="No target given.\nExamples:\n`v!kick @Huskie Being a dog.`.\n`v!kick @Huskie`.")
+        else:
+            if owner in user.roles or manager in user.roles or admin in user.roles or mod in user.roles or helper in user.roles or x in user.roles:
+                msg.add_field(name=error_img, value="You cannot kick other staff.\nStaff can only be kicked manualy.")
+            else:
+                chnl = client.get_channel('470464384725024768')
+                m = "```diff"
+                m += "\n- KICK -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(user, user.id)
                 if args == None:
-                    embed.description = "{} No channel name given.".format(error_e)
-                    await client.say(embed=embed)
+                    m += "\n+ Reason: [No Reason Given]"
+                    m += "\n```"
+                    msg.add_field(name="**Kick**", value="<@{}> kicked **{}**!\nNo reason given.".format(author.id, user))
+                    await client.kick(user)
+                    await client.send_message(chnl, m)
                 else:
-                    embed.description = "{} Editing log channels database... {}".format(roles_e, loading_e)
-                    h = await client.say(embed=embed)
-                    p = []
-                    for u in ctx.message.server.channels:
-                        if args.lower() in str(u.name.lower()):
-                            p.append("+1")
+                    if len(str(args)) > 1000:
+                        msg.add_field(name=error_img, value="The reason cannot be longer than 1000 characters.")
+                    else:
+                        m += "\n+ Reason:"
+                        m += "\n```"
+                        m += "\n{}".format(args)
+                        msg.add_field(name=":boot: Kicking Boot", value="<@{}> kicked **{}**!\nReason:\n{}".format(author.id, user, args))
+                        await client.kick(user)
+                        await client.send_message(chnl, m)
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Moderators, Administrators, Co-Owners and Owners.")
+    await client.say(embed=msg)
+    
+# v!idban <id> <reason>
+@client.command(pass_context=True)
+async def hackban(ctx, target = None, *, args = None):
+    author = ctx.message.author
+    server = ctx.message.server
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or manager in author.roles:
+        if target == None or args == None:
+            msg.add_field(name=error_img, value="Not all arguments were given.\nExample: `v!hackban 244042996129988608 Being a human being.`.")
+        else:
+            try:
+                a = await client.get_user_info(target)
+                await client.http.ban(target, server.id, 0)
+                msg.add_field(name="**Hack Ban**", value="<@{}> ID banned **{}**.\nReason:\n{}".format(author.id, a, args))
+                m = "```diff"
+                m += "\n- ID BAN -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(a, a.id)
+                m += "\n+ Reason:"
+                m += "\n```"
+                m += "\n{}".format(args)
+                chnl = client.get_channel('470464384725024768')
+                await client.send_message(chnl, m)
+            except:
+                msg.add_field(name=error_img, value="There was an error while trying to ID ban that user.\nEither the user cannot be banned or the ID you specified doesn't exist.")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Co-Owners and Owners.")
+    await client.say(embed=msg)
+    
+# v!unban <user id>
+@client.command(pass_context=True)
+async def unban(ctx, userID = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles:
+        if userID == None:
+            msg.add_field(name=error_img, value="No user ID given.\nExample: `v!unban 440770699259281408`.")
+        else:
+            banned_users = await client.get_bans(ctx.message.server)
+            try:
+                user = discord.utils.get(banned_users,id=userID)
+                await client.unban(ctx.message.server, user)
+                msg.add_field(name=":tools: ", value="<@{}> unbanned **{}** ( `{}` ).".format(author.id, user, userID))
+                m = "```diff"
+                m += "\n- UNBAN -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(user, user.id)
+                m += "\n```"
+                chnl = client.get_channel('470464384725024768')
+                await client.send_message(chnl, m)
+            except:
+                msg.add_field(name=error_img, value="There was an error while trying to unban that ID.\nEither the ID you specified doesn't exist or it isn't banned.")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Moderators, Administrators, Co-Owners and Owners.")
+    await client.say(embed=msg)
+    
+# }ban <user> [reason]
+@client.command(pass_context=True)
+async def ban(ctx, user: discord.Member = None, *, args = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles:
+        if user == None:
+            msg.add_field(name=error_img, value="No target given.\nExamples:\n`v!ban @Huskie Barking.`.\n`v!ban @Huskie`.")
+        else:
+            if owner in user.roles or manager in user.roles or admin in user.roles or mod in user.roles or helper in user.roles or x in user.roles:
+                msg.add_field(name=error_img, value="You cannot ban other staff.\nStaff can only be banned manualy.")
+            else:
+                chnl = client.get_channel('470464384725024768')
+                m = "```diff"
+                m += "\n- BAN -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(user, user.id)
+                if args == None:
+                    m += "\n+ Reason: [No Reason Given]"
+                    m += "\n```"
+                    msg.add_field(name=":hammer: Ban Hammer", value="<@{}> banned **{}**!\nNo reason given.".format(author.id, user))
+                    await client.ban(user)
+                    await client.send_message(chnl, m)
+                else:
+                    if len(str(args)) > 1000:
+                        msg.add_field(name=error_img, value="The reason cannot be longer than 1000 characters.")
+                    else:
+                        m += "\n+ Reason:"
+                        m += "\n```"
+                        m += "\n{}".format(args)
+                        msg.add_field(name=":hammer: Ban Hammer", value="<@{}> banned **{}**!\nReason:\n{}".format(author.id, user, args))
+                        await client.ban(user)
+                        await client.send_message(chnl, m)
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Moderators, Administrators, Co-Owners and Owners.")
+    await client.say(embed=msg)
+    
+# v!purge <number>
+@client.command(pass_context=True)
+async def purge(ctx, number = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    punished = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles or helper in author.roles:
+        if number == None:
+            msg.add_field(name=error_img, value="Please specify the number of messages you want to delete.")
+        else:
+            try:
+                testnumber = int(number)
+                number2 = testnumber * 0
+                await asyncio.sleep(float(number2))
+                try:
+                    deleted = await client.purge_from(ctx.message.channel, limit=testnumber)
+                    if len(deleted) < testnumber:
+                        msg.add_field(name="**Purge**", value="<@{}> tried to delete {} messages.\n{} messages were deleted.".format(author.id, number, len(deleted)))
+                    else:
+                        msg.add_field(name="**Purge**", value="<@{}> deleted {} messages.".format(author.id, len(deleted)))
+                    chnl = client.get_channel('470464384725024768')
+                    m = "```diff"
+                    m += "\n- PURGE -"
+                    m += "\n+ Author: {} ### {}".format(author, author.id)
+                    m += "\n+ In: {} ### {}".format(ctx.message.channel.name, ctx.message.channel.id)
+                    m += "\n+ Number: {}".format(number)
+                    m += "\n+ Deleted: {}".format(len(deleted))
+                    m += "\n```"
+                    await client.send_message(chnl, m)
+                except:
+                    msg.add_field(name=error_img, value="There has been an error while trying to purge messages.")
+            except:
+                msg.add_field(name=error_img, value="*Sigh*, a number is a number, not a letter...")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff.")
+    await client.say(embed=msg)
+    
+# v!say <text>
+@client.command(pass_context=True)
+async def say(ctx, *, args = None):
+    author = ctx.message.author
+    vip = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    legend = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if vip in author.roles or legend in author.roles:
+        if args == None:
+            msg.add_field(name=error_img, value="Please give a message that you want the bot to say.")
+            await client.say(embed=msg)
+        else:
+            if len(str(args)) > 1990:
+                msg.add_field(name=error_img, value="The message cannot be longer than 1990 characters.")
+                await client.say(embed=msg)
+            else:
+                await client.say("{}".format(args))
+                await client.delete_message(ctx.message)
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Moderators and Admins!")
+        await client.say(embed=msg)
+        
+# v!warn <user> <reason>
+@client.command(pass_context=True)
+async def warn(ctx, user: discord.Member = None, *, args = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    punished = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles or helper in author.roles:
+        if user == None or args == None:
+            msg.add_field(name=error_img, value="Not all arguments were given.\nExample: `v!warn @Huskie Ear Rape in Music (aka his singing).`.")
+            await client.say(embed=msg)
+        else:
+            if len(str(args)) > 1000:
+                msg.add_field(name=error_img, value="The reason cannot be longer than 1000 characters.")
+                await client.say(embed=msg)
+            else:
+                msg2 = discord.Embed(colour=0x000000, description= "")
+                msg2.title = ""
+                msg2.set_footer(text=footer_text)
+                msg2.add_field(name=":warning: ", value="Hello, <@{}>.\nYou have been warned by <@{}> ( **{}** ).\nReason:\n{}".format(user.id, author.id, author, args))
+                try:
+                    await client.send_message(user, embed=msg2)
+                    msg.add_field(name=":warning: ", value="<@{}> warned <@{}>.\nReason:\n{}".format(author.id, user.id, args))
+                    await client.say(embed=msg)
+                except:
+                    msg.add_field(name=":warning: ", value="<@{}> warned <@{}>.\nReason:\n{}".format(author.id, user.id, args))
+                    await client.say("<@{}>".format(user.id), embed=msg)
+                chnl = client.get_channel('470464384725024768')
+                chnl2 = client.get_channel('480177377343963138')
+                p = []
+                async for i in client.logs_from(chnl2):
+                    p.append("+1")
+                m2 = "{} | {} ### {} | {} ### {} | {}".format(len(p) + 1, author, author.id, user, user.id, args)
+                await client.send_message(chnl2, m2)
+                m = "```diff"
+                m += "\n- WARN -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(user, user.id)
+                m += "\n+ Reason:"
+                m += "\n```"
+                m += "\n{}".format(args)
+                await client.send_message(chnl, m)
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff.")
+        await client.say(embed=msg)
+        
+# v!check <user>
+@client.command(pass_context=True)
+async def check(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    punished = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles or helper in author.roles:
+        if user == None:
+            msg.add_field(name=error_img, value="Please mention someone you want to run a check on.")
+            await client.say(embed=msg)
+        else:
+            msg2 = discord.Embed(colour=0x000000, description= "")
+            msg2.title = ""
+            msg2.set_footer(text=footer_text)
+            chnl = client.get_channel('480177377343963138')
+            await client.send_typing(ctx.message.channel)
+            m = ""
+            async for i in client.logs_from(chnl):
+                a = str(i.content)
+                if user.id in a:
+                    b = i.content.split(' | ')
+                    m += "\n**__Warn number: {}__**\n`Warned by:` {}\n`Reason:` {}".format(b[0], b[1], b[3])
+                else:
+                    print("")
+            msg2.add_field(name=":warning: ***__Warning list for {} ### {}__***".format(user, user.id), value=m)
+            try:
+                await client.send_message(author, embed=msg2)
+                msg.add_field(name=":mag: Warnings Check", value="<@{}>, please check your DMs!".format(author.id), inline=True)
+                await client.say(embed=msg)
+            except:
+                msg.add_field(name=error_img, value="I cannot send you DMs. Please try again once you let me slide in your DMs.")
+                await client.say(embed=msg)
+                    
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff.")
+        await client.say(embed=msg)
+        
+# }punish <user> <time> [reason]
+@client.command(pass_context=True)
+async def mute(ctx, user: discord.Member = None, time4 = None, *, args = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    punished = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles or helper in author.roles:
+        if user == None or time4 == None:
+            msg.add_field(name=error_img, value="Not all required arguments were given.\nExamples:\n`v!mute @Huskie 15 Spamming.`.\n`v!mute @Huskie 15`.")
+            await client.say(embed=msg)
+        else:
+            if punished in user.roles:
+                msg.add_field(name=error_img, value="That user is already muted.")
+                await client.say(embed=msg)
+            else:
+                if owner in user.roles or manager in user.roles or admin in user.roles or mod in user.roles or helper in user.roles or x in user.roles:
+                    msg.add_field(name=error_img, value="Other staff cannot be muted.")
+                    await client.say(embed=msg)
+                else:
+                    try:
+                        time = int(time4)
+                        if time > 600:
+                            msg.add_field(name=error_img, value="The time cannot be longer than 600 minutes (10 hours).")
+                            await client.say(embed=msg)
+                        else:
+                            testtime = time * 0
                             try:
-                                k = await client.send_message(u, "test log message")
-                                async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
-                                    b = i.content.split(' | ')
-                                    if b[0] == ctx.message.server.id:
-                                        logs.remove(i.content)
-                                        await client.delete_message(i)
-                                        break
-                                await client.send_message(client.get_channel(logs_chnl), "{} | {}".format(ctx.message.server.id, u.id))
-                                logs.append("{} | {}".format(ctx.message.server.id, u.id))
-                                embed.description = "{} **{}** set `{}` as the new logs channel.".format(log_e, author.name, u.name)
-                                await client.edit_message(h, embed=embed)
-                                m = splitter
-                                m += "\n{} **__Log Channel__** {}".format(log_e, log_e)
-                                m += "\n`Author:` {} ### {}".format(author, author.id)
-                                m += "\n`New channel:` {} ### {}".format(u.name, u.id)
-                                await client.edit_message(k, m)
-                                break
+                                await asyncio.sleep(float(testtime))
+                                time2 = time * 60
+                                chnl = client.get_channel('470464384725024768')
+                                msg2 = discord.Embed(colour=0x000000, description= "")
+                                msg2.title = ""
+                                msg2.set_footer(text=footer_text)
+                                await client.add_roles(user, punished)
+                                if args == None:
+                                    msg.add_field(name=":speak_no_evil: ", value="<@{}> muted <@{}> for {} minute(s).\nNo reason given.".format(author.id, user.id, time4))
+                                    await client.say(embed=msg)
+                                    m = "```diff"
+                                    m += "\n- MUTE -"
+                                    m += "\n+ Author: {} ### {}".format(author, author.id)
+                                    m += "\n+ Target: {} ### {}".format(user, user.id)
+                                    m += "\n+ Time: {}".format(time4)
+                                    m += "\n+ Reason: [No Reason Given]"
+                                    m += "\n```"
+                                    await client.send_message(chnl, m)
+                                    await asyncio.sleep(float(time2))
+                                    await client.remove_roles(user, punished)
+                                    msg2.add_field(name=":monkey: ", value="<@{}> has been automatically unmuted.".format(user.id))
+                                    await client.say(embed=msg2)
+                                else:
+                                    if len(str(args)) > 1000:
+                                        msg.add_field(name=error_img, value="The reason cannot be longer than 1000 characters.")
+                                    else:
+                                        msg.add_field(name=":speak_no_evil: ", value="<@{}> muted <@{}> for {} minute(s).\nReason:\n{}".format(author.id, user.id, time4, args))
+                                        await client.say(embed=msg)
+                                        m = "```diff"
+                                        m += "\n- MUTE -"
+                                        m += "\n+ Author: {} ### {}".format(author, author.id)
+                                        m += "\n+ Target: {} ### {}".format(user, user.id)
+                                        m += "\n+ Time: {}".format(time4)
+                                        m += "\n+ Reason:"
+                                        m += "\n```"
+                                        m += "\n{}".format(args)
+                                        await client.send_message(chnl, m)
+                                        await asyncio.sleep(float(time2))
+                                        if punished in user.roles:
+                                            await client.remove_roles(user, punished)
+                                            msg2.add_field(name=":monkey: ", value="<@{}> has been automatically unmuted.".format(user.id))
+                                            await client.say(embed=msg2)
+                                        else:
+                                            print("")
                             except:
-                                embed.description = "{} Unable to send logs in that channel ( `{}` ).".format(error_e, u.name)
-                                await client.edit_message(h, embed=embed)
-                                break
-                    if len(p) == 0:
-                        embed.description = "{} Channel not found.".format(error_e)
-                        await client.edit_message(h, embed=embed)
-                a.append("+1")
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by owners.".format(error_e)
-            await client.say(embed=embed)
-
-
+                                msg.add_field(name=error_img, value="There has been an error while trying to punish that user.")
+                                await client.say(embed=msg)
+                    except:
+                        msg.add_field(name=error_img, value="The time has to be a number.\nExample: `v!mute @Huskie 10` will mute Sarah for 10 minutes.")
+                        await client.say(embed=msg)
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff.")
+        await client.say(embed=msg)
+        
+# v!unmute <user>
+@client.command(pass_context=True)
+async def unmute(ctx, user: discord.Member = None):
+    author = ctx.message.author
+    x = discord.utils.get(ctx.message.server.roles, name='Viola')
+    helper = discord.utils.get(ctx.message.server.roles, name='Jr. Mod')
+    mod = discord.utils.get(ctx.message.server.roles, name='Moderator')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    punished = discord.utils.get(ctx.message.server.roles, name='Muted')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if owner in author.roles or admin in author.roles or manager in author.roles or mod in author.roles or helper in author.roles:
+        if user == None:
+            msg.add_field(name=error_img, value="Please mention someone you want to unmute.\nExample: `v!unmute @Huskie`.")
+        else:
+            if punished in user.roles:
+                await client.remove_roles(user, punished)
+                msg.add_field(name=":monkey_face: ", value="<@{}> unmuted <@{}>.".format(author.id, user.id))
+                chnl = client.get_channel('470464384725024768')
+                m = "```diff"
+                m += "\n- UNMUTE -"
+                m += "\n+ Author: {} ### {}".format(author, author.id)
+                m += "\n+ Target: {} ### {}".format(user, user.id)
+                m += "\n```"
+                await client.send_message(chnl, m)
+            else:
+                msg.add_field(name=error_img, value="That user isn't muted.")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff.")
+    await client.say(embed=msg)
+    
+# }takerole <user> <role>
+@client.command(pass_context=True)
+async def take(ctx, user: discord.Member = None, *, args = None):
+    author = ctx.message.author
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if admin in author.roles or manager in author.roles or owner in author.roles:
+        if user == None or args == None:
+            msg.add_field(name=error_img, value="Not all arguments were given.\nExample: `v!take @Huskie Moderator`.")
+        else:
+            try:
+                rolename2 = discord.utils.get(ctx.message.server.roles, name='{}'.format(args))
+                if author.top_role == rolename2 or author.top_role < rolename2:
+                    msg.add_field(name=error_img, value="You cannot remove a role that is the same or higher than your top role.")
+                else:
+                    try:
+                        await client.remove_roles(user, rolename2)
+                        msg.add_field(name=":outbox_tray: ", value="<@{}> removed `{}` from <@{}>.".format(author.id, args, user.id))
+                    except:
+                        msg.add_field(name=error_img, value="Either I can't edit that user's role or the role you specified is higher than Co-Owner.")
+            except:
+                msg.add_field(name=error_img, value="The specified role was not found. Make sure to check spelling and capitalization.")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Administrators, Co-Owners and Owners.")
+    await client.say(embed=msg)
+    
+# }giverole <user> <role>
+@client.command(pass_context=True)
+async def give(ctx, user: discord.Member = None, *, args = None):
+    author = ctx.message.author
+    owner = discord.utils.get(ctx.message.server.roles, name='Owner')
+    admin = discord.utils.get(ctx.message.server.roles, name='Administrator')
+    manager = discord.utils.get(ctx.message.server.roles, name='Co-Owner')
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    if admin in author.roles or manager in author.roles or owner in author.roles:
+        if user == None or args == None:
+            msg.add_field(name=error_img, value="Not all arguments were given.\nExample: `v!give @Huskie Moderator`.")
+        else:
+            try:
+                rolename2 = discord.utils.get(ctx.message.server.roles, name='{}'.format(args))
+                if author.top_role == rolename2 or author.top_role < rolename2:
+                    msg.add_field(name=error_img, value="You cannot add a role that is the same or higher than your top role.")
+                else:
+                    try:
+                        await client.add_roles(user, rolename2)
+                        msg.add_field(name=":inbox_tray: ", value="<@{}> added `{}` to <@{}>.".format(author.id, args, user.id))
+                    except:
+                        msg.add_field(name=error_img, value="Either I can't edit that user's role or the role you specified is higher than Co-Owner.")
+            except:
+                msg.add_field(name=error_img, value="The specified role was not found.")
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by Administrators, Co-Owners and Owners.")
+    await client.say(embed=msg)
 #######################
 client.run(os.environ['BOT_TOKEN'])
