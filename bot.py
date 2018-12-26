@@ -45,8 +45,8 @@ partner_roles_chnl = '516606872896405520'
 muted_roles_chnl = '516607156813037608'
 member_roles_chnl = '516607267127164942'
 self_roles_chnl = '516611549427793930'
-logs_chnl = '516614512657563658'
-log_chnl = '516594957432389632'
+logs_chnl = '527385743224733706'
+log_chnl = '527385743224733706'
 joins_leaves_chnl = '516616002012839936'
 
 loading_e = "<a:loading:484705261609811979>"
@@ -195,5 +195,71 @@ async def say(ctx, *, args = None):
         else:
             await client.say("`{}`".format(args))
             await client.delete_message(ctx.message)
+                
+############### FOR PARTNERS ############
+
+# }p <user>
+@client.command(pass_context=True)
+async def p(ctx, user: discord.Member = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        author = ctx.message.author
+        partner = []
+        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles, partner_manager_roles]
+        for i in partner_roles:
+            if i in ctx.message.server.roles:
+                partner.append(i)
+                break
+        if len(partner) != 0:
+            a = []
+            for i in roles:
+                for u in i:
+                    if u in ctx.message.server.roles and u in ctx.message.author.roles:
+                        if user == None:
+                            embed.description = "{} No user was mentioned.".format(error_e)
+                            await client.say(embed=embed)
+                        elif user.bot:
+                            embed.description = "{} Bots can't be partners.".format(error_e)
+                            await client.say(embed=embed)
+                        elif partner[0] in user.roles:
+                            await client.remove_roles(user, partner[0])
+                            embed.description = "{} **{}** removed the partner role from **{}**.".format(partner_e, author.name, user.name)
+                            await client.say(embed=embed)
+                            m = splitter
+                            m += "\n{} **__Removed Partner Role__** {}".format(log_e, partner_e)
+                            m += "\n`Author:` {} ### {}".format(author, author.id)
+                            m += "\n`Target:` {} ### {}".format(user, user.id)
+                            for o in logs:
+                                b = o.split(' | ')
+                                if b[0] == ctx.message.server.id:
+                                    c = client.get_channel(b[1])
+                                    await client.send_message(c, m)
+                        else:
+                            await client.add_roles(user, partner[0])
+                            embed.description = "{} **{}** gave the partner role to **{}**.".format(partner_e, author.name, user.name)
+                            await client.say(embed=embed)
+                            m = splitter
+                            m += "\n{} **__Added Partner Role__** {}".format(log_e, partner_e)
+                            m += "\n`Author:` {} ### {}".format(author, author.id)
+                            m += "\n`Target:` {} ### {}".format(user, user.id)
+                            for o in logs:
+                                b = o.split(' | ')
+                                if b[0] == ctx.message.server.id:
+                                    c = client.get_channel(b[1])
+                                    await client.send_message(c, m)
+                        a.append("+1")
+                        break
+                if len(a) != 0:
+                    break
+            if len(a) == 0:
+                embed.description = "{} This command can only be used by partner managers and staff.".format(error_e)
+                await client.say(embed=embed)
+        else:
+            embed.description = "{} No partner role found in the database.".format(error_e)
+            await client.say(embed=embed)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
