@@ -176,5 +176,24 @@ async def lookup(ctx, ID = None):
             except:
                 embed.description = "{} User with that ID has not been found.".format(error_e)
                 await client.say(embed=embed)
+                
+# }say <text>
+@client.command(pass_context=True)
+async def say(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if args == None:
+            embed.description = "{} Please give a message that you want me to say.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 2000:
+            embed.description = "{} The message cannot be longer than 2000 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            await client.say("`{}`".format(args))
+            await client.delete_message(ctx.message)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
