@@ -34,6 +34,7 @@ member_roles = []
 self_roles = []
 logs = []
 joins_leaves = []
+started = []
 
 owner_roles_chnl = '516605295816867871'
 manager_roles_chnl = '516606147558506507'
@@ -75,9 +76,6 @@ roles_e = "<:roles:516614182045614080>"
 async def staff(ctx):
     embed = discord.Embed(colour=0x000000)
     embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
     else:
         embed.description = "{} Loading staff list... {}".format(roles_e, loading_e)
         k = await client.say(embed=embed)
