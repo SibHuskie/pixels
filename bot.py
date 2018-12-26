@@ -60,7 +60,7 @@ avatar_e = ":frame_photo: "
 suggestion_e = "<:suggestion:516609910088138772>"
 upvote_e = "<:upvote:516609910235201536>"
 downvote_e = "<:downvote:516609910214230016>"
-lookup_e = "<:lookup:516609910553837578>"
+lookup_e = ":mag: "
 partner_e = "<:partner:516609910390390815>"
 log_e = "<:log:516609910415425536>"
 roleme_e = "<:roleme:516609911006691338>"
@@ -149,5 +149,33 @@ async def avatar(ctx, user: discord.Member = None):
         embed.description = "{} Here is **{}**'s avatar:".format(avatar_e, author.name)
         embed.set_image(url=author.avatar_url)
         await client.say(embed=embed)
+        
+# }lookup <id>
+@client.command(pass_context=True)
+async def lookup(ctx, ID = None):
+    embed = discord.Embed(colour=0x2F007F)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if ID == None:
+            embed.description = "{} Please give a user ID you want to look up.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            try:
+                user = await client.get_user_info(ID)
+                embed.set_thumbnail(url=user.avatar_url)
+                m = "{} **__USER INFORMATION:__**".format(lookup_e)
+                m += "\n"
+                m += "\n**NAME:** `{}`".format(user)
+                m += "\n**ID:** `{}`".format(user.id)
+                m += "\n**CREATED AT:** `{}`".format(user.created_at)
+                m += "\n**IS BOT:** `{}`".format(user.bot)
+                embed.description = m
+                await client.say(embed=embed)
+            except:
+                embed.description = "{} User with that ID has not been found.".format(error_e)
+                await client.say(embed=embed)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
