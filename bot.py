@@ -17,7 +17,6 @@ bot_prefix= ["px!", "Px!"]
 client = commands.Bot(command_prefix=bot_prefix)
 server = discord.Server(id='439658556656975872')
 footer_text = "Pixels™"
-error_img = ':x: '
 limit = 100000000000000000
 default_invite = 'https://discord.gg/Xj6beq7'
 banner = 'https://cdn.discordapp.com/attachments/484761617016291328/527361105006297108/Photoshop_ccpixel.png'
@@ -51,7 +50,7 @@ log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
 
 loading_e = "<a:loading:484705261609811979>"
-error_e = "<:error:516609910356574212>"
+error_e = ":x:"
 joined_e = "<:joined:516609910318956552>"
 left_e = "<:left:516609910318956553>"
 serverinfo_e = ":crown: "
@@ -153,7 +152,7 @@ async def avatar(ctx, user: discord.Member = None):
 # }lookup <id>
 @client.command(pass_context=True)
 async def lookup(ctx, ID = None):
-    embed = discord.Embed(colour=0x2F007F)
+    embed = discord.Embed(colour=0x000000)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
