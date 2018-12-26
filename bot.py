@@ -21,13 +21,13 @@ limit = 100000000000000000
 default_invite = 'https://discord.gg/Xj6beq7'
 banner = 'https://cdn.discordapp.com/attachments/484761617016291328/527361105006297108/Photoshop_ccpixel.png'
 
-owner_roles = '527373834618273803'
+owner_roles = []
 manager_roles = []
 admin_roles = []
 mod_roles = []
 helper_roles = []
 partner_manager_roles = []
-partner_roles = '527388074930470913'
+partner_roles = []
 muted_roles = []
 member_roles = []
 self_roles = []
@@ -246,7 +246,119 @@ async def p(ctx, user: discord.Member = None):
             await client.say(embed=embed)
 
 ########################## STAFF ########################
-
+# }setrole <option> <role name>
+@client.command(pass_context=True)
+async def setrole(ctx, option = None, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        author = ctx.message.author
+        a = []
+        for i in owner_roles:
+            if i in ctx.message.server.roles and i in ctx.message.author.roles:
+                options = ["owner", "manager", "admin", "mod", "helper", "muted"]
+                if option == None or args == None:
+                    embed.description = "{} Not all arguments were given.\nOptions: `owner`, `manager`, `admin`, `mod`, `helper`, `muted`.\nTo remove a role from the database write the role's name like this: `<role name> | none`.".format(error_e)
+                    await client.say(embed=embed)
+                elif option.lower() not in options:
+                    embed.description = "{} Invalid option.\nOptions: `owner`, `manager`, `admin`, `mod`, `helper`, `muted`.\nTo remove a role from the database write the role's name like this: `<role name> | none`.".format(error_e)
+                    await client.say(embed=embed)
+                else:
+                    t = {"owner" : owner_roles_chnl,
+                         "manger" : manager_roles_chnl,
+                         "admin" : admin_roles_chnl,
+                         "mod" : mod_roles_chnl,
+                         "helper" : helper_roles_chnl,
+                         "muted" : muted_roles_chnl}
+                    k = {"owner" : owner_roles,
+                         "manger" : manager_roles,
+                         "admin" : admin_roles,
+                         "mod" : mod_roles,
+                         "helper" : helper_roles,
+                         "muted" : muted_roles}
+                    embed.description = "{} Editing roles database... {}".format(roles_e, loading_e)
+                    h = await client.say(embed=embed)
+                    p = []
+                    r = []
+                    for u in ctx.message.server.roles:
+                        if ' | ' in args:
+                            y = args.split(' | ')
+                            args = y[0]
+                            r.append(y[1])
+                        if args.lower() in str(u.name.lower()):
+                            p.append("+1")
+                            if " | none" in r:
+                                async for o in client.logs_from(client.get_channel(t[option]), limit=limit):
+                                    b = o.content.split(' | ')
+                                    if b[0] == ctx.message.server.id and b[1] == u.id:
+                                        await client.delete_message(o)
+                                        k[option].remove(u)
+                                        break
+                                embed.description = "{} **{}** removed `{}` from the `{}` roles database.".format(roles_e, author.name, u.name, option)
+                                await client.edit_message(h, embed=embed)
+                                m = splitter
+                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
+                                m += "\n`Author:` {} ### {}".format(author, author.id)
+                                m += "\n`Removed role:` {} ### {}".format(u.name, u.id)
+                                m += "\n`Role type:` {}".format(option)
+                                for o in logs:
+                                    b = o.split(' | ')
+                                    if b[0] == ctx.message.server.id:
+                                        c = client.get_channel(b[1])
+                                        await client.send_message(c, m)
+                                        break
+                                break
+                            elif option.lower() != "member":
+                                async for o in client.logs_from(client.get_channel(t[option]), limit=limit):
+                                    b = o.content.split(' | ')
+                                    if b[0] == ctx.message.server.id:
+                                        k[option].remove(discord.utils.get(ctx.message.server.roles, id=b[1]))
+                                        await client.delete_message(o)
+                                        break
+                                await client.send_message(client.get_channel(t[option]), "{} | {}".format(ctx.message.server.id, u.id))
+                                k[option].append(u)
+                                embed.description = "{} **{}** set the `{}` role as `{}`.".format(roles_e, author.name, u.name, option)
+                                await client.edit_message(h, embed=embed)
+                                m = splitter
+                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
+                                m += "\n`Author:` {} ### {}".format(author, author.id)
+                                m += "\n`Set role:` {} ### {}".format(u.name, u.id)
+                                m += "\n`Set as:` {}".format(option)
+                                for o in logs:
+                                    b = o.split(' | ')
+                                    if b[0] == ctx.message.server.id:
+                                        c = client.get_channel(b[1])
+                                        await client.send_message(c, m)
+                                        break
+                                break
+                            else:
+                                await client.send_message(client.get_channel(t[option]), "{} | {}".format(ctx.message.server.id, u.id))
+                                k[option].append(u)
+                                embed.description = "{} **{}** set the `{}` role as `{}`/`auto role`.".format(roles_e, author.name, u.name, option)
+                                await client.edit_message(h, embed=embed)
+                                m = splitter
+                                m += "\n{} **__Set Role__** {}".format(log_e, roles_e)
+                                m += "\n`Author:` {} ### {}".format(author, author.id)
+                                m += "\n`Set role:` {} ### {}".format(u.name, u.id)
+                                m += "\n`Set as:` {}/auto role".format(option)
+                                for o in logs:
+                                    b = o.split(' | ')
+                                    if b[0] == ctx.message.server.id:
+                                        c = client.get_channel(b[1])
+                                        await client.send_message(c, m)
+                                        break
+                                break
+                    if len(p) == 0:
+                        embed.description = "{} Role not found.".format(error_e)
+                        await client.edit_message(h, embed=embed)
+                a.append("+1")
+                break
+        if len(a) == 0:
+            embed.description = "{} This command can only be used by owners.".format(error_e)
+            await client.say(embed=embed)
 
 ##################################
 client.run(os.environ['BOT_TOKEN'])
