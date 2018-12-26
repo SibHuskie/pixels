@@ -42,6 +42,46 @@ async def on_member_remove(userName: discord.User):
     await client.send_message(client.get_channel("447634076866969610"), "{}".format(random.choice(leaves)))
     print("Leave")
     
-
+# }serverinfo
+@client.command(pass_context=True)
+async def serverinfo(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif '}' not in str(ctx.message.content):
+        embed.description = "{} Loading information...".format(loading_e)
+        h = await client.say(embed=embed)
+        m = "**ID:** `{}`".format(ctx.message.server.id)
+        m += "\n**OWNER:** `{}`".format(ctx.message.server.owner)
+        m += "\n**MEMBERS:** `{}`".format(len(ctx.message.server.members))
+        m += "\n**REGION:** `{}`".format(ctx.message.server.region)
+        m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
+        embed.description = "{} **__SERVER INFORMATION:__**\n\n{}".format(servers_e, m)
+        embed.set_thumbnail(url=ctx.message.server.icon_url)
+        ts = ""
+        if ctx.message.server.id in currency_t:
+            ts += "\n{}`Currency Rewards`{}".format(coins_e, off_e)
+        else:
+            ts += "\n{}`Currency Rewards`{}".format(coins_e, on_e)
+        if ctx.message.server.id in responses_t:
+            ts += "\n{}`Auto-Responses`{}".format(messages_e, off_e)
+        else:
+            ts += "\n{}`Auto-Responses`{}".format(messages_e, on_e)
+        embed.add_field(name="{} TOGGLES:".format(bannedusers_e), value=ts, inline=True)
+        ing = ""
+        for i in ctx.message.server.channels:
+            if i.id in ignored:
+                ing += "  <#{}>".format(i.id)
+        if ing != "":
+            embed.add_field(name="{} IGNORED CHANNELS:".format(ignored_e), value=ing, inline=True)
+        await client.edit_message(h, embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
