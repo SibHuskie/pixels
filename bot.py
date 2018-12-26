@@ -56,7 +56,7 @@ joined_e = "<:joined:516609910318956552>"
 left_e = "<:left:516609910318956553>"
 serverinfo_e = ":crown: "
 userinfo_e = ":bust_in_silhouette: "
-avatar_e = "<:avatar:516609910008578049>"
+avatar_e = ":frame_photo: "
 suggestion_e = "<:suggestion:516609910088138772>"
 upvote_e = "<:upvote:516609910235201536>"
 downvote_e = "<:downvote:516609910214230016>"
@@ -131,6 +131,23 @@ async def serverinfo(ctx):
         m += "\n**CREATED BY:** `{}`".format(ctx.message.server.owner)
         m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
         embed.description = m
+        await client.say(embed=embed)
+        
+# }avatar [user]
+@client.command(pass_context=True)
+async def avatar(ctx, user: discord.Member = None):
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if user == None:
+            author = ctx.message.author
+        else:
+            author = user
+        embed = discord.Embed(colour=0x000)
+        embed.set_footer(text=footer_text)
+        embed.description = "{} Here is **{}**'s avatar:".format(avatar_e, author.name)
+        embed.set_image(url=author.avatar_url)
         await client.say(embed=embed)
 ##################################
 client.run(os.environ['BOT_TOKEN'])
