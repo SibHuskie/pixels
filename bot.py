@@ -18,7 +18,26 @@ version = "1.0"
 splitter = "**~~`====================`~~**"
 started = "2"
 
-
+loading_e = "<a:loading:484705261609811979>"
+error_e = "<:error:516609910356574212>"
+joined_e = "<:joined:516609910318956552>"
+left_e = "<:left:516609910318956553>"
+serverinfo_e = ":mag:"
+userinfo_e = "<:userinfo:516609910465757184>"
+avatar_e = "<:avatar:516609910008578049>"
+suggestion_e = "<:suggestion:516609910088138772>"
+upvote_e = "<:upvote:516609910235201536>"
+downvote_e = "<:downvote:516609910214230016>"
+lookup_e = "<:lookup:516609910553837578>"
+partner_e = "<:partner:516609910390390815>"
+log_e = "<:log:516609910415425536>"
+roleme_e = "<:roleme:516609911006691338>"
+pinggood_e = "<:pinggood:516609909819965441>"
+pingok_e = "<:pingok:516609909832417296>"
+pingbad_e = "<:pingbad:516609910168092682>"
+reload_e = "<:reload:516609910235070472>"
+worked_e = "<:worked:516609910310699042>"
+roles_e = "<:roles:516614182045614080>"
 
 
 @client.async_event
@@ -51,38 +70,19 @@ async def serverinfo(ctx):
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
         await client.say(embed=embed)
-    elif ctx.message.author.id in banned_users:
-        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif ctx.message.server.id in banned_servers:
-        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif '}' not in str(ctx.message.content):
-        embed.description = "{} Loading information...".format(loading_e)
-        h = await client.say(embed=embed)
-        m = "**ID:** `{}`".format(ctx.message.server.id)
-        m += "\n**OWNER:** `{}`".format(ctx.message.server.owner)
-        m += "\n**MEMBERS:** `{}`".format(len(ctx.message.server.members))
-        m += "\n**REGION:** `{}`".format(ctx.message.server.region)
-        m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
-        embed.description = "{} **__SERVER INFORMATION:__**\n\n{}".format(servers_e, m)
+    else:
         embed.set_thumbnail(url=ctx.message.server.icon_url)
-        ts = ""
-        if ctx.message.server.id in currency_t:
-            ts += "\n{}`Currency Rewards`{}".format(coins_e, off_e)
-        else:
-            ts += "\n{}`Currency Rewards`{}".format(coins_e, on_e)
-        if ctx.message.server.id in responses_t:
-            ts += "\n{}`Auto-Responses`{}".format(messages_e, off_e)
-        else:
-            ts += "\n{}`Auto-Responses`{}".format(messages_e, on_e)
-        embed.add_field(name="{} TOGGLES:".format(bannedusers_e), value=ts, inline=True)
-        ing = ""
-        for i in ctx.message.server.channels:
-            if i.id in ignored:
-                ing += "  <#{}>".format(i.id)
-        if ing != "":
-            embed.add_field(name="{} IGNORED CHANNELS:".format(ignored_e), value=ing, inline=True)
-        await client.edit_message(h, embed=embed)
+        m = "{} **__SERVER INFORMATION:__**".format(serverinfo_e)
+        m += "\n"
+        m += "\n**MEMBERS:** `{}`".format(len(ctx.message.server.members))
+        m += "\n**CHANNELS:** `{}`".format(len(ctx.message.server.channels))
+        m += "\n**EMOJIS:** `{}`".format(len(ctx.message.server.emojis))
+        m += "\n**ID:** `{}`".format(ctx.message.server.id)
+        m += "\n**REGION:** `{}`".format(ctx.message.server.region)
+        m += "\n**ROLES:** `{}`".format(len(ctx.message.server.roles))
+        m += "\n**CREATED BY:** `{}`".format(ctx.message.server.owner)
+        m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
+        embed.description = m
+        await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
