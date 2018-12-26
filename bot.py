@@ -18,6 +18,21 @@ version = "1.0"
 splitter = "**~~`====================`~~**"
 started = "2"
 
+owner_roles_chnl = '527410451655426058'
+manager_roles_chnl = '527410482844532736'
+admin_roles_chnl = '527410517388820480'
+mod_roles_chnl = '527410541191495680'
+helper_roles_chnl = '527410570018816012'
+partner_manager_roles_chnl = '516606847323734064'
+partner_roles_chnl = '516606872896405520'
+muted_roles_chnl = '516607156813037608'
+member_roles_chnl = '516607267127164942'
+self_roles_chnl = '516611549427793930'
+logs_chnl = '516614512657563658'
+log_chnl = '516594957432389632'
+joins_leaves_chnl = '516616002012839936'
+
+
 loading_e = "<a:loading:484705261609811979>"
 error_e = "<:error:516609910356574212>"
 joined_e = "<:joined:516609910318956552>"
