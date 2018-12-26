@@ -1,4 +1,4 @@
-print("Starting Cube Moderation...")
+print("Starting X Moderation...")
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -12,7 +12,7 @@ import time
 Client = discord.Client()
 bot_prefix = ["px!", "Px!"]
 client = commands.Bot(command_prefix=bot_prefix)
-footer_text = "Pixels"
+footer_text = "[Realm X] - [X Moderation]"
 limit = 1000000000000
 version = "3.0"
 splitter = "**~~`====================`~~**"
@@ -28,43 +28,43 @@ helper_roles = []
 muted_roles = []
 logs = []
 
-warns_chnl = '506089510292029450'
-owner_roles_chnl = '517357850264338433'
-manager_roles_chnl = '517357867397808128'
-admin_roles_chnl = '517357880672911360'
-mod_roles_chnl = '517357889602584596'
-helper_roles_chnl = '517357900142870565'
-muted_roles_chnl = '517357914009370685'
-logs_chnl = '517358120561803279'
-log_chnl = '516595345476681758'
+warns_chnl = '527410424719605770'
+owner_roles_chnl = '527410451655426058'
+manager_roles_chnl = '527410482844532736'
+admin_roles_chnl = '527410517388820480'
+mod_roles_chnl = '527410541191495680'
+helper_roles_chnl = '527410570018816012'
+muted_roles_chnl = '527410597223202816'
+logs_chnl = '527410630798475274'
+log_chnl = '527410650570424340'
 
-loading_e = ':soon:'
-error_e = ":x:"
-log_e = ":newspaper: "
+loading_e = '<a:loading:484705261609811979>'
+error_e = "<:error:517356130968666132>"
+log_e = "<:log:517356131115597824>"
 auto_e = "<:auto:517356130557755396>"
-pinggood_e = ":one: "
+pinggood_e = "<:pinggood:517356130855550977>"
 pingok_e = "<:pingok:517356130918203394>"
 pingbad_e = "<:pingbad:517356131086106624>"
-clearbots_e = ":robot: "
-muted_e = ":speak_no_evil: "
-unmuted_e = ":monkey_face: "
-warn_e = ":exclamation: "
-checking_e = ":mag_right: "
-clear_e = ":recycle: "
-purge_e = ":file_cabinet: "
-nick_e = ":pen_ballpoint: "
-ban_e = ":boot: "
-unban_e = ":shield: "
-tempban_e = ":unamused: "
-kick_e = ":boot:"
-takerole_e = ":outbox_tray:  "
-giverole_e = ":inbox_tray:"
-idban_e = ":1234: "
-promote_e = ":arrow_up: "
-demote_e = ":arrow_down: "
-reload_e = ":clock3: "
-worked_e = ":money_with_wings: "
-roles_e = ":diamond_shape_with_a_dot_inside: "
+clearbots_e = "<:clearbots:517356130855419934>"
+muted_e = "<:muted:517356135972470794>"
+unmuted_e = "<:unmuted:517356137964765193>"
+warn_e = "<:warn:517356131467657226>"
+checking_e = "<:checking:517356130608087051>"
+clear_e = "<:clear:517356137054601216>"
+purge_e = "<:purge:517356131320987649>"
+nick_e = "<:nick:517356137499328513>"
+ban_e = "<:ban:517356130549366784>"
+unban_e = "<:unban:517356131279044628>"
+tempban_e = "<:tempban:517356131245359126>"
+kick_e = "<:kick:517356131895607326>"
+takerole_e = "<:takerole:517356131450880000>"
+giverole_e = "<:giverole:517356130880454656>"
+idban_e = "<:idban:517356137310453760>"
+promote_e = "<:promote:517356131379707907>"
+demote_e = "<:demote:517356137310584843>"
+reload_e = "<:reload:517356130939306020>"
+worked_e = "<:worked:517356137817964545>"
+roles_e = "<:roles:517356131379707905>"
 
 help1 = "```diff"
 help1 += "\n--- COMMANDS FOR EVERYONE ---"
