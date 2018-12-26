@@ -34,7 +34,7 @@ member_roles = []
 self_roles = []
 logs = []
 joins_leaves = []
-started = []
+started = [1]
 
 owner_roles_chnl = '516605295816867871'
 manager_roles_chnl = '516606147558506507'
