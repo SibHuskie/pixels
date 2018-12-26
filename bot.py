@@ -21,7 +21,7 @@ limit = 100000000000000000
 default_invite = 'https://discord.gg/Xj6beq7'
 banner = 'https://cdn.discordapp.com/attachments/484761617016291328/527361105006297108/Photoshop_ccpixel.png'
 
-owner_roles = []
+owner_roles = '527373834618273803'
 manager_roles = []
 admin_roles = []
 mod_roles = []
@@ -131,24 +131,7 @@ async def serverinfo(ctx):
         m += "\n**CREATED AT:** `{}`".format(ctx.message.server.created_at)
         embed.description = m
         await client.say(embed=embed)
-        
-# }avatar [user]
-@client.command(pass_context=True)
-async def avatar(ctx, user: discord.Member = None):
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        if user == None:
-            author = ctx.message.author
-        else:
-            author = user
-        embed = discord.Embed(colour=0x000)
-        embed.set_footer(text=footer_text)
-        embed.description = "{} Here is **{}**'s avatar:".format(avatar_e, author.name)
-        embed.set_image(url=author.avatar_url)
-        await client.say(embed=embed)
-        
+               
 # }lookup <id>
 @client.command(pass_context=True)
 async def lookup(ctx, ID = None):
@@ -261,5 +244,9 @@ async def p(ctx, user: discord.Member = None):
         else:
             embed.description = "{} No partner role found in the database.".format(error_e)
             await client.say(embed=embed)
+
+########################## STAFF ########################
+
+
 ##################################
 client.run(os.environ['BOT_TOKEN'])
