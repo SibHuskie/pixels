@@ -1,4 +1,4 @@
-print("Starting X Moderation...")
+print("Starting Cube. . .")
 import discord
 from discord.ext.commands import Bot
 from discord.ext import commands
@@ -12,7 +12,7 @@ import time
 Client = discord.Client()
 bot_prefix = ["px!", "Px!"]
 client = commands.Bot(command_prefix=bot_prefix)
-footer_text = "[Realm X] - [X Moderation]"
+footer_text = "Pixels"
 limit = 1000000000000
 version = "3.0"
 splitter = "**~~`====================`~~**"
