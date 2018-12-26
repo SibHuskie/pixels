@@ -21,7 +21,7 @@ limit = 100000000000000000
 default_invite = 'https://discord.gg/Xj6beq7'
 banner = 'https://cdn.discordapp.com/attachments/484761617016291328/527361105006297108/Photoshop_ccpixel.png'
 
-owner_roles = '527373834618273803'
+owner_roles = [527373834618273803]
 manager_roles = []
 admin_roles = []
 mod_roles = []
