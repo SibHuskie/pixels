@@ -70,47 +70,6 @@ pingbad_e = "<:pingbad:516609910168092682>"
 reload_e = "<:reload:516609910235070472>"
 worked_e = "<:worked:516609910310699042>"
 roles_e = "<:roles:516614182045614080>"
-
-# staff
-@client.command(pass_context=True)
-async def staff(ctx):
-    embed = discord.Embed(colour=0x000000)
-    embed.set_footer(text=footer_text)
-    else:
-        embed.description = "{} Loading staff list... {}".format(roles_e, loading_e)
-        k = await client.say(embed=embed)
-        
-        try:
-            roles = {"owners" : owner_roles,
-                     "managers" : manager_roles,
-                     "admins" : admin_roles,
-                     "mods" : mod_roles,
-                     "helpers" : helper_roles,
-                     "pms" : partner_manager_roles}
-            owners = ""
-            managers = ""
-            admins = ""
-            mods = ""
-            helpers = ""
-            pms = ""
-            roles_l = {"owners" : owners,
-                       "managers" : managers,
-                       "admins" : admins,
-                       "mods" : mods,
-                       "helpers" : helpers,
-                       "pms" : pms}
-            for i in roles:
-                for u in roles[i]:
-                    if u in ctx.message.server.roles:
-                        for o in ctx.message.server.members:
-                            if u in o.roles:
-                                roles_l[i] += "\n`{}`".format(o.name)
-                        embed.add_field(name="{}".format(u.name), value=roles_l[i], inline=True)
-            embed.description = "{} **__STAFF LIST:__**".format(roles_e)
-            await client.edit_message(k, embed=embed)
-        except:
-            embed.description = "{} There was an error while loading the staff list. Please try again.".format(error_e)
-            await client.edit_message(k, embed=embed)
         
 # }userinfo [user]
 @client.command(pass_context=True)
