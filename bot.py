@@ -77,6 +77,7 @@ logs_chnl = '516614512657563658'
 log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
 ships_chnl = '527708373144174594'
+rates_chnl = '527714528721633280'
 
 
 loading_e = ":arrows_counterclockwise: "
@@ -852,5 +853,41 @@ async def leave(ctx):
         a = ["Cya `{}` :wave:".format(ctx.message.author.name)]
         await client.say(random.choice(a))
         await client.delete_message(ctx.message)
+            
+# }rate <something>
+@client.command(pass_context=True)
+async def rate(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if args == None:
+            embed.description = "{} Please give me something to rate.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 100:
+            embed.description = "{} The text cannot be longer than 100 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            c = []
+            for i in rates:
+                if args in str(i):
+                    a = i.split(' | ')
+                    p = int(a[1])
+                    c.append("+1")
+                    break
+            if len(c) == 0:
+                p = random.randint(0, 11)
+                await client.send_message(client.get_channel(rates_chnl), "{} | {}".format(args, p))
+                rates.append("{} | {}".format(args, p))
+            embed.description = "{} I'd rate {} a `{}/10`.".format(rate_e, args, p)
+            await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
