@@ -995,7 +995,7 @@ async def rate(ctx, *, args = None):
             
 # }chatrevive
 @client.command(pass_context=True)
-async def chatrevive(ctx):
+async def topic(ctx):
     embed = discord.Embed(colour=0x000000)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
