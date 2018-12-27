@@ -650,7 +650,7 @@ async def ship(ctx, *, args = None):
                 c = []
                 for i in ships:
                     if a[0] in str(i) and a[1] in str(i):
-                        b = i.split(' | ')
+                        b = i.split(', ')
                         p = int(b[2])
                         c.append("+1")
                         break
