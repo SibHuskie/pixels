@@ -243,7 +243,7 @@ generator_e = "<:generator:519841353077751809>"
 steal_e = "<:steal:519845656928452632>"
 gift_e = "<:gift1:519849587100614658>"
 ban_e = "<:ban:519859483330215936>"
-link_e = "<:link1:520593270494199819>"
+link_e = "<:link1:52059327049419919>"
 
 # START UP SYSTEM
 started = []
