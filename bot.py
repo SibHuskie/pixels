@@ -370,7 +370,7 @@ tos_m += "\n{} Thanks for using this bot. Use `xf!info` for more information and
 
 ''''''
 
-started = []
+started = ["1"]
 # EVENT - TELLS YOU WHEN THE BOT TURNS ON
 @client.event
 async def on_ready():
