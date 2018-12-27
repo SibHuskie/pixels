@@ -1053,28 +1053,19 @@ async def cb(ctx):
         for i in roles:
             for u in i:
                 if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                    embed.description = "{} Deleting latest messages sent by bots... {}".format(clearbots_e, loading_e)
-                    h = await client.say(embed=embed)
-                    msgs = '1'
-                    async for o in client.logs_from(ctx.message.channel, limit=100, before=ctx.message):
-                        if o.author.bot and o.id != h.id:
-                            msgs.append(o)
-                try:
-                    await client.delete_messages(msgs)
-                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
-                    await client.edit_message(h, embed=embed)
-                except:
-                    for o in msgs:
-                        await client.delete_message(o)
-                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
-                    await client.edit_message(h, embed=embed)
-                a.append("+1")
+                            async for i in client.logs_from(chnl):
+            if len(a) < 50:
+                if i.author.bot:
+                    await client.delete_message(i)
+                    a.append("+1")
+                else:
+                    print("")
+            else:
                 break
-            if len(a) != 0:
-                break
-        if len(a) == 0:
-            embed.description = "{} This command can only be used by staff.".format(error_e)
-            await client.say(embed=embed)
+        msg.add_field(name="**Bot Clear**", value="<@{}> removed the latest messages sent by bots.".format(author.id))
+    else:
+        msg.add_field(name=error_img, value="This command can only be used by the staff!")
+    await client.say(embed=msg)
 
 
 
