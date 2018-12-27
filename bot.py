@@ -46,24 +46,24 @@ log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
 
 
-loading_e = "<a:loading:484705261609811979>"
-error_e = "<:error:516609910356574212>"
+loading_e = ":arrows_counterclockwise: "
+error_e = ":x:"
 joined_e = "<:joined:516609910318956552>"
 left_e = "<:left:516609910318956553>"
 serverinfo_e = ":mag:"
 userinfo_e = ":bust_in_silhouette: "
-avatar_e = "<:avatar:516609910008578049>"
+avatar_e = ":frame_photo:"
 suggestion_e = "<:suggestion:516609910088138772>"
 upvote_e = "<:upvote:516609910235201536>"
 downvote_e = "<:downvote:516609910214230016>"
-lookup_e = "<:lookup:516609910553837578>"
+lookup_e = ":mag:"
 partner_e = "<:partner:516609910390390815>"
 log_e = "<:log:516609910415425536>"
 roleme_e = "<:roleme:516609911006691338>"
 pinggood_e = "<:pinggood:516609909819965441>"
 pingok_e = "<:pingok:516609909832417296>"
 pingbad_e = "<:pingbad:516609910168092682>"
-reload_e = "<:reload:516609910235070472>"
+reload_e = ":arrows_counterclockwise: "
 worked_e = "<:worked:516609910310699042>"
 roles_e = "<:roles:516614182045614080>"
 
@@ -89,7 +89,7 @@ async def on_member_remove(userName: discord.User):
     await client.send_message(client.get_channel("447634076866969610"), "{}".format(random.choice(leaves)))
     print("Leave")
     
-# }serverinfo
+# serverinfo
 @client.command(pass_context=True)
 async def serverinfo(ctx):
     embed = discord.Embed(colour=0x000000)
@@ -112,7 +112,7 @@ async def serverinfo(ctx):
         embed.description = m
         await client.say(embed=embed)
         
-# }userinfo [user]
+# userinfo [user]
 @client.command(pass_context=True)
 async def userinfo(ctx, user: discord.User = None):
     embed = discord.Embed(colour=0x000000)
@@ -150,5 +150,69 @@ async def userinfo(ctx, user: discord.User = None):
                 m += "\n**MUTED:** `False`"
         embed.description = m
         await client.say(embed=embed)
+        
+# avatar [user]
+@client.command(pass_context=True)
+async def avatar(ctx, user: discord.Member = None):
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if user == None:
+            author = ctx.message.author
+        else:
+            author = user
+        embed = discord.Embed(colour=0x000000)
+        embed.set_footer(text=footer_text)
+        embed.description = "{} Here is **{}**'s avatar:".format(avatar_e, author.name)
+        embed.set_image(url=author.avatar_url)
+        await client.say(embed=embed)
+        
+# lookup <id>
+@client.command(pass_context=True)
+async def lookup(ctx, ID = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if ID == None:
+            embed.description = "{} Please give a user ID you want to look up.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            try:
+                user = await client.get_user_info(ID)
+                embed.set_thumbnail(url=user.avatar_url)
+                m = "{} **__USER INFORMATION:__**".format(lookup_e)
+                m += "\n"
+                m += "\n**NAME:** `{}`".format(user)
+                m += "\n**ID:** `{}`".format(user.id)
+                m += "\n**CREATED AT:** `{}`".format(user.created_at)
+                m += "\n**IS BOT:** `{}`".format(user.bot)
+                embed.description = m
+                await client.say(embed=embed)
+            except:
+                embed.description = "{} User with that ID has not been found.".format(error_e)
+                await client.say(embed=embed)
+                
+# say <text>
+@client.command(pass_context=True)
+async def say(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        if args == None:
+            embed.description = "{} Please give a message that you want me to say.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 2000:
+            embed.description = "{} The message cannot be longer than 2000 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            await client.say("`{}`".format(args))
+            await client.delete_message(ctx.message)
 #######################
 client.run(os.environ['BOT_TOKEN'])
