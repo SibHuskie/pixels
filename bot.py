@@ -70,33 +70,6 @@ roles_e = "<:roles:517356131379707905>"
 
 # START UP SYSTEM
 started = ["1"]
-@client.event
-async def on_ready():
-    async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
-    print("[START UP] Loaded owner roles.")
-    async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
-    print("[START UP] Loaded manager roles.")
-    async for i in client.logs_from(client.get_channel(admin_roles_chnl), limit=limit):
-    print("[START UP] Loaded administrator roles.")
-    async for i in client.logs_from(client.get_channel(mod_roles_chnl), limit=limit):
-    print("[START UP] Loaded moderator roles.")
-    async for i in client.logs_from(client.get_channel(helper_roles_chnl), limit=limit):
-    print("[START UP] Loaded helper roles.")
-    async for i in client.logs_from(client.get_channel(muted_roles_chnl), limit=limit):
-    print("[START UP] Loaded muted roles.")
-    async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
-    print("[START UP] Loaded logs channels.")
-    async for i in client.logs_from(client.get_channel(warns_chnl), limit=limit):
-    print("[START UP] Loaded warnings.")
-    print("[START UP] Finished.")
-    await client.change_presence(game=discord.Game(name="on Pixels"))
-    m = splitter
-    m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
-    t1 = time.perf_counter()
-    await client.send_typing(client.get_channel(log_chnl))
-    t2 = time.perf_counter()
-    m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
-    await client.send_message(client.get_channel(log_chnl), m)
 
 # ANTI MUTE BYPASS
 @client.async_event
