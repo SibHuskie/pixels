@@ -487,5 +487,127 @@ async def calculator(ctx, *, args = None):
             except:
                 embed.description = "{} I'm having trouble solving that math problem.".format(error_e)
                 await client.say(embed=embed)
+                  
+# }battle <user>
+@client.command(pass_context=True)
+async def battle(ctx, user: discord.Member = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if user == None:
+            embed.description = "{} Please mention the user you want to battle.".format(error_e)
+            await client.say(embed=embed)
+        elif user.id == ctx.message.author.id:
+            embed.description = "{} You can't battle yourself.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            author = ctx.message.author
+            u_health = []
+            a_health = []
+            rounds = []
+            for i in range(1000):
+                a_health.append(".")
+                u_health.append(".")
+            dmgs = {"punches the opponent! :right_facing_fist:" : random.randint(50, 70),
+                    "kicks the opponent! :boot:" : random.randint(55, 75),
+                    "grabs and throws the opponent on the ground! :raised_hands:" : random.randint(65, 85),
+                    "stabs the opponent! :dagger:" : random.randint(75, 95),
+                    "shoots the opponent! :gun:" : random.randint(90, 110),
+                    "cuts the opponent! :knife:" : random.randint(65, 85),
+                    "hits the opponent with a hammer! :hammer_pick:" : random.randint(75, 95),
+                    "attacks the opponent with dark magic! :skull_crossbones:" : random.randint(280, 300),
+                    "chokes the opponent using chains! :chains:" : random.randint(65, 85),
+                    "casts a spell on the opponent! :sparkles:" : random.randint(155, 175),
+                    "pukes on the opponent! :nauseated_face:" : random.randint(50, 70),
+                    "scares the opponent! :ghost:" : random.randint(50, 70),
+                    "summons a demon to attack the opponent! :smiling_imp:" : random.randint(275, 295),
+                    "calls a rabot to attack the opponent! :robot:" : random.randint(125, 145),
+                    "farts at the opponent! :dash:" : random.randint(50, 70),
+                    "creates a tornado behind the opponent! :cloud_tornado:" : random.randint(130, 150),
+                    "summons a meteor above the opponent! :comet:" : random.randint(210, 230),
+                    "strikes the opponent with lightning! :zap:" : random.randint(200, 220),
+                    "freezes the opponent! :snowflake:" : random.randint(140, 160),
+                    "throws a bomb at the opponent! :bomb:" : random.randint(150, 170),
+                    "drives over the opponent! :red_car:" : random.randint(110, 130),
+                    "stuns the opponent! :dizzy:" : random.randint(60, 80),
+                    "uses ear-rape to deafen the opponent! :ear:" : random.randint(50, 70),
+                    "poisons the opponent! :syringe:" : random.randint(200, 220),
+                    "set the opponent on fire! :fire:" : random.randint(170, 190),
+                    "made the opponent not feel so good! :boom:" : random.randint(225, 245),
+                    "stole the opponent's memes! :100:" : 420,
+                    "deleted the opponent's hentai collections! :no_entry:" : 69,
+                    "banned the opponent's memes! :no_entry_sign:" : random.randint(55, 75),
+                    "pushed the opponent in the toilet! :toilet:" : 1}
+            attacks = ["punches the opponent! :right_facing_fist:",
+                       "kicks the opponent! :boot:",
+                       "grabs and throws the opponent on the ground! :raised_hands:",
+                       "stabs the opponent! :dagger:",
+                       "shoots the opponent! :gun:",
+                       "cuts the opponent! :knife:",
+                       "hits the opponent with a hammer! :hammer_pick:",
+                       "attacks the opponent with dark magic! :skull_crossbones:",
+                       "chokes the opponent using chains! :chains:",
+                       "casts a spell on the opponent! :sparkles:",
+                       "pukes on the opponent! :nauseated_face:",
+                       "scares the opponent! :ghost:",
+                       "summons a demon to attack the opponent! :smiling_imp:",
+                       "calls a rabot to attack the opponent! :robot:",
+                       "farts at the opponent! :dash:",
+                       "creates a tornado behind the opponent! :cloud_tornado:",
+                       "summons a meteor above the opponent! :comet:",
+                       "strikes the opponent with lightning! :zap:",
+                       "freezes the opponent! :snowflake:",
+                       "throws a bomb at the opponent! :bomb:",
+                       "drives over the opponent! :red_car:",
+                       "stuns the opponent! :dizzy:",
+                       "uses ear-rape to deafen the opponent! :ear:",
+                       "poisons the opponent! :syringe:",
+                       "set the opponent on fire! :fire:",
+                       "made the opponent not feel so good! :boom:",
+                       "stole the opponent's memes! :100:",
+                       "deleted the opponent's hentai collections! :no_entry:",
+                       "banned the opponent's memes! :no_entry_sign:",
+                       "pushed the opponent in the toilet! :toilet:"]
+            title = "{} **__`D E A T H    B A T T L E`__** {}\n**{}**\n:vs:\n**{}**".format(battle_e, battle_e, author.name, user.name)
+            s = "**~~`=====`~~**"
+            embed.description = "{}\n{} **HEALTH** {}\n:small_red_triangle_down: **{}**\n:heart: `1000` HP\n\n:small_red_triangle_down: **{}**\n:heart: `1000` HP".format(title, s, s, author.name, user.name)
+            h = await client.say(embed=embed)
+            for i in range(1000):
+                if len(a_health) == 0 or len(u_health) == 0:
+                    await asyncio.sleep(float(5))
+                    if len(a_health) > len(u_health):
+                        embed.description = "{}\n{} **BATTLE OVER** {}\n:crown: WINNER: **{}**\n:heart: `{}` HP\n\n:poop: LOSER: **{}**\n:heart: `0` HP".format(title, s, s, author.name, len(a_health), user.name)
+                    elif len(a_health) < len(u_health):
+                        embed.description = "{}\n{} **BATTLE OVER** {}\n:crown: WINNER: **{}**\n:heart: `{}` HP\n\n:poop: LOSER: **{}**\n:heart: `0` HP".format(title, s, s, user.name, len(u_health), author.name)
+                    else:
+                        p = random.randint(0, 1)
+                        if p == 0:
+                            embed.description = "{}\n{} **BATTLE OVER** {}\n:crown: RANDOM WINNER: **{}**\n:heart: `0` HP\n\n:poop: LOSER: **{}**\n:heart: `0` HP".format(title, s, s, author.name, user.name)
+                        else:
+                            embed.description = "{}\n{} **BATTLE OVER** {}\n:crown: RANDOM WINNER: **{}**\n:heart: `0` HP\n\n:poop: LOSER: **{}**\n:heart: `0` HP".format(title, s, s, user.name, author.name)
+                    await client.edit_message(h, embed=embed)
+                    break
+                else:
+                    await asyncio.sleep(float(5))
+                    rounds.append("+1")
+                    u_d = random.choice(attacks)
+                    a_d = random.choice(attacks)
+                    for u in range(dmgs[u_d]):
+                        if len(a_health) != 0:
+                            a_health.remove('.')
+                    for u in range(dmgs[a_d]):
+                        if len(u_health) != 0:
+                            u_health.remove('.')
+                    embed.description = "{}\n{} **ROUND {}** {}\n:small_red_triangle_down: **{}** {}\n:arrow_right: `{}` DMG\n\n:small_red_triangle_down: **{}** {}\n:arrow_right: `{}` DMG\n{} **HEALTH** {}\n:small_red_triangle_down: **{}**\n:heart: `{}` HP\n\n:small_red_triangle_down: **{}**\n:heart: `{}` HP".format(title, s, len(rounds), s, author.name, a_d, dmgs[a_d], user.name, u_d, dmgs[u_d], s, s, author.name, len(a_health), user.name, len(u_health))
+                    await client.edit_message(h, embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
