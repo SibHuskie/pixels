@@ -1038,22 +1038,18 @@ async def topic(ctx):
 
 
 
-# }cb
+
+# v!bc
 @client.command(pass_context=True)
-async def cb(ctx):
-    embed = discord.Embed(colour=0x000000)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        author = ctx.message.author
-        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
-        a = []
-        for i in roles:
-            for u in i:
-                if u in ctx.message.server.roles and u in ctx.message.author.roles:
-                            async for i in client.logs_from(chnl):
+async def bc(ctx):
+    author = ctx.message.author
+    chnl = ctx.message.channel
+    msg = discord.Embed(colour=0x000000, description= "")
+    msg.title = ""
+    msg.set_footer(text=footer_text)
+    a = []
+    if helper in author.roles or mod in author.roles or admin in author.roles or manager in author.roles or owner in author.roles:
+        async for i in client.logs_from(chnl):
             if len(a) < 50:
                 if i.author.bot:
                     await client.delete_message(i)
