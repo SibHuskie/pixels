@@ -28,15 +28,15 @@ helper_roles = []
 muted_roles = []
 logs = []
 
-warns_chnl = '506089510292029450'
-owner_roles_chnl = '517357850264338433'
-manager_roles_chnl = '517357867397808128'
-admin_roles_chnl = '517357880672911360'
-mod_roles_chnl = '517357889602584596'
-helper_roles_chnl = '517357900142870565'
+warns_chnl = '527410424719605770'
+owner_roles_chnl = '527410451655426058'
+manager_roles_chnl = '527410482844532736'
+admin_roles_chnl = '527410482844532736'
+mod_roles_chnl = '527410541191495680'
+helper_roles_chnl = '527410570018816012'
 muted_roles_chnl = '517357914009370685'
-logs_chnl = '517358120561803279'
-log_chnl = '516595345476681758'
+logs_chnl = '527410630798475274'
+log_chnl = '527410630798475274'
 
 loading_e = '<a:loading:484705261609811979>'
 error_e = "<:error:517356130968666132>"
