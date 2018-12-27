@@ -246,7 +246,7 @@ ban_e = "<:ban:519859483330215936>"
 link_e = "<:link1:52059327049419919>"
 
 # START UP SYSTEM
-started = []
+started = ["1"]
 @client.event
 async def on_ready():
     async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
