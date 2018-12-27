@@ -734,5 +734,104 @@ async def rps(ctx, choice = None):
             else:
                 embed.description = "{}\n:no_entry:\n**{}**\n:arrow_right: `{}`\n\n**{}**\n:arrow_right: `{}`".format(title, ctx.message.author.name, rps_tie[choice], client.user.name, rps_tie[a])
             await client.say(embed=embed)
+            
+# }kill <user>
+@client.command(pass_context=True)
+async def kill(ctx, user: discord.Member = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if user == None:
+            embed.description = "{} Please mention the user you want to kill.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            author = ctx.message.author
+            if user.id == client.user.id:
+                embed.description = "**{}**, don't you try anything like that ever again, you fucking dirt bag.".format(author.name)
+                await client.say(embed=embed)
+            else:
+                msgs = ["On a beautiful, sunny day, **{}**, went to the store. As they walked in to the store, they slipped and the doors cut off their head.".format(user.name),
+                        "**{}** was sitting on a tree, but because of their weight the branch broke and they fell right on their head.".format(user.name),
+                        "On a beautiful morning **{}** suddenly jumped out of bed and started running towards the bathroom. However, they slipped on a banana and fell out of the window.".format(user.name),
+                        "**{}** watched the Emoji movie. The next day they died from cringing too much.".format(user.name),
+                        "**{}** was browsing the web one day. They accidentaly clicked on a pop-up saying 'DIE FOR FREE!'.".format(user.name),
+                        "**{}** got caught watching hentai. They had no choice but to kill themselves in order to wash away their sins.".format(user.name),
+                        "All of **{}**'s memes got stolen! They couldn't live for more than 0.420 seconds without memes.".format(user.name),
+                        "**{}** was walking down the village when all of a sudden a piano fell on top of them, crashing all their bones.".format(user.name),
+                        "Long time ago **{}** lived in peace and harmony, until the fire nation attacked. Now **{}** is pretty much dead.".format(user.name, user.name),
+                        "**{}** died a virgin. LMAO what a loser.".format(user.name),
+                        "**{}** was playing hopscotch on a landmine field. You can tell how that went.".format(user.name),
+                        "**{}** was playing the Sims. Their computer crashed and they got a heart attack.".format(user.name),
+                        "Wait, **{}** died? Oh well.".format(user.name),
+                        "**{}** commited suicide. I guess it's a way of saying 'You can't fire me! I quit!' to God.".format(user.name),
+                        "**{}** gave their heart to **{}**... Literally.".format(user.name, author.name),
+                        "**{}** decided to go on the moon. However they forgot their space suit. All the kids wanted to hear about the corpse on the moon...".format(user.name),
+                        "One day **{}** was chilling with their friends. All of them were bored, they didn't have anything to do. One of them said 'So gentlemen, what do we do now?', **{}** replied: 'We die.'. Yeah, they were really bored.".format(user.name, user.name),
+                        "**{}** tried to lay an egg. Humans can't do that, nor can bots!".format(user.name),
+                        "All of **{}**'s diamonds were stolen on their Christian minecraft server. Out of anger they said 'heck' and got killed instantly.".format(user.name),
+                        "**{}** forgot how to breathe.".format(user.name),
+                        "**{}** saw **{}**'s face and instantly died.".format(user.name, author.name),
+                        "**{}** said: Mr.**{}** I don't feel so good...".format(user.name, author.name),
+                        "**{}** livedn't.".format(user.name),
+                        "**{}** had a lot of mental disorders and couldn't live with them anymore. They commited suicide by cutting a deep wound on their chest with a kitchen knife.".format(user.name),
+                        "**{}** drowned **{}** in a glass of water.".format(author.name, user.name),
+                        "**{}** threw **{}** in a pool with sharks.".format(author.name, user.name),
+                        "**{}** spammed **{}**'s DMs and they died from all the notifications they got.".format(author.name, user.name),
+                        "**{}** stole all of **{}**'s chocolate. **{}** simply couldn't live without their chocolate and decided that their life is not worth living anymore.".format(author.name, user.name, user.name),
+                        "**{}**'s toaster was hacked by **{}**. They couldn't live with no toast.".format(user.name, author.name),
+                        "**{}** watched furry porn and died from what they saw.".format(user.name),
+                        "**{}** 'accidentally' fell off a building.".format(user.name),
+                        "**{}** may have ate food with cyanide.".format(user.name),
+                        "**{}** saw Huskie's face reveal and instantly died.".format(user.name),
+                        "**{}** starved in a fast food restaurant. What a fucking idiot.".format(user.name),
+                        "...And **{}** died happily ever after... Wait no, I messed it up!".format(user.name),
+                        "**{}** joined this server and died. Oh well, that's not a first.".format(user.name),
+                        "**{}** was gay in Iran.".format(user.name),
+                        "**{}** choked on a banana ( ͡° ͜ʖ ͡°) and died.".format(user.name),
+                        "**{}** drove off a cliff and survived, but died from shock when they saw the high price of the hospital bill.".format(user.name),
+                        "**{}** listened to Justin Beiber for more than 0.69 seconds.".format(user.name),
+                        "**{}** drank too much anti-freeze.".format(user.name),
+                        "**{}** got stabbed with a cucumber by **{}**.".format(user.name, author.name),
+                        "**{}** died from a heatstroke in the artic.".format(user.name),
+                        "**{}** tried to fly. It worked till they hit the ground.".format(user.name),
+                        "**{}** wanted to get a haircut in a faster way. They thought setting their hair on fire would do the trick.".format(user.name),
+                        "On a peaceful night. The moon was shining and everyone was sleeping and enjoying their dreams while **{}** suffocated in their pillow.".format(user.name),
+                        "**{}** got run over by a boat. A fricking boat!".format(user.name),
+                        "What's that smell? It smells like toast... Hey, **{}**! Don't take out the toast with a fork- too late...".format(user.name),
+                        "**{}** got a paper cut on both of their eyes, walked off a cliff and died. I guess books are evil.".format(user.name),
+                        "**{}** tried putting out fire with gasoline.".format(user.name),
+                        "**{}**'s head exploded while they were sitting on the toilet and pressing.".format(user.name),
+                        "**{}** died of laughter. No, I mean they actually died.".format(user.name),
+                        "**{}** got locked in a refrigerator and died of hunger.".format(user.name),
+                        "**{}** drowned in their own tears after losing a game of Fortnite.".format(user.name),
+                        "**{}** got beat up by their imaginary friends.".format(user.name),
+                        "**{}** played My Little Ponny for too long.".format(user.name),
+                        "**{}** choked on air.".format(user.name),
+                        "**{}** got poked by Chuck Norris.".format(user.name),
+                        "**{}** took a selfie with a gun.".format(user.name),
+                        "**{}**'s brain exploded after **{}** saying 'What if dolphins had legs?'.".format(user.name, author.name),
+                        "**{}** died after eating their favourite snack, tide pods.".format(user.name),
+                        "**{}** survived the biggest waves then tripped on a rock and died.".format(user.name),
+                        "**{}** ate white chocolate. Who the fuck eats white chocolate?".format(user.name),
+                        "**{}** demonstrated how to die and then had a heart attack. How ironic.".format(user.name),
+                        "**{}** fell in a toilet and then got flushed.".format(user.name),
+                        "**{}** got stuck in a vending machine.".format(user.name),
+                        "**{}** choked on their toothbrush and died.".format(user.name),
+                        "**{}** found their butthole and died from excitement.".format(user.name),
+                        "**{}** died. That's it. They just died.".format(user.name),
+                        "**{}** saw **{}** naked and instantly died.".format(user.name, author.name),
+                        "**{}** touched **{}**'s spaghet and died.".format(user.name, author.name),
+                        "**{}** had too much porn and their mom cought them before they deleted it.".format(user.name)]
+                embed.description = "{} {}".format(kill_e, random.choice(msgs))
+                await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
