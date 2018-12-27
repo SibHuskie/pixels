@@ -214,5 +214,64 @@ async def say(ctx, *, args = None):
         else:
             await client.say("`{}`".format(args))
             await client.delete_message(ctx.message)
+            
+# cointoss
+@client.command(pass_context=True)
+async def cointoss(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        msgs = ["heads", "tails"]
+        embed.description = "{} It's {}!".format(cointoss_e, random.choice(msgs))
+        await client.say(embed=embed)
+        
+# suicide
+@client.command(pass_context=True)
+async def suicide(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        msgs = ["**{}** tried to commit suicide but failed! Better luck next time I guess.".format(ctx.message.author.name),
+                "**{}** killed themselves after losing all their diamonds on their christian minecraft server.".format(ctx.message.author.name),
+                "**{}** had no internet connection for more than 5 seconds so they commited suicide.".format(ctx.message.author.name),
+                "**{}** felt weird in the middle of the night, but hentaihaven was down so they killed themselves.".format(ctx.message.author.name),
+                "**{}** didn't really have a life, but they still managed to kill themselves.".format(ctx.message.author.name),
+                "**{}** watched boku no pico, few seconds later they jumped off the 7th floor.".format(ctx.message.author.name),
+                "**{}** saw Zero's face. They instantly commited suicide after that.".format(ctx.message.author.name),
+                "All of **{}**'s memes were stolen. Not having any memes or dreams left, they decided to kill themselves.".format(ctx.message.author.name),
+                "**{}** realized how shitty this server actually is. Leaving it wasn't enough so they commited suicide too.".format(ctx.message.author.name),
+                "**{}** had anxiety for way too long. They couldn't live with it anymore so they took their own life away.".format(ctx.message.author.name),
+                "**{}** was bipolar. That disorder was messing up their life too much so they commited suicide.".format(ctx.message.author.name),
+                "**{}** suffered from depression for years. Not having any hope or motivation left, they commited suicide.".format(ctx.message.author.name),
+                "**{}** was physically abused every day. They thought killing themselves would make things better.".format(ctx.message.author.name),
+                "**{}** was sexually abused. That experience made them take their own life away.".format(ctx.message.author.name),
+                "**{}** lived in war and chaos for a very long time. The day they had enough was the day they killed themselves.".format(ctx.message.author.name),
+                "**{}** was bullied in school, outside, even at home. They couldn't take it anymore so they commited suicide.".format(ctx.message.author.name),
+                "**{}** had a personality disorder that made them take their life away.".format(ctx.message.author.name),
+                "**{}** had an eating disorder. They couldn't eat anything without thorwing up after that so they took their life away.".format(ctx.message.author.name),
+                "**{}** was lonely all their life. Not having any friends or family, they killed themselves without anyone finding out.".format(ctx.message.author.name),
+                "**{}** had a great relationship that started to fall apart. After their partner left them, they became depressed and decided to kill themselves, thinking no one would ever love them again.".format(ctx.message.author.name),
+                "**{}** commited suicide. Too bad there's no one to leave a flower on their grave...".format(ctx.message.author.name),
+                "**{}** killed themselves.".format(ctx.message.author.id)]
+        embed.description = "{} {}".format(suicide_e, random.choice(msgs))
+        await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
