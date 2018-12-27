@@ -41,7 +41,7 @@ rps_tie = {"rock" : "rock",
            "p" : "paper",
            "s" : "scissors"}
 
-owner_roles = ["299761993382887425", "52737383461827380"]
+owner_roles = ["299761993382887425"]
 manager_roles = "527373849495339008"
 admin_roles = "527373859335176202"
 mod_roles = "527373873394483200"
