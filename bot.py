@@ -43,7 +43,7 @@ rps_tie = {"rock" : "rock",
 
 owner_roles = []
 manager_roles = []
-admin_roles = []
+admin_roles = "527373859335176202"
 mod_roles = []
 helper_roles = []
 partner_manager_roles = []
@@ -51,7 +51,7 @@ partner_roles = []
 muted_roles = []
 member_roles = []
 self_roles = []
-logs = []
+logs = [527410630798475274]
 joins_leaves = []
 mods = ['527373873394483200']
 mods_chnl = '527410541191495680'
@@ -1010,5 +1010,103 @@ async def topic(ctx):
     else:
         await client.say(random.choice(revivals))
         await client.delete_message(ctx.message)
+      
+      
+      
+ 
+
+
+
+
+
+
+
+
+
+
+######################################################## STAFF #############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+# }cb
+@client.command(pass_context=True)
+async def cb(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    else:
+        author = ctx.message.author
+        roles = [owner_roles, manager_roles, admin_roles, mod_roles, helper_roles]
+        a = []
+        for i in roles:
+            for u in i:
+                if u in ctx.message.server.roles and u in ctx.message.author.roles:
+                    embed.description = "{} Deleting latest messages sent by bots... {}".format(clearbots_e, loading_e)
+                    h = await client.say(embed=embed)
+                    msgs = []
+                    async for o in client.logs_from(ctx.message.channel, limit=100, before=ctx.message):
+                        if o.author.bot and o.id != h.id:
+                            msgs.append(o)
+                try:
+                    await client.delete_messages(msgs)
+                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
+                    await client.edit_message(h, embed=embed)
+                except:
+                    for o in msgs:
+                        await client.delete_message(o)
+                    embed.description = "{} **{}** removed the latest messages sent by bots.".format(clearbots_e, author.name)
+                    await client.edit_message(h, embed=embed)
+                a.append("+1")
+                break
+            if len(a) != 0:
+                break
+        if len(a) == 0:
+            embed.description = "{} This command can only be used by staff.".format(error_e)
+            await client.say(embed=embed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #######################
 client.run(os.environ['BOT_TOKEN'])
