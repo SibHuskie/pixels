@@ -252,6 +252,7 @@ async def on_ready():
     async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
         a = i.content.split(' | ')
         server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
         owner_roles.append(role)
     print("[START UP] Loaded owner roles.")
     async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
@@ -301,6 +302,7 @@ async def on_ready():
     t2 = time.perf_counter()
     m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
     await client.send_message(client.get_channel(log_chnl), m)
+
 
 
 @client.async_event
