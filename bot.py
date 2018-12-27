@@ -16,6 +16,7 @@ footer_text = "P i x e l s"
 limit = 1000000000000
 version = "1.0"
 splitter = "**~~`====================`~~**"
+server = "439658556656975872"
 
 eb = ["Hell no!",
       "No!",
