@@ -625,7 +625,7 @@ async def ship(ctx, *, args = None):
         embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
         await client.say(embed=embed)
     else:
-        if args == None or ' | ' not in str(args):
+        if args == None or ', ' not in str(args):
             embed.description = "{} The command was used incorrectly.\nProper usage: `<something>, <something else>`.".format(error_e)
             await client.say(embed=embed)
         elif len(str(args)) > 250:
@@ -656,8 +656,8 @@ async def ship(ctx, *, args = None):
                         break
                 if len(c) == 0:
                     p = random.randint(0, 101)
-                    await client.send_message(client.get_channel(ships_chnl), "{} | {} | {}".format(a[0], a[1], p))
-                    ships.append("{} | {} | {}".format(a[0], a[1], p))
+                    await client.send_message(client.get_channel(ships_chnl), "{}, {}, {}".format(a[0], a[1], p))
+                    ships.append("{}, {}, {}".format(a[0], a[1], p))
                 await asyncio.sleep(float(1))
                 if p >= 0 and p <= 10:
                     embed.description = "{}\n**{}**\n:heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Shit :poop:__**".format(title, a[0], a[1], s, s, p)
