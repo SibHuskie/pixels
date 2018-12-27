@@ -73,49 +73,21 @@ started = ["1"]
 @client.event
 async def on_ready():
     async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        owner_roles.append(role)
     print("[START UP] Loaded owner roles.")
     async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        manager_roles.append(role)
     print("[START UP] Loaded manager roles.")
     async for i in client.logs_from(client.get_channel(admin_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        admin_roles.append(role)
     print("[START UP] Loaded administrator roles.")
     async for i in client.logs_from(client.get_channel(mod_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        mod_roles.append(role)
     print("[START UP] Loaded moderator roles.")
     async for i in client.logs_from(client.get_channel(helper_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        helper_roles.append(role)
     print("[START UP] Loaded helper roles.")
     async for i in client.logs_from(client.get_channel(muted_roles_chnl), limit=limit):
-        a = i.content.split(' | ')
-        server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
-        muted_roles.append(role)
     print("[START UP] Loaded muted roles.")
     async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
-        logs.append(i.content)
     print("[START UP] Loaded logs channels.")
     async for i in client.logs_from(client.get_channel(warns_chnl), limit=limit):
-        a = i.content.split(' | ')
-        warns.append(a[1])
     print("[START UP] Loaded warnings.")
-    started.append("+1")
     print("[START UP] Finished.")
     await client.change_presence(game=discord.Game(name="on Pixels"))
     m = splitter
