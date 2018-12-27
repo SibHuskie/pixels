@@ -252,7 +252,6 @@ async def on_ready():
     async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
         a = i.content.split(' | ')
         server = client.get_server(a[0])
-        role = discord.utils.get(server.roles, id=a[1])
         owner_roles.append(role)
     print("[START UP] Loaded owner roles.")
     async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
