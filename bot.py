@@ -2049,7 +2049,7 @@ async def slots(ctx, number = None):
                         if int(a[1]) >= k:
                             p = random.randint(0, 1)
                             if p == 0:
-                                new = int(a[1]) - k
+                                new = int(a[5]) - k
                                 embed.description = "{} **{}** gambled and lost `{}` coins!\n{} New balance: `{}` coins.".format(slots_e, ctx.message.author.name, number, coins_e, new)
                                 await client.edit_message(i, "{} | {}".format(ctx.message.author.id, new))
                                 await client.edit_message(h, embed=embed)
