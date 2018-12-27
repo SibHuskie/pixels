@@ -69,7 +69,7 @@ roles_e = "<:roles:517356131379707905>"
 ''''''
 
 # START UP SYSTEM
-started = []
+started = ["1"]
 @client.event
 async def on_ready():
     async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
