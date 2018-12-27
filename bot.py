@@ -43,7 +43,7 @@ rps_tie = {"rock" : "rock",
 
 warns = []
 muted_list = []
-owner_roles = []
+owner_roles = ["527750165717581825"]
 manager_roles = []
 admin_roles = []
 mod_roles = []
