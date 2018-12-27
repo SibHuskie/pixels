@@ -63,6 +63,7 @@ responses_t = []
 currencies = []
 ships = []
 rates = []
+revivals = []
 
 owner_roles_chnl = '527410451655426058'
 manager_roles_chnl = '527410482844532736'
@@ -79,6 +80,7 @@ log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
 ships_chnl = '527708373144174594'
 rates_chnl = '527714528721633280'
+revivals_chnl = '515851181722173460'
 
 
 loading_e = ":arrows_counterclockwise: "
@@ -132,7 +134,7 @@ roast_e = ":fire: "
 calculator_e = ":1234: "
 ship_e = ":100: "
 kill_e = ":busts_in_silhouette: "
-rate_e = "<:rate:515909299793428501>"
+rate_e = ":rate:"
 dicklength_e = "<:dicklength:515909294546485248>"
 howgay_e = "<:howgay:515909296043589633>"
 suggestion_e = "<:suggestion:515909299914932250>"
@@ -890,5 +892,23 @@ async def rate(ctx, *, args = None):
                 rates.append("{} | {}".format(args, p))
             embed.description = "{} I'd rate {} a `{}/10`.".format(rate_e, args, p)
             await client.say(embed=embed)
+            
+# }chatrevive
+@client.command(pass_context=True)
+async def chatrevive(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        await client.say(random.choice(revivals))
+        await client.delete_message(ctx.message)
 #######################
 client.run(os.environ['BOT_TOKEN'])
