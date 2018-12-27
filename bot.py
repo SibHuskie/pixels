@@ -443,6 +443,31 @@ async def on_ready():
     m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
     await client.send_message(client.get_channel(log_chnl), m)
 
+@client.async_event
+async def on_member_join(user: discord.User):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    embed.description = "Welcome to **{}**, <@{}>! We hope you enjoy your stay.\n\n{}".format(user.server.name, user.id, link)
+    if user.server.id == '299761993382887425':
+        await client.send_message(client.get_channel("447634076866969610"), ":wave: Welcome to **{}**, <@{}>! We hope you enjoy your stay.".format(user.server.name, user.id))
+    elif user.server.id == '516573414664962050':
+        await client.send_message(client.get_channel("516575864884953129"), ":wave: Welcome to **{}**, <@{}>! We hope you enjoy your stay.".format(user.server.name, user.id))
+    for i in joins_leaves:
+        a = i.split(' | ')
+        if a[0] == user.server.id:
+            await client.send_message(client.get_channel(a[1]), "{} `{}` joined the server! We now have **{}** members.".format(joined_e, user, len(user.server.members)))
+            break
+    for i in member_roles:
+        if i in user.server.roles:
+            try:
+                server = user.server
+                await client.add_roles(server.get_member(user.id), i)
+                await asyncio.sleep(1.25)
+                await client.send_message(user, embed=embed)
+            except:
+                print("[JOIN EVENT] Error.")
+       
+    
 # CURRENCY SYSTEM / AUTO-RESPONSES
 @client.event
 async def on_message(msg):
