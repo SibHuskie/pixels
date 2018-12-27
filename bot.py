@@ -194,8 +194,6 @@ help1 += "\npx!help"
 help1 += "\n-    Gives you a list of commands."
 help1 += "\npx!ping"
 help1 += "\n-    Pings the bot. Used to check if the bot is lagging."
-help1 += "\npx!tos"
-help1 += "\n-    Gives you the bot's TOS and rules."
 help1 += "\npx!invite"
 help1 += "\n-    Gives you invite links for the bot."
 help1 += "\npx!features"
@@ -353,20 +351,6 @@ help5 += "\n-    Adds/removes a user to/from the mods list."
 help5 += "\npx!say <text>"
 help5 += "\n-    Forces the bot to say something,"
 help5 += "\n```"
-
-tos_m = "\n{} **__Bot rules:__**".format(error_e)
-tos_m += "\n"
-tos_m += "\n{} Spamming the bot's commands or making the bot lag will get you instantly banned.".format(check_e)
-tos_m += "\n{} Continuous asking to become a bot moderator is not allowed.".format(check_e)
-tos_m += "\n{} Raiding, spamming, nuking and similar acts will get you banned.".format(check_e)
-tos_m += "\n{} Sending NSFW or gore files/links in non-NSFW channels will get you banned.".format(check_e)
-tos_m += "\n{} Making drama about the bot, stealing the bot's code, sending viruses or any kind of malicious files/links will get you banned.".format(check_e)
-tos_m += "\n{} Do not mess with the support, report and suggestion systems.".format(check_e)
-tos_m += "\n{} Only suggest things that can actually improve the bot.".format(check_e)
-tos_m += "\n{} Do not take advantage of bugs. Please report them instead.".format(check_e)
-tos_m += "\n"
-tos_m += "\n"
-tos_m += "\n{} Thanks for using this bot. Use `xf!info` for more information and `xf!features` to see the bot's features.".format(worked_e)
 
 ''''''
 
@@ -533,24 +517,6 @@ async def ping(ctx):
         embed.description = "My ping is `{}ms`.\n{}".format(ping, m)
         await client.say(embed=embed)
 
-# }tos
-@client.command(pass_context=True)
-async def tos(ctx):
-    embed = discord.Embed(colour=0x00)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    elif ctx.message.author.id in banned_users:
-        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif ctx.message.server.id in banned_servers:
-        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif '}' not in str(ctx.message.content):
-        embed.description = tos_m
-        await client.say(embed=embed)
-
 # }invite
 @client.command(pass_context=True)
 async def invite(ctx):
@@ -621,7 +587,7 @@ async def support(ctx, *, args = None):
             embed.description = "{} No text given.\nYou can also just join the support server and ask for help there. [Click here]({}) to join the support server.".format(error_e, default_link)
             await client.say(embed=embed)
         elif len(str(args)) > 500:
-            embed.description = "{} The text cannot be longer than 500 characters.\nYou can also just join the support server and ask for help there. [Click here]({}) to join the support server.".format(error_e, default_link)
+            embed.description = "{} The text cannot be longer than 500 characters.".format(error_e)
             await client.say(embed=embed)
         else:
             embed.description = "{} Sending support ticket... {}".format(support_e, loading_e)
