@@ -30,6 +30,17 @@ eb = ["Hell no!",
       "Yes! I'm sure of it!",
       "No! I'm sure of it!"]
 
+rps_choices = ["rock", "paper", "scissors", "r", "p", "s"]
+rps_r = ["rock", "r"]
+rps_p = ["paper", "p"]
+rps_s = ["scissors", "s"]
+rps_tie = {"rock" : "rock",
+           "paper" : "paper",
+           "scissors" : "scissors",
+           "r" : "rock",
+           "p" : "paper",
+           "s" : "scissors"}
+
 owner_roles = []
 manager_roles = []
 admin_roles = []
@@ -682,5 +693,46 @@ async def ship(ctx, *, args = None):
                 else:
                     embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Perfect :revolving_hearts:__**".format(title, a[0], a[1], s, s, p)
                 await client.edit_message(h, embed=embed)
+            
+# }rps <rock/paper/scissors>
+@client.command(pass_context=True)
+async def rps(ctx, choice = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if choice == None:
+            embed.description = "{} Please choose what you want to use.\nChoices: `rock`, `paper`, `scissors`.".format(error_e)
+            await client.say(embed=embed)
+        elif choice not in rps_choices:
+            embed.description = "{} Invalid choice.\nChoices: `rock`, `paper`, `scissors`.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            a = random.choice(rps_choices)
+            s = "**~~`=====`~~**"
+            title = "{} **__`ROCK, PAPER, SCISSORS`__** {}\n**{}**\n:vs:\n**{}**\n{} **OVER** {}".format(game_e, game_e, ctx.message.author.name, client.user.name, s, s)
+            if choice in rps_r and a in rps_s:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `rock`\n\n:poop: LOSER: **{}**\n:arrow_right: `scissors`".format(title, ctx.message.author.name, client.user.name)
+            elif choice in rps_p and a in rps_r:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `paper`\n\n:poop: LOSER: **{}**\n:arrow_right: `rock`".format(title, ctx.message.author.name, client.user.name)
+            elif choice in rps_s and a in rps_p:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `scissors`\n\n:poop: LOSER: **{}**\n:arrow_right: `paper`".format(title, ctx.message.author.name, client.user.name)
+            elif a in rps_r and choice in rps_s:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `rock`\n\n:poop: LOSER: **{}**\n:arrow_right: `scissors`".format(title, client.user.name, ctx.message.author.name)
+            elif a in rps_p and choice in rps_r:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `paper`\n\n:poop: LOSER: **{}**\n:arrow_right: `rock`".format(title, client.user.name, ctx.message.author.name)
+            elif a in rps_s and choice in rps_p:
+                embed.description = "{}\n:crown: WINNER: **{}**\n:arrow_right: `scissors`\n\n:poop: LOSER: **{}**\n:arrow_right: `paper`".format(title, client.user.name, ctx.message.author.name)
+            else:
+                embed.description = "{}\n:no_entry:\n**{}**\n:arrow_right: `{}`\n\n**{}**\n:arrow_right: `{}`".format(title, ctx.message.author.name, rps_tie[choice], client.user.name, rps_tie[a])
+            await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
