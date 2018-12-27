@@ -63,7 +63,7 @@ responses_t = []
 currencies = []
 ships = []
 rates = []
-revivals = []
+revivals = ['no']
 
 owner_roles_chnl = '527410451655426058'
 manager_roles_chnl = '527410482844532736'
