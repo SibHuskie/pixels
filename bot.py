@@ -117,7 +117,7 @@ async def on_ready():
     print("[START UP] Loaded warnings.")
     started.append("+1")
     print("[START UP] Finished.")
-    await client.change_presence(game=discord.Game(name="}help | }invite"))
+    await client.change_presence(game=discord.Game(name="on Pixels"))
     m = splitter
     m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
     t1 = time.perf_counter()
@@ -177,24 +177,6 @@ async def ping(ctx, option = None):
                 m = "{} The bot isn't lagging.".format(pinggood_e)
             embed.description = "My ping is `{}`ms.\n{}".format(ping, m)
             await client.say(embed=embed)
-
-# }help
-@client.command(pass_context=True)
-async def help(ctx):
-    embed = discord.Embed(colour=0x0)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    else:
-        if 'xm!' in str(ctx.message.content):
-            try:
-                await client.send_message(ctx.message.author, help1)
-                embed.description = "{} A list of commands has been sent to your DMs.".format(worked_e)
-                await client.say(embed=embed)
-            except:
-                embed.description = "{} I was unable to DM you my list of commands.".format(error_e)
-                await client.say(embed=embed)
 
 ''' COMMANDS FOR HELPERS '''
 # }cb
