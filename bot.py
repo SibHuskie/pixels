@@ -115,7 +115,7 @@ cointoss_e = ":moneybag: "
 suicide_e = ":skull: "
 roast_e = ":fire: "
 calculator_e = ":1234: "
-ship_e = "<:ship1:515909300984741898>"
+ship_e = ":100: "
 kill_e = "<:kill:515909300149944321>"
 rate_e = "<:rate:515909299793428501>"
 dicklength_e = "<:dicklength:515909294546485248>"
@@ -609,5 +609,76 @@ async def battle(ctx, user: discord.Member = None):
                             u_health.remove('.')
                     embed.description = "{}\n{} **ROUND {}** {}\n:small_red_triangle_down: **{}** {}\n:arrow_right: `{}` DMG\n\n:small_red_triangle_down: **{}** {}\n:arrow_right: `{}` DMG\n{} **HEALTH** {}\n:small_red_triangle_down: **{}**\n:heart: `{}` HP\n\n:small_red_triangle_down: **{}**\n:heart: `{}` HP".format(title, s, len(rounds), s, author.name, a_d, dmgs[a_d], user.name, u_d, dmgs[u_d], s, s, author.name, len(a_health), user.name, len(u_health))
                     await client.edit_message(h, embed=embed)
+                        
+# }ship <something> , <something else>
+@client.command(pass_context=True)
+async def ship(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if args == None or ' | ' not in str(args):
+            embed.description = "{} The command was used incorrectly.\nProper usage: `<something>, <something else>`.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 250:
+            embed.description = "{} The ship cannot be longer than 250 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            a = args.split(', ')
+            if len(a) != 2:
+                embed.description = "{} The command was used incorrectly.\nProper usage: `<something>, <something else>`.".format(error_e)
+                await client.say(embed=embed)
+            else:
+                title = "{} **__`LOVELY SHIPPING MACHINE`__** {}".format(ship_e, ship_e)
+                s = "**~~`=====`~~**"
+                embed.description = "{}\n**{}**\n:heart: :yellow_heart: :green_heart: :blue_heart: :purple_heart:\n**{}**".format(title, a[0], a[1])
+                h = await client.say(embed=embed)
+                l = [":yellow_heart:", ":green_heart:", ":blue_heart:", ":purple_heart:", ":heart:"]
+                for i in range(3):
+                    await asyncio.sleep(float(1))
+                    r = "{}{}{}{}{}{}{}{}{}{}".format(random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l), random.choice(l))
+                    embed.description = "{}\n**{}**\n{}\n**{}**\n{} **RESULTS** {}\n**__Loading...__**".format(title, a[0], r, a[1], s, s)
+                    await client.edit_message(h, embed=embed)
+                c = []
+                for i in ships:
+                    if a[0] in str(i) and a[1] in str(i):
+                        b = i.split(' | ')
+                        p = int(b[2])
+                        c.append("+1")
+                        break
+                if len(c) == 0:
+                    p = random.randint(0, 101)
+                    await client.send_message(client.get_channel(ships_chnl), "{} | {} | {}".format(a[0], a[1], p))
+                    ships.append("{} | {} | {}".format(a[0], a[1], p))
+                await asyncio.sleep(float(1))
+                if p >= 0 and p <= 10:
+                    embed.description = "{}\n**{}**\n:heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Shit :poop:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 11 and p <= 20:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Awful :sob:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 21 and p <= 30:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Very bad :pensive:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 31 and p <= 40:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Bad :frowning:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 41 and p <= 50:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Okay :neutral_face:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 51 and p <= 60:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Good :slight_smile:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 61 and p <= 70:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Very good :smiley:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 71 and p <= 80:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Fantastic :heart_eyes:__**".format(title, a[0], a[1], s, s, p)
+                elif p >= 81 and p <= 90:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Amazing :sparkling_heart:__**".format(title, a[0], a[1], s, s, p)
+                else:
+                    embed.description = "{}\n**{}**\n:heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse::heartpulse:\n**{}**\n{} **RESULTS** {}\n**__`{}%` Perfect :revolving_hearts:__**".format(title, a[0], a[1], s, s, p)
+                await client.edit_message(h, embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
