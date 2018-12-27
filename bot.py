@@ -480,7 +480,7 @@ client.remove_command('help')
 # }help
 @client.command(pass_context=True)
 async def help(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x0)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -508,7 +508,7 @@ async def help(ctx):
 # }ping
 @client.command(pass_context=True)
 async def ping(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -536,7 +536,7 @@ async def ping(ctx):
 # }tos
 @client.command(pass_context=True)
 async def tos(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -554,7 +554,7 @@ async def tos(ctx):
 # }invite
 @client.command(pass_context=True)
 async def invite(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -575,7 +575,7 @@ async def invite(ctx):
 # }features
 @client.command(pass_context=True)
 async def features(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -605,7 +605,7 @@ async def features(ctx):
 # }support <text>
 @client.command(pass_context=True)
 async def support(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -642,7 +642,7 @@ async def support(ctx, *, args = None):
 # }bug <text>
 @client.command(pass_context=True)
 async def bug(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -679,7 +679,7 @@ async def bug(ctx, *, args = None):
 # }info
 @client.command(pass_context=True)
 async def info(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -715,7 +715,7 @@ async def info(ctx):
 # }stats
 @client.command(pass_context=True)
 async def stats(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -763,7 +763,7 @@ async def stats(ctx):
 # }suggest <text>
 @client.command(pass_context=True)
 async def suggest(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -792,7 +792,7 @@ async def suggest(ctx, *, args = None):
 # }serverinfo
 @client.command(pass_context=True)
 async def serverinfo(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -834,7 +834,7 @@ async def serverinfo(ctx):
 # }cointoss
 @client.command(pass_context=True)
 async def cointoss(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -853,7 +853,7 @@ async def cointoss(ctx):
 # }suicide
 @client.command(pass_context=True)
 async def suicide(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -893,7 +893,7 @@ async def suicide(ctx):
 # }roast <user>
 @client.command(pass_context=True)
 async def roast(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -952,7 +952,7 @@ async def roast(ctx, user: discord.Member = None):
 # }eightball <yes or no question>
 @client.command(pass_context=True)
 async def eightball(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -977,7 +977,7 @@ async def eightball(ctx, *, args = None):
 # }pfp
 @client.command(pass_context=True)
 async def pfp(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1009,7 +1009,7 @@ async def pfp(ctx):
 # }calculator <math problem>
 @client.command(pass_context=True)
 async def calculator(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1038,7 +1038,7 @@ async def calculator(ctx, *, args = None):
 # }battle <user>
 @client.command(pass_context=True)
 async def battle(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1160,7 +1160,7 @@ async def battle(ctx, user: discord.Member = None):
 # }ship <something> | <something else>
 @client.command(pass_context=True)
 async def ship(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1231,7 +1231,7 @@ async def ship(ctx, *, args = None):
 # }rps <rock/paper/scissors>
 @client.command(pass_context=True)
 async def rps(ctx, choice = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1272,7 +1272,7 @@ async def rps(ctx, choice = None):
 # }kill <user>
 @client.command(pass_context=True)
 async def kill(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1371,7 +1371,7 @@ async def kill(ctx, user: discord.Member = None):
 # }leave
 @client.command(pass_context=True)
 async def leave(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1394,7 +1394,7 @@ async def leave(ctx):
 # }join
 @client.command(pass_context=True)
 async def join(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1417,7 +1417,7 @@ async def join(ctx):
 # }rate <something>
 @client.command(pass_context=True)
 async def rate(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1453,7 +1453,7 @@ async def rate(ctx, *, args = None):
 # }dicklength [user]
 @client.command(pass_context=True)
 async def dicklength(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1496,7 +1496,7 @@ async def dicklength(ctx, user: discord.Member = None):
 # }howgay [user]
 @client.command(pass_context=True)
 async def howgay(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1536,7 +1536,7 @@ async def howgay(ctx, user: discord.Member = None):
 # }chatrevive
 @client.command(pass_context=True)
 async def chatrevive(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1554,7 +1554,7 @@ async def chatrevive(ctx):
 # }nhie
 @client.command(pass_context=True)
 async def nhie(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1572,7 +1572,7 @@ async def nhie(ctx):
 # }wyr
 @client.command(pass_context=True)
 async def wyr(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1590,7 +1590,7 @@ async def wyr(ctx):
 # }lettergen <number of letters>
 @client.command(pass_context=True)
 async def lettergen(ctx, number = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1624,7 +1624,7 @@ async def lettergen(ctx, number = None):
 # }numbergen <minimum number> <maximum number>
 @client.command(pass_context=True)
 async def numbergen(ctx, mi = None, ma = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1656,7 +1656,7 @@ async def numbergen(ctx, mi = None, ma = None):
 # }ban <text>
 @client.command(pass_context=True)
 async def ban(ctx, *, text = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1682,7 +1682,7 @@ async def ban(ctx, *, text = None):
 # }convert
 @client.command(pass_context=True)
 async def convert(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1717,7 +1717,7 @@ async def convert(ctx):
 # }marry <user>
 @client.command(pass_context=True)
 async def marry(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1798,7 +1798,7 @@ async def marry(ctx, user: discord.Member = None):
 # }md
 @client.command(pass_context=True)
 async def md(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1845,7 +1845,7 @@ async def md(ctx):
 # }ma
 @client.command(pass_context=True)
 async def ma(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1907,7 +1907,7 @@ async def ma(ctx):
 # }divorce
 @client.command(pass_context=True)
 async def divorce(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1966,7 +1966,7 @@ async def divorce(ctx):
 # }bal [user]
 @client.command(pass_context=True)
 async def bal(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -1993,7 +1993,7 @@ async def bal(ctx, user: discord.Member = None):
 # }profile [user]
 @client.command(pass_context=True)
 async def profile(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2048,7 +2048,7 @@ async def profile(ctx, user: discord.Member = None):
 # }slots <number>
 @client.command(pass_context=True)
 async def slots(ctx, number = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2105,7 +2105,7 @@ async def slots(ctx, number = None):
 # }work
 @client.command(pass_context=True)
 async def work(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2138,7 +2138,7 @@ async def work(ctx):
 # }steal <user>
 @client.command(pass_context=True)
 async def steal(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2183,7 +2183,7 @@ async def steal(ctx, user: discord.Member = None):
 # }gift <user> <amount>
 @client.command(pass_context=True)
 async def gift(ctx, user: discord.Member = None, number = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2245,7 +2245,7 @@ async def gift(ctx, user: discord.Member = None, number = None):
 # }hug <user>
 @client.command(pass_context=True)
 async def hug(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2269,7 +2269,7 @@ async def hug(ctx, user: discord.Member = None):
 # }kiss <user>
 @client.command(pass_context=True)
 async def kiss(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2293,7 +2293,7 @@ async def kiss(ctx, user: discord.Member = None):
 # }pat <user>
 @client.command(pass_context=True)
 async def pat(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2317,7 +2317,7 @@ async def pat(ctx, user: discord.Member = None):
 # }punch <user>
 @client.command(pass_context=True)
 async def punch(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2341,7 +2341,7 @@ async def punch(ctx, user: discord.Member = None):
 # }cuddle <user>
 @client.command(pass_context=True)
 async def cuddle(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2365,7 +2365,7 @@ async def cuddle(ctx, user: discord.Member = None):
 # }bite <user>
 @client.command(pass_context=True)
 async def bite(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2389,7 +2389,7 @@ async def bite(ctx, user: discord.Member = None):
 # }bloodsuck <user>
 @client.command(pass_context=True)
 async def bloodsuck(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2413,7 +2413,7 @@ async def bloodsuck(ctx, user: discord.Member = None):
 # }throw <user>
 @client.command(pass_context=True)
 async def throw(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2437,7 +2437,7 @@ async def throw(ctx, user: discord.Member = None):
 # }nom <user>
 @client.command(pass_context=True)
 async def nom(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2461,7 +2461,7 @@ async def nom(ctx, user: discord.Member = None):
 # }highfive <user>
 @client.command(pass_context=True)
 async def highfive(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2485,7 +2485,7 @@ async def highfive(ctx, user: discord.Member = None):
 # }poke <user>
 @client.command(pass_context=True)
 async def poke(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2509,7 +2509,7 @@ async def poke(ctx, user: discord.Member = None):
 # }slap <user>
 @client.command(pass_context=True)
 async def slap(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2533,7 +2533,7 @@ async def slap(ctx, user: discord.Member = None):
 # }stare <user>
 @client.command(pass_context=True)
 async def stare(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2557,7 +2557,7 @@ async def stare(ctx, user: discord.Member = None):
 # }spank <user>
 @client.command(pass_context=True)
 async def spank(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2581,7 +2581,7 @@ async def spank(ctx, user: discord.Member = None):
 # }lick <user>
 @client.command(pass_context=True)
 async def lick(ctx, user: discord.Member = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2605,7 +2605,7 @@ async def lick(ctx, user: discord.Member = None):
 # }facepalm
 @client.command(pass_context=True)
 async def facepalm(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2625,7 +2625,7 @@ async def facepalm(ctx):
 # }cry
 @client.command(pass_context=True)
 async def cry(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2645,7 +2645,7 @@ async def cry(ctx):
 # }dance
 @client.command(pass_context=True)
 async def dance(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2665,7 +2665,7 @@ async def dance(ctx):
 # }bow
 @client.command(pass_context=True)
 async def bow(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2685,7 +2685,7 @@ async def bow(ctx):
 # }dab
 @client.command(pass_context=True)
 async def dab(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2706,7 +2706,7 @@ async def dab(ctx):
 # }responses
 @client.command(pass_context=True)
 async def responses(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2741,7 +2741,7 @@ async def responses(ctx):
 # }currency
 @client.command(pass_context=True)
 async def currency(ctx):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2776,7 +2776,7 @@ async def currency(ctx):
 # }ignore <channel name>
 @client.command(pass_context=True)
 async def ignore(ctx, channel = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
@@ -2820,7 +2820,7 @@ async def ignore(ctx, channel = None):
 # }umsg <user ID> <text>
 @client.command(pass_context=True)
 async def umsg(ctx, target = None, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     author = ctx.message.author
     if len(started) == 0:
@@ -2859,7 +2859,7 @@ async def umsg(ctx, target = None, *, args = None):
 # }smsg <user ID> <text>
 @client.command(pass_context=True)
 async def smsg(ctx, target = None, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     author = ctx.message.author
     if len(started) == 0:
@@ -2898,7 +2898,7 @@ async def smsg(ctx, target = None, *, args = None):
 # }close <ticket number>
 @client.command(pass_context=True)
 async def close(ctx, number = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     author = ctx.message.author
     if len(started) == 0:
@@ -2940,7 +2940,7 @@ async def close(ctx, number = None):
 # }link <server ID>
 @client.command(pass_context=True)
 async def link(ctx, target = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     author = ctx.message.author
     if len(started) == 0:
@@ -2982,7 +2982,7 @@ async def link(ctx, target = None):
 # }mod <user id>
 @client.command(pass_context=True)
 async def mod(ctx, target = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     author = ctx.message.author
     if len(started) == 0:
@@ -3028,7 +3028,7 @@ async def mod(ctx, target = None):
 # }say <text>
 @client.command(pass_context=True)
 async def say(ctx, *, args = None):
-    embed = discord.Embed(colour=0x007F0B)
+    embed = discord.Embed(colour=0x00)
     embed.set_footer(text=footer_text)
     if len(started) == 0:
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
