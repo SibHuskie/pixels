@@ -455,7 +455,7 @@ async def on_member_join(user: discord.User):
     for i in joins_leaves:
         a = i.split(' | ')
         if a[0] == user.server.id:
-            await client.send_message(client.get_channel(a[1]), "{} `{}` joined the server! We now have **{}** members.".format(joined_e, user, len(user.server.members)))
+            await client.send_message(client.get_channel("447592000728858646"), "{} `{}` joined the server! We now have **{}** members.".format(joined_e, user, len(user.server.members)))
             break
     for i in member_roles:
         if i in user.server.roles:
