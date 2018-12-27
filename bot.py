@@ -12,14 +12,14 @@ import time
 Client = discord.Client()
 bot_prefix= ["px!", "Px!"]
 client = commands.Bot(command_prefix=bot_prefix)
-footer_text = "[Realm X] - [X Fun]"
+footer_text = "Pixels"
 limit = 10000000000000000
-version = '2.3'
-default_link = 'https://discord.gg/geVrByH'
+version = '1.0'
+default_link = 'https://discord.gg/Xj6beq7'
 
 
-mods = ['412201413335056386']
-mods_chnl = '504295465022390282'
+mods = ['299761993382887425']
+mods_chnl = '527410541191495680'
 banned_users = []
 banned_servers = []
 ignored = []
@@ -115,25 +115,25 @@ responses_msgs = {"good bot" : ["C:", "yey me good botty", "I'm not your dog, hu
              "rip" : ["gg", "f"]}
 
 
-banned_users_chnl = '499842858891739136'
-banned_servers_chnl = '499842876969058304'
-log_chnl = '516596153148768266'
-tickets_chnl = '518333828838719522'
-dicks_chnl = '515850231309533187'
-balances_chnl = '518887417487556608'
-marriages_chnl = '515850054305579019'
-gays_chnl = '515850453783937024'
-ships_chnl = '518087518479056896'
-wyr_chnl = '515850545169170443'
-nhie_chnl = '515850611292372992'
-revivals_chnl = '515851181722173460'
-interactions_chnl = '515855920421535744'
-ignored_chnl = '515866988392742915'
-currency_t_chnl = '515867314189631507'
-responses_t_chnl = '515867359844761642'
-rates_chnl = '518105776628301882'
+banned_users_chnl = '527769371292991500'
+banned_servers_chnl = '527769888735887360'
+log_chnl = '527769404893691924'
+tickets_chnl = '527769434190774272'
+dicks_chnl = '527769459008733184'
+balances_chnl = '527769484308643850'
+marriages_chnl = '527769509164220416'
+gays_chnl = '527769532354527253'
+ships_chnl = '527769555075072000'
+wyr_chnl = '527769574716997632'
+nhie_chnl = '527769594975354901'
+revivals_chnl = '527769624595660800'
+interactions_chnl = '527769649400643600'
+ignored_chnl = '527769671655620609'
+currency_t_chnl = '527769697824014336'
+responses_t_chnl = '527769725942366208'
+rates_chnl = '527769744439508995'
 
-staff_role = '516586573668679680'
+staff_role = '504702557428383754'
 splitter = "**~~`====================`~~**"
 
 loading_e = "<a:loading:484705261609811979>"
