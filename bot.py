@@ -1051,7 +1051,7 @@ async def setrole(ctx, option = None, *, args = None):
         author = ctx.message.author
         a = []
         for i in owner_roles:
-            if i in ctx.message.server.roles and i in ctx.message.author.roles:
+            if ctx.message.author.id in owners:
                 options = ["owner", "manager", "admin", "mod", "helper", "muted"]
                 if option == None or args == None:
                     embed.description = "{} Not all arguments were given.\nOptions: `owner`, `manager`, `admin`, `mod`, `helper`, `muted`.\nTo remove a role from the database write the role's name like this: `<role name> | none`.".format(error_e)
