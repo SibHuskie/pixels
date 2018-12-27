@@ -101,8 +101,8 @@ messages_e = "<:messages:515909299495763968>"
 bannedservers_e = "<:bannedservers:515909292101074945>"
 bannedusers_e = "<:bannedusers:515909292419973130>"
 cointoss_e = ":moneybag: "
-suicide_e = "<:suicide:515909300347207680>"
-roast_e = "<:roast:515909300330299392>"
+suicide_e = ":skull: "
+roast_e = ":fire: "
 calculator_e = "<:calculator:515909292545802240>"
 ship_e = "<:ship1:515909300984741898>"
 kill_e = "<:kill:515909300149944321>"
@@ -313,7 +313,7 @@ async def suicide(ctx):
                 "**{}** felt weird in the middle of the night, but hentaihaven was down so they killed themselves.".format(ctx.message.author.name),
                 "**{}** didn't really have a life, but they still managed to kill themselves.".format(ctx.message.author.name),
                 "**{}** watched boku no pico, few seconds later they jumped off the 7th floor.".format(ctx.message.author.name),
-                "**{}** saw Zero's face. They instantly commited suicide after that.".format(ctx.message.author.name),
+                "**{}** saw Huskie's face. They instantly commited suicide after that.".format(ctx.message.author.name),
                 "All of **{}**'s memes were stolen. Not having any memes or dreams left, they decided to kill themselves.".format(ctx.message.author.name),
                 "**{}** realized how shitty this server actually is. Leaving it wasn't enough so they commited suicide too.".format(ctx.message.author.name),
                 "**{}** had anxiety for way too long. They couldn't live with it anymore so they took their own life away.".format(ctx.message.author.name),
@@ -331,5 +331,64 @@ async def suicide(ctx):
                 "**{}** killed themselves.".format(ctx.message.author.id)]
         embed.description = "{} {}".format(suicide_e, random.choice(msgs))
         await client.say(embed=embed)
+        
+# roast <user>
+@client.command(pass_context=True)
+async def roast(ctx, user: discord.Member = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if user == None:
+            embed.description = "{} Please mention the user you want to roast.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            if user.id == client.user.id:
+                user = ctx.message.author
+            else:
+                user = user
+            msgs = ["Why would I bother roasting someone like **{}** when the mirror does it every morning?".format(user.name),
+                    "We all hate you, **{}**. Just not quite enough to think about you.".format(user.name),
+                    "**{}** don't play hard to get when you are hard to want.".format(user.name),
+                    "God wasted a good asshole when he put teeth in your mouth, **{}**.".format(user.name),
+                    "I can't even call **{}** ugly. Nature has beaten me to it.".format(user.name),
+                    "I can't roast **{}**. I simply can't imagine the pain they go thru with that face.".format(user.name),
+                    "**{}**, I would call you a cunt, but you lack the warmth or the depth.".format(user.name),
+                    "**{}**, you remind me of Huskie. Get out of here!".format(user.name),
+                    "**{}**'s are trash.".format(user.name),
+                    "**{}**, you're a great shower when you speak.".format(user.name),
+                    "I can't breathe when I see you, **{}**. Because I'm suffocating from your bullshit.".format(user.name),
+                    "**{}**, the only way you'll ever get laid is if you crawl up a chicken's ass and wait.".format(user.name),
+                    "**{}**, I just stepped in something that is smarter than you. It smelled better too.".format(user.name),
+                    "**{}**, you're as stupid as your father when he thought he didn't need a condom.".format(user.name),
+                    "**{}**, it's a joke, not a dick. You don't have to take it so hard.".format(user.name),
+                    "**{}**, the only thing that would fuck you is life.".format(user.name),
+                    "What's the difference between 3 dicks and a joke? **{}** can't take a joke.".format(user.name),
+                    "**{}**, you have more dick in your personality than in your pants.".format(user.name),
+                    "**{}**, even your father would be disappointed in your if he stayed.".format(user.name),
+                    "**{}** should put a condom on their head. Cause if they're gonna act like a dick, they might as well dress like one too.".format(user.name),
+                    "**{}**, you were probably birthed out of your mother's ass cause her pussy was too busy.".format(user.name),
+                    "**{}** is such a pussy that fucking them wouldn't be gay.".format(user.name),
+                    "If I wanted to kill myself, I'd climb up your ego and jump into your IQ, **{}**.".format(user.name),
+                    "If laughter is the best medicine, **{}**'s face must be curing the world.".format(user.name),
+                    "**{}**, your family tree is probably a cactus. Cause everyone on it is a prick.".format(user.name),
+                    "**{}** is so ugly that when they look in the mirror, their reflection looks away.".format(user.name),
+                    "**{}**, it's better to let someone think you're stupid than open your mouth and prove it.".format(user.name),
+                    "**{}**, you're so ugly that you have to trick or treat over the phone.".format(user.name),
+                    "**{}**, you're so fat that your school photo was a double picture.".format(user.name),
+                    "**{}** is so stupid that they called me to ask me for my phone number.".format(user.name),
+                    "**{}** is hating themselves too much for me to roast them.".format(user.name),
+                    "**{}** is so fat that Thanos had to snap twice.".format(user.name),
+                    "**{}**'s hair looks like a virginity helmet.".format(user.name)]
+            embed.description = "{} {}".format(roast_e, random.choice(msgs))
+            await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
