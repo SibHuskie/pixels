@@ -3000,7 +3000,7 @@ async def say(ctx, *, args = None):
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
         await client.say(embed=embed)
     elif '}' not in str(ctx.message.content):
-        if ctx.message.author.id == '412201413335056386':
+        if ctx.message.author.id == '299761993382887425':
             if args == None:
                 embed.description = "{} No text given.".format(error_e)
                 await client.say(embed=embed)
