@@ -16,7 +16,7 @@ footer_text = "Pixels"
 limit = 1000000000000
 version = "1.0"
 splitter = "**~~`====================`~~**"
-started = "2"
+started = []
 
 eb = ["Hell no!",
       "No!",
@@ -41,20 +41,26 @@ rps_tie = {"rock" : "rock",
            "p" : "paper",
            "s" : "scissors"}
 
-owner_roles = ["299761993382887425"]
-manager_roles = "527373849495339008"
-admin_roles = "527373859335176202"
-mod_roles = "527373873394483200"
+warns = []
+muted_list = []
+owner_roles = []
+manager_roles = []
+admin_roles = []
+mod_roles = []
 helper_roles = []
-partner_manager_roles = []
-partner_roles = []
 muted_roles = []
-member_roles = []
-self_roles = []
-logs = [527410630798475274]
-joins_leaves = []
-mods = ['527373873394483200']
-mods_chnl = '527410541191495680'
+logs = []
+
+warns_chnl = '527410424719605770'
+owner_roles_chnl = '527410451655426058'
+manager_roles_chnl = '527410482844532736'
+admin_roles_chnl = '527410517388820480'
+mod_roles_chnl = '527410541191495680'
+helper_roles_chnl = '527410570018816012'
+muted_roles_chnl = '527410597223202816'
+logs_chnl = '527410630798475274'
+log_chnl = '527410630798475274'
+
 banned_users = []
 banned_servers = []
 ignored = []
@@ -165,19 +171,6 @@ revivals = ["Tell me the 3 best things about you.",
             "What is the best part of being a part of your family?",
             "What is your favorite day of the week?"]
 
-owner_roles_chnl = '527410451655426058'
-manager_roles_chnl = '527410482844532736'
-admin_roles_chnl = '527410517388820480'
-mod_roles_chnl = '527410541191495680'
-helper_roles_chnl = '527410570018816012'
-partner_manager_roles_chnl = '516606847323734064'
-partner_roles_chnl = '516606872896405520'
-muted_roles_chnl = '516607156813037608'
-member_roles_chnl = '516607267127164942'
-self_roles_chnl = '516611549427793930'
-logs_chnl = '516614512657563658'
-log_chnl = '516594957432389632'
-joins_leaves_chnl = '516616002012839936'
 ships_chnl = '527708373144174594'
 rates_chnl = '527714528721633280'
 revivals_chnl = '515851181722173460'
@@ -252,6 +245,64 @@ steal_e = "<:steal:519845656928452632>"
 gift_e = "<:gift1:519849587100614658>"
 ban_e = "<:ban:519859483330215936>"
 link_e = "<:link1:520593270494199819>"
+
+# START UP SYSTEM
+started = []
+@client.event
+async def on_ready():
+    async for i in client.logs_from(client.get_channel(owner_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        owner_roles.append(role)
+    print("[START UP] Loaded owner roles.")
+    async for i in client.logs_from(client.get_channel(manager_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        manager_roles.append(role)
+    print("[START UP] Loaded manager roles.")
+    async for i in client.logs_from(client.get_channel(admin_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        admin_roles.append(role)
+    print("[START UP] Loaded administrator roles.")
+    async for i in client.logs_from(client.get_channel(mod_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        mod_roles.append(role)
+    print("[START UP] Loaded moderator roles.")
+    async for i in client.logs_from(client.get_channel(helper_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        helper_roles.append(role)
+    print("[START UP] Loaded helper roles.")
+    async for i in client.logs_from(client.get_channel(muted_roles_chnl), limit=limit):
+        a = i.content.split(' | ')
+        server = client.get_server(a[0])
+        role = discord.utils.get(server.roles, id=a[1])
+        muted_roles.append(role)
+    print("[START UP] Loaded muted roles.")
+    async for i in client.logs_from(client.get_channel(logs_chnl), limit=limit):
+        logs.append(i.content)
+    print("[START UP] Loaded logs channels.")
+    async for i in client.logs_from(client.get_channel(warns_chnl), limit=limit):
+        a = i.content.split(' | ')
+        warns.append(a[1])
+    print("[START UP] Loaded warnings.")
+    started.append("+1")
+    print("[START UP] Finished.")
+    await client.change_presence(game=discord.Game(name="}help | }invite"))
+    m = splitter
+    m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
+    t1 = time.perf_counter()
+    await client.send_typing(client.get_channel(log_chnl))
+    t2 = time.perf_counter()
+    m += "\n{} Ping: `{}ms`".format(pingok_e, round((t2-t1)*1000))
+    await client.send_message(client.get_channel(log_chnl), m)
 
 
 @client.async_event
