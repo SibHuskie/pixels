@@ -230,25 +230,25 @@ help1 += "\npx!rps <rock/paper/scissors>"
 help1 += "\n-    Use this to play rock, paper, scissors with the bot."
 help1 += "\npx!kill <user>"
 help1 += "\n-    Use this to kill someone."
-help1 += "\nxf!leave"
+help1 += "\npx!leave"
 help1 += "\n-    Creates a fake leave message."
 help1 += "\npx!join"
 help1 += "\n-    Creates a fake join message."
 help1 += "\npx!rate <something>"
 help1 += "\n-    Rates stuff."
-help1 += "\nxf!dicklength [user]"
+help1 += "\npx!dicklength [user]"
 help1 += "\n-    Tells you the length of someone's dick even if they don't have one."
-help1 += "\nxf!howgay <user>"
+help1 += "\npx!howgay <user>"
 help1 += "\n-    Tells you how gay someone is."
-help1 += "\nxf!chatrevive"
+help1 += "\npx!chatrevive"
 help1 += "\n-    Sends a random conversation starter as an atempt to revive the chat."
-help1 += "\nxf!nhie"
+help1 += "\npx!nhie"
 help1 += "\n-    Tells a random 'never have i ever' sentence."
 help1 += "\npx!wyr"
 help1 += "\n-    Tells a random 'would you rather' sentence."
 help1 += "\npx!lettergen <number of letters>"
 help1 += "\n-    Generates the specified amout of random letters."
-help1 += "\nxf!numbergen <minimum number> <maximum number>"
+help1 += "\npx!numbergen <minimum number> <maximum number>"
 help1 += "\n-    Generates random numbers."
 help1 += "\npx!ban <text>"
 help1 += "\n-    Creates a fake ban message."
@@ -260,11 +260,11 @@ help2 += "\npx!hug <user>"
 help2 += "\n-    Hugs the mentioned user."
 help2 += "\npx!kiss <user>"
 help2 += "\n-    Kisses the mentioned user."
-help2 += "\nxf!pat <user>"
+help2 += "\npx!pat <user>"
 help2 += "\n-    Pats the mentioned user."
 help2 += "\npx!punch <user>"
 help2 += "\n-    Punches the mentioned user."
-help2 += "\nxf!cuddle <user>"
+help2 += "\npx!cuddle <user>"
 help2 += "\n-    Cuddles the mentioned user."
 help2 += "\npx!bite <user>"
 help2 += "\n-    Bites the mentioned user."
@@ -434,7 +434,7 @@ async def on_ready():
     print("[START UP] Loaded mods.")
     started.append("+1")
     print("[START UP] Finished.")
-    await client.change_presence(game=discord.Game(name="xf!help | xf!invite | xf!support | Running DEV version."))
+    await client.change_presence(game=discord.Game(name="px!help | px!invite | px!support | Running DEV version."))
     m = splitter
     m += "\n{} **__Bot Restart__** {} `-` Version: {}".format(log_e, reload_e, version)
     t1 = time.perf_counter()
@@ -660,7 +660,7 @@ async def info(ctx):
         m = ":clipboard: **__BOT INFORMATION__**"
         m += "\n"
         m += "\n{} Version `{}`".format(reload_e, version)
-        m += "\n{} Prefix `xf!`".format(check_e)
+        m += "\n{} Prefix `px!`".format(check_e)
         embed.description = m
         a = []
         for i in client.servers:
@@ -672,8 +672,8 @@ async def info(ctx):
         embed.add_field(name="{} MODERATORS:".format(kill_e), value="{} `{}`".format(kill_e, len(mods)), inline=True)
         embed.add_field(name="{} BOT INVITE:".format(ignored_e), value="{} [click here](https://discordapp.com/oauth2/authorize?client_id=453210408384462848&scope=bot&permissions=8)".format(ignored_e), inline=True)
         embed.add_field(name="{} SUPPORT SERVER:".format(support_e), value="{} [click here]({})".format(support_e, default_link), inline=True)
-        embed.add_field(name="{} FEATURES:".format(msg_e), value="{} Use `xf!features`".format(msg_e), inline=True)
-        embed.add_field(name="{} STATISTICS:".format(slots_e), value="{} Use `xf!stats`".format(slots_e), inline=True)
+        embed.add_field(name="{} FEATURES:".format(msg_e), value="{} Use `px!features`".format(msg_e), inline=True)
+        embed.add_field(name="{} STATISTICS:".format(slots_e), value="{} Use `px!stats`".format(slots_e), inline=True)
         embed.add_field(name=":label: MADE BY:", value=":label: `Realm ✘`", inline=True)
         embed.add_field(name="**~~==========~~**", value="**~~==========~~**", inline=True)
         await client.say(embed=embed)
@@ -698,7 +698,7 @@ async def stats(ctx):
         m = ":bar_chart: **__BOT STATISTICS__**"
         m += "\n"
         m += "\n{} Version `{}`".format(reload_e, version)
-        m += "\n{} Prefix `xf!`".format(check_e)
+        m += "\n{} Prefix `px!`".format(check_e)
         m += "\n"
         m += "\n{} SERVERS: `{}`".format(servers_e, len(client.servers))
         a = []
@@ -1709,7 +1709,7 @@ async def marry(ctx, user: discord.Member = None):
                     if author.id == a[0]:
                         k = await client.get_user_info(a[1])
                         if a[2] == "pending":
-                            embed.description = "{} **{}**, you've already asked **{}** to marry you.\nUse `xf!md` to remove the request.".format(marriage_e, author.name, k.name)
+                            embed.description = "{} **{}**, you've already asked **{}** to marry you.\nUse `px!md` to remove the request.".format(marriage_e, author.name, k.name)
                             await client.edit_message(h, embed=embed)
                             o.append("+1")
                             break
@@ -1721,7 +1721,7 @@ async def marry(ctx, user: discord.Member = None):
                     elif author.id == a[1]:
                         k = await client.get_user_info(a[0])
                         if a[2] == "pending":
-                            embed.description = "{} **{}**, **{}** has already asked to marry you.\nUse `xf!ma` to accept or `xf!md` to deny.".format(marriage_e, author.name, k.name)
+                            embed.description = "{} **{}**, **{}** has already asked to marry you.\nUse `px!ma` to accept or `px!md` to deny.".format(marriage_e, author.name, k.name)
                             await client.edit_message(h, embed=embed)
                             o.append("+1")
                             break
@@ -1756,7 +1756,7 @@ async def marry(ctx, user: discord.Member = None):
                             o.append("+1")
                             break
             if len(o) == 0:
-                embed.description = "{} **{}** asked **{}** to marry them!\n**{}**, use `xf!ma` to accept or `xf!md` to deny.".format(marriage_e, author.name, user.name, user.name)
+                embed.description = "{} **{}** asked **{}** to marry them!\n**{}**, use `px!ma` to accept or `px!md` to deny.".format(marriage_e, author.name, user.name, user.name)
                 await client.edit_message(h, embed=embed)
                 marriages.append("{} | {} | pending".format(author.id, user.id))
                 await client.send_message(client.get_channel(marriages_chnl), "{} | {} | pending".format(author.id, user.id))
@@ -2165,7 +2165,7 @@ async def gift(ctx, user: discord.Member = None, number = None):
         await client.say(embed=embed)
     else:
         if user == None or number == None:
-            embed.description = "{} The command was used incorrectly.\nProper usage: `xf!gift <user> <amount>`".format(error_e)
+            embed.description = "{} The command was used incorrectly.\nProper usage: `px!gift <user> <amount>`".format(error_e)
             await client.say(embed=embed)
         else:
             try:
@@ -2795,7 +2795,7 @@ async def umsg(ctx, target = None, *, args = None):
     elif '}' not in str(ctx.message.content):
         if author.id in mods:
             if target == None or args == None:
-                embed.description = "{} The command was used incorrectly.\nProper usage: `xf!umsg <user ID> <text>`.".format(error_e)
+                embed.description = "{} The command was used incorrectly.\nProper usage: `px!umsg <user ID> <text>`.".format(error_e)
                 await client.say(embed=embed)
             elif len(str(args)) > 1500:
                 embed.description = "{} The text cannot be longer than 1500 characters.".format(error_e)
@@ -2834,7 +2834,7 @@ async def smsg(ctx, target = None, *, args = None):
     elif '}' not in str(ctx.message.content):
         if author.id in mods:
             if target == None or args == None:
-                embed.description = "{} The command was used incorrectly.\nProper usage: `xf!smsg <server ID> <text>`.".format(error_e)
+                embed.description = "{} The command was used incorrectly.\nProper usage: `px!smsg <server ID> <text>`.".format(error_e)
                 await client.say(embed=embed)
             elif len(str(args)) > 1500:
                 embed.description = "{} The text cannot be longer than 1500 characters.".format(error_e)
