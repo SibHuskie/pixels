@@ -18,6 +18,18 @@ version = "1.0"
 splitter = "**~~`====================`~~**"
 started = "2"
 
+eb = ["Hell no!",
+      "No!",
+      "Hell yes!",
+      "Yes!",
+      "Definitely!",
+      "Definitely not!",
+      "Probably!",
+      "Probably not!",
+      "Most likely!",
+      "Yes! I'm sure of it!",
+      "No! I'm sure of it!"]
+
 owner_roles = []
 manager_roles = []
 admin_roles = []
@@ -389,6 +401,31 @@ async def roast(ctx, user: discord.Member = None):
                     "**{}** is so fat that Thanos had to snap twice.".format(user.name),
                     "**{}**'s hair looks like a virginity helmet.".format(user.name)]
             embed.description = "{} {}".format(roast_e, random.choice(msgs))
+            await client.say(embed=embed)
+            
+# eightball <yes or no question>
+@client.command(pass_context=True)
+async def eightball(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if args == None:
+            embed.description = "{} Please ask me a question.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 200:
+            embed.description = "{} The question cannot be longer than 200 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            embed.description = ":grey_question: `Question`:\n**{}**: {}\n\n:8ball: `Answer`:\n**{}**: {}".format(ctx.message.author.name, args, client.user.name, random.choice(eb))
             await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
