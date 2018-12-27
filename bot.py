@@ -1055,7 +1055,7 @@ async def cb(ctx):
                 if u in ctx.message.server.roles and u in ctx.message.author.roles:
                     embed.description = "{} Deleting latest messages sent by bots... {}".format(clearbots_e, loading_e)
                     h = await client.say(embed=embed)
-                    msgs = []
+                    msgs = [1]
                     async for o in client.logs_from(ctx.message.channel, limit=100, before=ctx.message):
                         if o.author.bot and o.id != h.id:
                             msgs.append(o)
