@@ -1044,11 +1044,11 @@ async def topic(ctx):
 async def bc(ctx):
     author = ctx.message.author
     chnl = ctx.message.channel
-    msg = discord.Embed(colour=0x000000, description= "")
+    msg = discord.Embed(colour=0x51cbdb, description= "")
     msg.title = ""
     msg.set_footer(text=footer_text)
     a = []
-    if helper in author.roles or mod in author.roles or admin in author.roles or manager in author.roles or owner in author.roles:
+    if helper_roles in author.roles or mod_roles in author.roles or admin_roles in author.roles or manager_roles in author.roles or owner_roles in author.roles:
         async for i in client.logs_from(chnl):
             if len(a) < 50:
                 if i.author.bot:
