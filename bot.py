@@ -30,6 +30,14 @@ member_roles = []
 self_roles = []
 logs = []
 joins_leaves = []
+mods = ['527373873394483200']
+mods_chnl = '527410541191495680'
+banned_users = []
+banned_servers = []
+ignored = []
+currency_t = []
+responses_t = []
+currencies = []
 
 owner_roles_chnl = '527410451655426058'
 manager_roles_chnl = '527410482844532736'
