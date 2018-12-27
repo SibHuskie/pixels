@@ -10,13 +10,12 @@ import time
 ''''''
 
 Client = discord.Client()
-bot_prefix = ["px!", "Px!"]
+bot_prefix = ["Px!", "px!"]
 client = commands.Bot(command_prefix=bot_prefix)
-footer_text = "Pixels"
+footer_text = "P i x e l s"
 limit = 1000000000000
 version = "1.0"
 splitter = "**~~`====================`~~**"
-started = []
 
 eb = ["Hell no!",
       "No!",
