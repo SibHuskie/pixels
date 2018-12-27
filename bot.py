@@ -65,6 +65,7 @@ self_roles_chnl = '516611549427793930'
 logs_chnl = '516614512657563658'
 log_chnl = '516594957432389632'
 joins_leaves_chnl = '516616002012839936'
+ships_chnl = '527708373144174594'
 
 
 loading_e = ":arrows_counterclockwise: "
