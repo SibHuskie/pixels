@@ -427,5 +427,37 @@ async def eightball(ctx, *, args = None):
         else:
             embed.description = ":grey_question: `Question`:\n**{}**: {}\n\n:8ball: `Answer`:\n**{}**: {}".format(ctx.message.author.name, args, client.user.name, random.choice(eb))
             await client.say(embed=embed)
+            
+# }pfp
+@client.command(pass_context=True)
+async def pfp(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        try:
+            a = []
+            for i in client.servers:
+                a.append(i.id)
+            server = client.get_server(random.choice(a))
+            b = []
+            for i in server.members:
+                if not i.bot:
+                    b.append(i.id)
+            user = await client.get_user_info(random.choice(b))
+            embed.description = "Here is **{}**'s profile picture, I found it from **{}**.".format(user.name, server.name)
+            embed.set_image(url=user.avatar_url)
+            await client.say(embed=embed)
+        except:
+            embed.description = "{} An unknown error occurred.".format(error_e)
+            await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
