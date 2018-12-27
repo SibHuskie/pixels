@@ -833,5 +833,24 @@ async def kill(ctx, user: discord.Member = None):
                         "**{}** had too much porn and their mom cought them before they deleted it.".format(user.name)]
                 embed.description = "{} {}".format(kill_e, random.choice(msgs))
                 await client.say(embed=embed)
+            
+# }leave
+@client.command(pass_context=True)
+async def leave(ctx):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        a = ["Cya `{}` :wave:".format(ctx.message.author.name)]
+        await client.say(random.choice(a))
+        await client.delete_message(ctx.message)
 #######################
 client.run(os.environ['BOT_TOKEN'])
