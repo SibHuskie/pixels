@@ -115,7 +115,7 @@ bannedusers_e = "<:bannedusers:515909292419973130>"
 cointoss_e = ":moneybag: "
 suicide_e = ":skull: "
 roast_e = ":fire: "
-calculator_e = "<:calculator:515909292545802240>"
+calculator_e = ":1234: "
 ship_e = "<:ship1:515909300984741898>"
 kill_e = "<:kill:515909300149944321>"
 rate_e = "<:rate:515909299793428501>"
@@ -459,5 +459,34 @@ async def pfp(ctx):
         except:
             embed.description = "{} An unknown error occurred.".format(error_e)
             await client.say(embed=embed)
+            
+# }calculator <math problem>
+@client.command(pass_context=True)
+async def calculator(ctx, *, args = None):
+    embed = discord.Embed(colour=0x000000)
+    embed.set_footer(text=footer_text)
+    if len(started) == 0:
+        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
+        await client.say(embed=embed)
+    elif ctx.message.author.id in banned_users:
+        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    elif ctx.message.server.id in banned_servers:
+        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
+        await client.say(embed=embed)
+    else:
+        if args == None:
+            embed.description = "{} Please give a simple math problem for me to solve.".format(error_e)
+            await client.say(embed=embed)
+        elif len(str(args)) > 100:
+            embed.description = "{} The math problem cannot be longer than 100 characters.".format(error_e)
+            await client.say(embed=embed)
+        else:
+            try:
+                embed.description = "{} Problem: `{}`\n{} Answer: `{}`".format(calculator_e, args, calculator_e, eval(args))
+                await client.say(embed=embed)
+            except:
+                embed.description = "{} I'm having trouble solving that math problem.".format(error_e)
+                await client.say(embed=embed)
 #######################
 client.run(os.environ['BOT_TOKEN'])
