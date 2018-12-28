@@ -89,6 +89,26 @@ slots_wait = []
 worked = []
 stole = []
 
+warns = []
+muted_list = []
+owner_roles = []
+manager_roles = []
+admin_roles = []
+mod_roles = []
+helper_roles = []
+muted_roles = []
+logs = []
+
+warns_chnl = '528060006344556544'
+owner_roles_chnl = '528060030243569665'
+manager_roles_chnl = '528060045133348874'
+admin_roles_chnl = '528060056336596992'
+mod_roles_chnl = '528060074917363713'
+helper_roles_chnl = '528060089899155467'
+muted_roles_chnl = '528060132228333629'
+logs_chnl = '528060175559557120'
+log_chnl = '527769404893691924'
+
 responses_msgs = {"good bot" : ["C:", "yey me good botty", "I'm not your dog, human.", "uwu"],
              "bad bot" : [";c", "so sad", "I'm not your fucking dog.", "much cri"],
              "fun" : ["fun?", "fun.", "fun!", "( ͡° ͜ʖ ͡°)"],
