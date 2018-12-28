@@ -1644,31 +1644,6 @@ async def numbergen(ctx, mi = None, ma = None):
             embed.description = "{} Invalid number(s) given.".format(error_e)
             await client.say(embed=embed)
 
-# }ban <text>
-@client.command(pass_context=True)
-async def ban(ctx, *, text = None):
-    embed = discord.Embed(colour=0x00)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    elif ctx.message.author.id in banned_users:
-        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif ctx.message.server.id in banned_servers:
-        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif '}' not in str(ctx.message.content):
-        if text == None:
-            embed.description = "{} No text given.".format(error_e)
-            await client.say(embed=embed)
-        elif len(str(text)) > 200:
-            embed.description = "{} The text cannot be longer than 200 characters.".format(error_e)
-            await client.say(embed=embed)
-        else:
-            embed.description = "{} **{}** banned **{}**.".format(ban_e, ctx.message.author.name, text)
-            await client.say(embed=embed)
-
 ''' CURRENCY COMMANDS FOR EVERYONE '''
 # }convert
 @client.command(pass_context=True)
