@@ -2946,7 +2946,7 @@ async def mod(ctx, target = None):
         embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
         await client.say(embed=embed)
     elif '}' not in str(ctx.message.content):
-        if author.id == '412201413335056386':
+        if author.id == '299761993382887425':
             if target == None:
                 embed.description = "{} No user ID given.".format(error_e)
                 await client.say(embed=embed)
