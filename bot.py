@@ -484,35 +484,6 @@ async def on_message(msg):
     await client.process_commands(msg)
 
 ''' COMMANDS FOR EVERYONE '''
-client.remove_command('help')
-
-# }help
-@client.command(pass_context=True)
-async def help(ctx):
-    embed = discord.Embed(colour=0x0)
-    embed.set_footer(text=footer_text)
-    if len(started) == 0:
-        embed.description = "{} The bot is restarting. Please try again in a few seconds.".format(reload_e)
-        await client.say(embed=embed)
-    elif ctx.message.author.id in banned_users:
-        embed.description = "{} You are on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif ctx.message.server.id in banned_servers:
-        embed.description = "{} This server is on the ban list and cannot use this bot.".format(noperms_e)
-        await client.say(embed=embed)
-    elif '}' not in str(ctx.message.content):
-        try:
-            await client.send_message(ctx.message.author, help1)
-            await client.send_message(ctx.message.author, help2)
-            await client.send_message(ctx.message.author, help3)
-            await client.send_message(ctx.message.author, help4)
-            if ctx.message.author.id in mods:
-                await client.send_message(ctx.message.author, help5)
-            embed.description = "{} A list of commands has been sent to your DMs.".format(worked_e)
-            await client.say(embed=embed)
-        except:
-            embed.description = "{} I was unable to DM you my list of commands.".format(error_e)
-            await client.say(embed=embed)
 
 # }ping
 @client.command(pass_context=True)
